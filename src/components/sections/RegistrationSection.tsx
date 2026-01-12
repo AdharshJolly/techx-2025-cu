@@ -165,20 +165,11 @@ const RegistrationSection = () => {
                   <div className="absolute right-0 -top-3 w-6 h-6 bg-background rounded-full -mr-3" />
                 </div>
 
-                {/* Bottom Section (QR) */}
-                <div className="p-6 bg-black/20 flex items-center justify-between gap-4">
-                  <div className="text-xs text-muted-foreground">
-                    <p>Scan to</p>
-                    <p>Register</p>
-                  </div>
-                  <QrCode className="w-12 h-12 text-white/80" />
-                  <Button size="sm" className={`
-                     ${selectedTier.color === 'primary' ? 'bg-primary hover:bg-primary/90' : 
-                       selectedTier.color === 'secondary' ? 'bg-secondary hover:bg-secondary/90' : 'bg-accent hover:bg-accent/90'}
-                     text-white border-0
-                  `}>
-                    Book Now
-                  </Button>
+                {/* Bottom Section (Note) */}
+                <div className="p-6 bg-black/20 text-center">
+                  <p className="text-xs text-muted-foreground">
+                    Present this digital pass at the venue
+                  </p>
                 </div>
               </div>
             </div>
