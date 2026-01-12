@@ -9,21 +9,18 @@ const pricingTiers = [
     id: "ieee-cs",
     title: "IEEE CS Member",
     price: 299,
-    originalPrice: 499,
     color: "primary",
   },
   {
     id: "ieee",
     title: "IEEE Member",
     price: 399,
-    originalPrice: 599,
     color: "secondary",
   },
   {
     id: "non-ieee",
     title: "Non-IEEE Member",
     price: 499,
-    originalPrice: 699,
     color: "accent",
   },
 ];
@@ -151,9 +148,8 @@ const RegistrationSection = () => {
 
                   <div className="space-y-2">
                     <div className="flex justify-between items-end">
-                      <span className="text-muted-foreground text-sm">Total</span>
+                      <span className="text-muted-foreground text-sm">Amount Payable</span>
                       <div className="text-right">
-                         <span className="text-sm text-muted-foreground line-through mr-2">₹{selectedTier.originalPrice}</span>
                          <span className={`text-3xl font-bold font-mono
                             ${selectedTier.color === 'primary' ? 'text-primary' : 
                               selectedTier.color === 'secondary' ? 'text-secondary' : 'text-accent'}
