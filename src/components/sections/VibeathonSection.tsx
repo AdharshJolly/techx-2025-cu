@@ -1,198 +1,195 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "framer-motion";
-import { useRef } from "react";
-import { Clock, FileText, Lightbulb, Rocket, Target, Users, Wrench, Zap } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Clock, Code, FileText, Layout, Rocket, Target, Terminal, Users, Zap } from "lucide-react";
+import GlowCard from "@/components/ui/GlowCard";
 
-const details = [
-  { icon: Users, label: "Team Size", value: "3-4 members" },
-  { icon: Clock, label: "Duration", value: "6 hours" },
-  { icon: Wrench, label: "Tools Allowed", value: "AI & No-code/Low-code" },
-  { icon: Rocket, label: "Requirement", value: "Working Prototype" },
-];
+const BinaryRain = () => {
+  const [drops, setDrops] = useState<{ id: number; left: number; delay: number; duration: number }[]>([]);
 
-const deliverables = [
-  "Functional prototype",
-  "Brief technical documentation",
-  "Executive summary",
-];
+  useEffect(() => {
+    const newDrops = Array.from({ length: 20 }, (_, i) => ({
+      id: i,
+      left: Math.random() * 100,
+      delay: Math.random() * 5,
+      duration: Math.random() * 5 + 5,
+    }));
+    setDrops(newDrops);
+  }, []);
 
-const criteria = [
-  { icon: Lightbulb, label: "Innovation" },
-  { icon: Target, label: "Feasibility" },
-  { icon: Zap, label: "Execution" },
-  { icon: Rocket, label: "Impact" },
-];
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
+      {drops.map((drop) => (
+        <motion.div
+          key={drop.id}
+          className="absolute top-0 text-primary/50 font-mono text-xs writing-vertical-rl"
+          style={{ left: `${drop.left}%` }}
+          animate={{ top: ["-20%", "120%"] }}
+          transition={{
+            duration: drop.duration,
+            delay: drop.delay,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        >
+          {Array.from({ length: 15 }, () => Math.random() > 0.5 ? "1" : "0").join("")}
+        </motion.div>
+      ))}
+    </div>
+  );
+};
 
 const VibeathonSection = () => {
   const ref = useRef(null);
   const containerRef = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"]
   });
 
-  const glowScale = useTransform(scrollYProgress, [0.2, 0.5, 0.8], [0.8, 1.2, 0.8]);
-  const glowOpacity = useTransform(scrollYProgress, [0.2, 0.5, 0.8], [0.05, 0.15, 0.05]);
+  const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
 
   return (
-    <section id="vibeathon" ref={containerRef} className="py-24 md:py-32 relative overflow-hidden">
-      {/* Intense background glow for spotlight effect with parallax */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
-      <motion.div 
-        style={{ scale: glowScale, opacity: glowOpacity }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-primary/20 rounded-full blur-[150px]" 
-      />
-      <motion.div 
-        style={{ y: useTransform(scrollYProgress, [0, 1], [100, -100]) }}
-        className="absolute top-1/3 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-[120px]" 
-      />
+    <section id="vibeathon" ref={containerRef} className="py-24 md:py-32 relative overflow-hidden bg-background">
+      <BinaryRain />
       
-      {/* Parallax decorative dots */}
-      <motion.div 
-        style={{ y: useTransform(scrollYProgress, [0, 1], [0, -150]) }}
-        className="absolute top-20 left-20 w-3 h-3 bg-primary/30 rounded-full"
-      />
-      <motion.div 
-        style={{ y: useTransform(scrollYProgress, [0, 1], [0, 200]) }}
-        className="absolute bottom-40 right-32 w-2 h-2 bg-secondary/40 rounded-full"
-      />
+      {/* Background Glows */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px]" />
       
       <div className="container relative z-10">
-        <div className="max-w-5xl mx-auto" ref={ref}>
-          <div className="text-center mb-12">
+        <div className="max-w-6xl mx-auto" ref={ref}>
+          {/* Header */}
+          <div className="text-center mb-16 relative">
             <motion.div
-              initial={{ opacity: 0, scale: 0.5, rotateX: 90 }}
-              animate={isInView ? { opacity: 1, scale: 1, rotateX: 0 } : {}}
-              transition={{ duration: 0.6, type: "spring" }}
-              className="inline-block px-4 py-1.5 rounded-full bg-primary/20 border border-primary/40 mb-6"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : {}}
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-6"
             >
-              <span className="font-mono text-xs uppercase tracking-wider text-primary">Flagship Competition</span>
+              <Terminal className="w-4 h-4 text-primary" />
+              <span className="font-mono text-xs uppercase tracking-wider text-primary">System Override: Initiated</span>
             </motion.div>
             
-            <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="font-poppins text-4xl md:text-6xl font-bold mb-4"
-            >
-              <motion.span 
-                className="text-gradient inline-block"
-                animate={isInView ? { 
-                  textShadow: [
-                    "0 0 20px hsl(270 100% 65% / 0.5)",
-                    "0 0 40px hsl(270 100% 65% / 0.8)",
-                    "0 0 20px hsl(270 100% 65% / 0.5)"
-                  ]
-                } : {}}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                VIBEATHON
-              </motion.span>
-            </motion.h2>
+            <h2 className="font-poppins text-5xl md:text-7xl font-bold mb-6 tracking-tight">
+              <span className="relative inline-block">
+                <span className="absolute inset-0 translate-x-[2px] translate-y-[2px] text-primary/30 blur-sm">VIBEATHON</span>
+                <span className="relative text-transparent bg-clip-text bg-gradient-to-r from-primary via-white to-secondary animate-shimmer bg-[length:200%_auto]">
+                  VIBEATHON
+                </span>
+              </span>
+            </h2>
             
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-xl md:text-2xl text-muted-foreground"
-            >
-              The Innovation Sprint
-            </motion.p>
+            <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">
+              The Ultimate 6-Hour Innovation Sprint. Build. Execute. Dominate.
+            </p>
           </div>
           
-          {/* Details grid with staggered loading */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12"
-          >
-            {details.map((item, index) => (
-              <motion.div
-                key={item.label}
-                initial={{ opacity: 0, y: 30, scale: 0.9 }}
-                animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
-                transition={{ 
-                  duration: 0.5, 
-                  delay: 0.4 + index * 0.1,
-                  type: "spring"
-                }}
-                whileHover={{ 
-                  scale: 1.05,
-                  boxShadow: "0 10px 40px hsl(270 100% 65% / 0.2)"
-                }}
-                className="p-4 md:p-6 rounded-xl bg-card/60 border border-primary/30 backdrop-blur-sm text-center transition-all duration-300"
-              >
-                <motion.div
-                  whileHover={{ rotate: 360 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <item.icon className="w-6 h-6 text-primary mx-auto mb-3" />
-                </motion.div>
-                <p className="font-mono text-xs text-muted-foreground mb-1">{item.label}</p>
-                <p className="font-semibold text-sm">{item.value}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-          
-          {/* Two columns: Deliverables + Criteria */}
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Deliverables */}
+          <div className="grid lg:grid-cols-2 gap-8">
+            {/* Left Column: System Status */}
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
+              initial={{ opacity: 0, x: -50 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.6 }}
-              whileHover={{ boxShadow: "0 10px 40px hsl(320 100% 60% / 0.15)" }}
-              className="p-6 md:p-8 rounded-2xl bg-card/50 border border-border/50 backdrop-blur-sm transition-all duration-300"
+              transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <div className="flex items-center gap-3 mb-6">
-                <FileText className="w-5 h-5 text-secondary" />
-                <h3 className="font-poppins text-lg font-semibold">Deliverables</h3>
-              </div>
-              <ul className="space-y-3">
-                {deliverables.map((item, i) => (
-                  <motion.li 
-                    key={item} 
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={isInView ? { opacity: 1, x: 0 } : {}}
-                    transition={{ delay: 0.8 + i * 0.1 }}
-                    className="flex items-center gap-3"
-                  >
-                    <motion.span 
-                      whileHover={{ scale: 1.5 }}
-                      className="w-2 h-2 rounded-full bg-secondary" 
-                    />
-                    <span className="text-muted-foreground">{item}</span>
-                  </motion.li>
-                ))}
-              </ul>
+              <GlowCard glowColor="primary" className="h-full">
+                <div className="flex items-center gap-3 mb-8 border-b border-primary/20 pb-4">
+                  <Layout className="w-6 h-6 text-primary" />
+                  <h3 className="font-mono text-xl font-bold text-primary">Mission Parameters</h3>
+                </div>
+
+                <div className="space-y-6">
+                  <div className="group">
+                    <div className="flex justify-between text-sm mb-2">
+                      <span className="text-muted-foreground">Squad Size</span>
+                      <span className="font-mono text-primary">3-4 Operatives</span>
+                    </div>
+                    <div className="h-2 bg-muted rounded-full overflow-hidden">
+                      <motion.div 
+                        initial={{ width: 0 }}
+                        animate={isInView ? { width: "75%" } : {}}
+                        transition={{ duration: 1, delay: 0.5 }}
+                        className="h-full bg-primary/80 group-hover:bg-primary transition-colors"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="group">
+                    <div className="flex justify-between text-sm mb-2">
+                      <span className="text-muted-foreground">Time Limit</span>
+                      <span className="font-mono text-secondary">6 Hours</span>
+                    </div>
+                    <div className="h-2 bg-muted rounded-full overflow-hidden">
+                      <motion.div 
+                        initial={{ width: 0 }}
+                        animate={isInView ? { width: "60%" } : {}}
+                        transition={{ duration: 1, delay: 0.7 }}
+                        className="h-full bg-secondary/80 group-hover:bg-secondary transition-colors"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4 mt-8">
+                    <div className="p-4 rounded-lg bg-background/50 border border-border">
+                      <Code className="w-5 h-5 text-primary mb-2" />
+                      <div className="text-sm font-semibold">AI Tools</div>
+                      <div className="text-xs text-muted-foreground">Authorized</div>
+                    </div>
+                    <div className="p-4 rounded-lg bg-background/50 border border-border">
+                      <Zap className="w-5 h-5 text-secondary mb-2" />
+                      <div className="text-sm font-semibold">No-Code</div>
+                      <div className="text-xs text-muted-foreground">Permitted</div>
+                    </div>
+                  </div>
+                </div>
+              </GlowCard>
             </motion.div>
-            
-            {/* Evaluation Criteria */}
+
+            {/* Right Column: Objectives */}
             <motion.div
-              initial={{ opacity: 0, x: 30 }}
+              initial={{ opacity: 0, x: 50 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.7 }}
-              whileHover={{ boxShadow: "0 10px 40px hsl(270 100% 65% / 0.15)" }}
-              className="p-6 md:p-8 rounded-2xl bg-card/50 border border-border/50 backdrop-blur-sm transition-all duration-300"
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="space-y-6"
             >
-              <h3 className="font-poppins text-lg font-semibold mb-6">Evaluation Criteria</h3>
+              <GlowCard glowColor="secondary">
+                <div className="flex items-center gap-3 mb-6">
+                  <Target className="w-6 h-6 text-secondary" />
+                  <h3 className="font-mono text-xl font-bold text-secondary">Primary Objectives</h3>
+                </div>
+                <ul className="space-y-4">
+                  {[
+                    "Develop a functional prototype",
+                    "Generate executive summary",
+                    "Final deployment & demo"
+                  ].map((item, i) => (
+                    <motion.li 
+                      key={i}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={isInView ? { opacity: 1, x: 0 } : {}}
+                      transition={{ delay: 0.6 + i * 0.1 }}
+                      className="flex items-center gap-4 p-3 rounded-lg hover:bg-white/5 transition-colors border border-transparent hover:border-white/10"
+                    >
+                      <div className="w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center shrink-0">
+                        <span className="font-mono text-sm font-bold text-secondary">0{i + 1}</span>
+                      </div>
+                      <span className="text-foreground/90">{item}</span>
+                    </motion.li>
+                  ))}
+                </ul>
+              </GlowCard>
+
               <div className="grid grid-cols-2 gap-4">
-                {criteria.map((item, i) => (
-                  <motion.div 
-                    key={item.label}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                    transition={{ delay: 0.9 + i * 0.1, type: "spring" }}
-                    whileHover={{ scale: 1.05, backgroundColor: "hsl(var(--muted) / 0.5)" }}
-                    className="flex items-center gap-3 p-3 rounded-lg bg-muted/30 transition-all duration-300"
-                  >
-                    <item.icon className="w-5 h-5 text-primary" />
-                    <span className="font-medium text-sm">{item.label}</span>
-                  </motion.div>
-                ))}
+                <div className="p-4 rounded-xl bg-card border border-border hover:border-primary/50 transition-colors group">
+                  <Rocket className="w-6 h-6 text-primary mb-2 group-hover:scale-110 transition-transform" />
+                  <div className="font-bold text-sm">Impact</div>
+                  <div className="text-xs text-muted-foreground">High Priority</div>
+                </div>
+                <div className="p-4 rounded-xl bg-card border border-border hover:border-secondary/50 transition-colors group">
+                  <Lightbulb className="w-6 h-6 text-secondary mb-2 group-hover:scale-110 transition-transform" />
+                  <div className="font-bold text-sm">Innovation</div>
+                  <div className="text-xs text-muted-foreground">Critical</div>
+                </div>
               </div>
             </motion.div>
           </div>
