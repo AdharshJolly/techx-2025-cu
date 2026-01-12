@@ -7,6 +7,7 @@ import WorkshopsSection from "@/components/sections/WorkshopsSection";
 import VibeathonSection from "@/components/sections/VibeathonSection";
 import PrizesSection from "@/components/sections/PrizesSection";
 import RegistrationSection from "@/components/sections/RegistrationSection";
+import SponsorsSection from "@/components/sections/SponsorsSection";
 import Footer from "@/components/sections/Footer";
 import FloatingParticles from "@/components/ui/FloatingParticles";
 import ScrollProgress from "@/components/ui/ScrollProgress";
@@ -30,6 +31,7 @@ const Index = () => {
           <VibeathonSection />
           <PrizesSection />
           <RegistrationSection />
+          <SponsorsSection />
         </main>
         <Footer />
       </div>
