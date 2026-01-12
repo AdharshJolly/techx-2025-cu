@@ -1,12 +1,12 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { Calendar, Cpu, Users, Zap } from "lucide-react";
+import { Calendar, Cpu, MapPin, Trophy, Users, Zap } from "lucide-react";
 
 const highlights = [
-  { icon: Calendar, label: "3-Day Event" },
-  { icon: Cpu, label: "AI-Driven" },
-  { icon: Users, label: "Open to All Departments" },
+  { icon: Calendar, label: "3-Day Mega Event" },
+  { icon: Cpu, label: "AI-Assisted Dev" },
+  { icon: Trophy, label: "₹32k Prize Pool" },
   { icon: Zap, label: "VIBEATHON Finale" },
 ];
 
@@ -116,14 +116,20 @@ const HeroSection = () => {
           </motion.h1>
           
           {/* Tagline */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-            className="font-inter text-xl md:text-2xl text-muted-foreground mb-10"
+          <motion.div
+             initial={{ opacity: 0, y: 20 }}
+             animate={{ opacity: 1, y: 0 }}
+             transition={{ duration: 0.5, delay: 0.6 }}
+             className="mb-10"
           >
-            Unlocking Future Innovations
-          </motion.p>
+            <p className="font-inter text-xl md:text-2xl text-muted-foreground mb-4">
+              Vibe Coding • Prompt Engineering • Rapid Innovation
+            </p>
+            <div className="flex items-center justify-center gap-2 text-primary/80 font-medium">
+              <MapPin className="w-5 h-5" />
+              <span>CHRIST University, Kengeri Campus</span>
+            </div>
+          </motion.div>
           
           {/* Highlights with staggered reveal */}
           <motion.div
