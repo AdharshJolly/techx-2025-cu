@@ -2,7 +2,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { Crown, Medal, Trophy, Zap, PieChart } from "lucide-react";
-import AnimatedCounter from "@/components/ui/AnimatedCounter";
+import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 import GlowCard from "@/components/ui/GlowCard";
 
 const vibeathonWinners = [

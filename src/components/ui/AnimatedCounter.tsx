@@ -9,7 +9,7 @@ interface AnimatedCounterProps {
   className?: string;
 }
 
-const AnimatedCounter = ({
+export const AnimatedCounter = ({
   value,
   prefix = "",
   suffix = "",
@@ -53,4 +53,4 @@ const AnimatedCounter = ({
   );
 };
 
-export default AnimatedCounter;
+

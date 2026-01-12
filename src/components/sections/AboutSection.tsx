@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import AnimatedCounter from "@/components/ui/AnimatedCounter";
+import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 
 const stats = [
   { value: 3, label: "Days", suffix: "" },
