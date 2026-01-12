@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import { Clock, Code, FileText, Layout, Rocket, Target, Terminal, Users, Zap } from "lucide-react";
+import { Clock, Code, FileText, Layout, Lightbulb, Rocket, Target, Terminal, Users, Zap } from "lucide-react";
 import GlowCard from "@/components/ui/GlowCard";
 
 const BinaryRain = () => {
