@@ -1,194 +1,217 @@
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { useRef } from "react";
-import { Code, Cpu, MessageSquare, Swords, Users, Zap } from "lucide-react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Badge } from "@/components/ui/badge";
+import { Clock, Code, Cpu, MessageSquare, Mic, Zap } from "lucide-react";
+import GlowCard from "@/components/ui/GlowCard";
+
+type TrackType = "workshops" | "challenges";
 
 const workshops = [
   {
+    id: "w1",
+    title: "Intro to Vibe Coding",
+    time: "10:30 AM - 11:30 AM",
+    description: "Discover the new paradigm of coding where intuition meets AI. Learn how to 'vibe' with your code using modern AI assistants.",
     icon: Code,
-    title: "Introduction to Vibe Coding",
-    description: "Explore intuitive and efficient coding practices.",
+    tags: ["AI-Assisted", "Future Tech", "Coding"],
+    level: "Beginner",
   },
   {
+    id: "w2",
+    title: "AI-Assisted Dev Tools",
+    time: "11:45 AM - 01:00 PM",
+    description: "Hands-on deep dive into the latest AI development tools. Boost your productivity and learn to build faster.",
     icon: Cpu,
-    title: "AI-Assisted Development Tools",
-    description: "Learn how to leverage AI tools to accelerate development.",
+    tags: ["Productivity", "Tools", "DevOps"],
+    level: "Intermediate",
   },
   {
+    id: "w3",
+    title: "Prompt Engineering 101",
+    time: "02:00 PM - 03:00 PM",
+    description: "Master the art of talking to AI. Learn the fundamental techniques to get the exact output you need from LLMs.",
     icon: MessageSquare,
-    title: "Prompt Engineering Fundamentals",
-    description: "Master effective AI interaction and output generation.",
+    tags: ["LLMs", "Prompting", "NLP"],
+    level: "All Levels",
   },
 ];
 
 const challenges = [
   {
-    icon: Swords,
+    id: "c1",
     title: "Prompt Engineering Battle",
-    description: "Timed, competitive AI prompting challenge.",
-  },
-  {
-    icon: Users,
-    title: "Sector-wise Idea Debate",
-    description: "Debate innovative ideas across real-world sectors.",
-  },
-  {
+    time: "09:30 AM - 12:00 PM",
+    description: "A live, timed showdown where teams compete to generate the most accurate and creative outputs using AI models.",
     icon: Zap,
-    title: "VIBEATHON",
-    description: "The ultimate innovation sprint.",
-    highlight: true,
+    tags: ["Team Event", "Live Battle", "Creativity"],
+    specs: ["Team Size: 2-3", "Live Evaluation", "Timed Rounds"],
+  },
+  {
+    id: "c2",
+    title: "Sector-Wise Idea Debate",
+    time: "09:30 AM - 12:00 PM",
+    description: "Defend your innovative ideas in Education, Healthcare, Finance, or Sustainability against opposing teams and judges.",
+    icon: Mic,
+    tags: ["Debate", "Innovation", "Strategy"],
+    specs: ["Team Size: 3-4", "Critical Thinking", "Defense"],
   },
 ];
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 30, scale: 0.95 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      delay: i * 0.1,
-      duration: 0.5,
-      type: "spring" as const,
-      stiffness: 150,
-    },
-  }),
-};
-
 const WorkshopsSection = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [activeTrack, setActiveTrack] = useState<TrackType>("workshops");
 
   return (
-    <section id="workshops" className="py-24 md:py-32 relative bg-muted/20">
-      <div className="container">
-        <div className="text-center mb-16" ref={ref}>
+    <section id="workshops" className="py-24 relative overflow-hidden">
+      <div className="container relative z-10">
+        <div className="text-center mb-16">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             className="section-tag mb-4"
           >
             Learn & Compete
           </motion.p>
-          
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="font-poppins text-3xl md:text-5xl font-bold"
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="font-poppins text-3xl md:text-5xl font-bold mb-8"
           >
-            Workshops & <span className="text-gradient">Challenges</span>
+            Tech <span className="text-gradient">Arena</span>
           </motion.h2>
-        </div>
-        
-        {/* Workshops */}
-        <div className="mb-16">
-          <motion.h3
-            initial={{ opacity: 0, x: -20 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="font-poppins text-xl font-semibold mb-6 text-center md:text-left"
-          >
-            Workshops
-          </motion.h3>
-          
-          <div className="grid md:grid-cols-3 gap-6">
-            {workshops.map((item, index) => (
-              <motion.div
-                key={item.title}
-                custom={index}
-                initial="hidden"
-                animate={isInView ? "visible" : "hidden"}
-                variants={cardVariants}
-                whileHover={{ 
-                  y: -8, 
-                  scale: 1.02,
-                  boxShadow: "0 20px 50px hsl(270 100% 65% / 0.15)"
-                }}
-                className="group p-6 rounded-2xl bg-card/50 border border-border/50 backdrop-blur-sm hover:border-primary/40 transition-all duration-300 cursor-default"
-              >
-                <motion.div 
-                  whileHover={{ rotate: 10, scale: 1.1 }}
-                  className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors"
+
+          {/* Track Switcher */}
+          <div className="flex justify-center mb-12">
+            <div className="p-1 rounded-full bg-muted/50 border border-border/50 backdrop-blur-sm relative">
+              <div 
+                className={`absolute inset-y-1 rounded-full bg-gradient-to-r transition-all duration-300 ease-in-out
+                  ${activeTrack === "workshops" ? "from-primary to-accent left-1 w-[140px]" : "from-secondary to-orange-500 left-[145px] w-[140px]"}
+                `} 
+              />
+              <div className="relative flex gap-1">
+                <button
+                  onClick={() => setActiveTrack("workshops")}
+                  className={`w-[140px] px-6 py-2.5 rounded-full text-sm font-bold transition-colors z-10
+                    ${activeTrack === "workshops" ? "text-white" : "text-muted-foreground hover:text-white"}
+                  `}
                 >
-                  <item.icon className="w-5 h-5 text-primary" />
-                </motion.div>
-                <h4 className="font-poppins font-semibold mb-2">{item.title}</h4>
-                <p className="text-sm text-muted-foreground">{item.description}</p>
-                
-                {/* Loading bar at bottom */}
-                <div className="mt-4 h-1 rounded-full bg-muted/50 overflow-hidden">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    animate={isInView ? { width: "100%" } : {}}
-                    transition={{ delay: 0.8 + index * 0.2, duration: 0.8 }}
-                    className="h-full bg-gradient-to-r from-primary to-primary/50 rounded-full"
-                  />
-                </div>
-              </motion.div>
-            ))}
+                  Workshops
+                </button>
+                <button
+                  onClick={() => setActiveTrack("challenges")}
+                  className={`w-[140px] px-6 py-2.5 rounded-full text-sm font-bold transition-colors z-10
+                    ${activeTrack === "challenges" ? "text-white" : "text-muted-foreground hover:text-white"}
+                  `}
+                >
+                  Challenges
+                </button>
+              </div>
+            </div>
           </div>
         </div>
-        
-        {/* Challenges */}
-        <div>
-          <motion.h3
-            initial={{ opacity: 0, x: -20 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="font-poppins text-xl font-semibold mb-6 text-center md:text-left"
-          >
-            Challenges
-          </motion.h3>
-          
-          <div className="grid md:grid-cols-3 gap-6">
-            {challenges.map((item, index) => (
+
+        {/* Content Area */}
+        <div className="max-w-4xl mx-auto min-h-[400px]">
+          <AnimatePresence mode="wait">
+            {activeTrack === "workshops" ? (
               <motion.div
-                key={item.title}
-                custom={index + 3}
-                initial="hidden"
-                animate={isInView ? "visible" : "hidden"}
-                variants={cardVariants}
-                whileHover={{ 
-                  y: -8,
-                  scale: 1.02,
-                  boxShadow: item.highlight 
-                    ? "0 20px 60px hsl(270 100% 65% / 0.25)"
-                    : "0 20px 50px hsl(320 100% 60% / 0.15)"
-                }}
-                className={`group p-6 rounded-2xl border backdrop-blur-sm transition-all duration-300 cursor-default ${
-                  item.highlight
-                    ? "bg-gradient-to-br from-primary/20 to-secondary/10 border-primary/50"
-                    : "bg-card/50 border-border/50 hover:border-secondary/40"
-                }`}
+                key="workshops"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 20 }}
+                transition={{ duration: 0.3 }}
+                className="grid gap-6"
               >
-                <motion.div 
-                  whileHover={{ rotate: -10, scale: 1.1 }}
-                  className={`w-10 h-10 rounded-lg flex items-center justify-center mb-4 transition-colors ${
-                    item.highlight
-                      ? "bg-primary/30 group-hover:bg-primary/40"
-                      : "bg-secondary/10 group-hover:bg-secondary/20"
-                  }`}
-                >
-                  <item.icon className={`w-5 h-5 ${item.highlight ? "text-primary" : "text-secondary"}`} />
-                </motion.div>
-                <h4 className="font-poppins font-semibold mb-2">{item.title}</h4>
-                <p className="text-sm text-muted-foreground">{item.description}</p>
-                
-                {/* Shimmer on highlight */}
-                {item.highlight && (
-                  <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none">
-                    <motion.div
-                      animate={{ x: ["-200%", "200%"] }}
-                      transition={{ duration: 4, repeat: Infinity, repeatDelay: 2 }}
-                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12"
-                    />
-                  </div>
-                )}
+                {workshops.map((workshop, index) => (
+                  <GlowCard 
+                    key={workshop.id} 
+                    glowColor="primary" 
+                    className="flex flex-col md:flex-row items-start gap-6 group"
+                    delay={index * 0.1}
+                  >
+                    <div className="shrink-0 w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform duration-300">
+                      <workshop.icon className="w-8 h-8" />
+                    </div>
+                    <div className="flex-1 space-y-3">
+                      <div className="flex flex-wrap items-center gap-3">
+                        <Badge variant="outline" className="bg-primary/5 border-primary/20 text-primary">
+                          {workshop.level}
+                        </Badge>
+                        <div className="flex items-center text-sm text-muted-foreground">
+                          <Clock className="w-4 h-4 mr-1.5" />
+                          {workshop.time}
+                        </div>
+                      </div>
+                      <h3 className="text-xl font-bold font-poppins group-hover:text-primary transition-colors">
+                        {workshop.title}
+                      </h3>
+                      <p className="text-muted-foreground text-sm leading-relaxed">
+                        {workshop.description}
+                      </p>
+                      <div className="flex flex-wrap gap-2 pt-2">
+                        {workshop.tags.map(tag => (
+                          <span key={tag} className="text-xs font-mono text-foreground/60 bg-muted/50 px-2 py-1 rounded">
+                            #{tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </GlowCard>
+                ))}
               </motion.div>
-            ))}
-          </div>
+            ) : (
+              <motion.div
+                key="challenges"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3 }}
+                className="grid gap-6"
+              >
+                {challenges.map((challenge, index) => (
+                  <GlowCard 
+                    key={challenge.id} 
+                    glowColor="secondary" 
+                    className="flex flex-col md:flex-row items-start gap-6 group border-secondary/20"
+                    delay={index * 0.1}
+                  >
+                    <div className="shrink-0 w-16 h-16 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary group-hover:scale-110 transition-transform duration-300">
+                      <challenge.icon className="w-8 h-8" />
+                    </div>
+                    <div className="flex-1 space-y-3">
+                      <div className="flex flex-wrap items-center gap-3">
+                        <Badge variant="outline" className="bg-secondary/5 border-secondary/20 text-secondary">
+                          Day 2 Event
+                        </Badge>
+                        <div className="flex items-center text-sm text-muted-foreground">
+                          <Clock className="w-4 h-4 mr-1.5" />
+                          {challenge.time}
+                        </div>
+                      </div>
+                      <h3 className="text-xl font-bold font-poppins group-hover:text-secondary transition-colors">
+                        {challenge.title}
+                      </h3>
+                      <p className="text-muted-foreground text-sm leading-relaxed">
+                        {challenge.description}
+                      </p>
+                      
+                      {/* Battle Specs */}
+                      <div className="grid grid-cols-2 md:grid-cols-3 gap-3 pt-3 border-t border-border/50 mt-4">
+                        {challenge.specs.map(spec => (
+                          <div key={spec} className="flex items-center gap-2 text-xs font-mono text-secondary/80">
+                            <div className="w-1.5 h-1.5 rounded-full bg-secondary" />
+                            {spec}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </GlowCard>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </section>
