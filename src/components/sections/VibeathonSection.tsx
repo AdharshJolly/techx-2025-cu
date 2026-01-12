@@ -68,7 +68,7 @@ const VibeathonSection = () => {
               className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-6"
             >
               <Terminal className="w-4 h-4 text-primary" />
-              <span className="font-mono text-xs uppercase tracking-wider text-primary">System Override: Initiated</span>
+              <span className="font-mono text-xs uppercase tracking-wider text-primary">Flagship Competition</span>
             </motion.div>
             
             <h2 className="font-poppins text-5xl md:text-7xl font-bold mb-6 tracking-tight">
@@ -95,14 +95,14 @@ const VibeathonSection = () => {
               <GlowCard glowColor="primary" className="h-full">
                 <div className="flex items-center gap-3 mb-8 border-b border-primary/20 pb-4">
                   <Layout className="w-6 h-6 text-primary" />
-                  <h3 className="font-mono text-xl font-bold text-primary">Mission Parameters</h3>
+                  <h3 className="font-mono text-xl font-bold text-primary">Event Details</h3>
                 </div>
 
                 <div className="space-y-6">
                   <div className="group">
                     <div className="flex justify-between text-sm mb-2">
-                      <span className="text-muted-foreground">Squad Size</span>
-                      <span className="font-mono text-primary">3-4 Operatives</span>
+                      <span className="text-muted-foreground">Team Size</span>
+                      <span className="font-mono text-primary">3-4 Members</span>
                     </div>
                     <div className="h-2 bg-muted rounded-full overflow-hidden">
                       <motion.div 
@@ -116,7 +116,7 @@ const VibeathonSection = () => {
 
                   <div className="group">
                     <div className="flex justify-between text-sm mb-2">
-                      <span className="text-muted-foreground">Time Limit</span>
+                      <span className="text-muted-foreground">Duration</span>
                       <span className="font-mono text-secondary">6 Hours</span>
                     </div>
                     <div className="h-2 bg-muted rounded-full overflow-hidden">
@@ -155,7 +155,7 @@ const VibeathonSection = () => {
               <GlowCard glowColor="secondary">
                 <div className="flex items-center gap-3 mb-6">
                   <Target className="w-6 h-6 text-secondary" />
-                  <h3 className="font-mono text-xl font-bold text-secondary">Primary Objectives</h3>
+                  <h3 className="font-mono text-xl font-bold text-secondary">Deliverables</h3>
                 </div>
                 <ul className="space-y-4">
                   {[
