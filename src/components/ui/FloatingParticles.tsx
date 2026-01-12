@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 import { useMemo, useRef } from "react";
 
 const codeSymbols = ["</>", "{}", "[]", "=>", "//", "**", "&&", "||", "!=", "++", "01", "10"];
@@ -13,6 +13,39 @@ interface Particle {
   delay: number;
   parallaxFactor: number;
 }
+
+const ParticleItem = ({ particle, scrollYProgress }: { particle: Particle; scrollYProgress: MotionValue<number> }) => {
+  const y = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [0, particle.parallaxFactor * (particle.id % 2 === 0 ? 1 : -1)]
+  );
+
+  return (
+    <motion.div
+      className="absolute font-mono text-primary/20 select-none"
+      style={{
+        left: `${particle.x}%`,
+        top: `${particle.y}%`,
+        fontSize: `${particle.size}rem`,
+        y,
+      }}
+      animate={{
+        x: [0, 15, -15, 0],
+        opacity: [0.1, 0.3, 0.1],
+        rotate: [0, 10, -10, 0],
+      }}
+      transition={{
+        duration: particle.duration,
+        delay: particle.delay,
+        repeat: Infinity,
+        ease: "easeInOut",
+      }}
+    >
+      {particle.symbol}
+    </motion.div>
+  );
+};
 
 const FloatingParticles = () => {
   const ref = useRef(null);
@@ -33,39 +66,9 @@ const FloatingParticles = () => {
 
   return (
     <div ref={ref} className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-      {particles.map((particle) => {
-        const y = useTransform(
-          scrollYProgress, 
-          [0, 1], 
-          [0, particle.parallaxFactor * (particle.id % 2 === 0 ? 1 : -1)]
-        );
-        
-        return (
-          <motion.div
-            key={particle.id}
-            className="absolute font-mono text-primary/20 select-none"
-            style={{
-              left: `${particle.x}%`,
-              top: `${particle.y}%`,
-              fontSize: `${particle.size}rem`,
-              y,
-            }}
-            animate={{
-              x: [0, 15, -15, 0],
-              opacity: [0.1, 0.3, 0.1],
-              rotate: [0, 10, -10, 0],
-            }}
-            transition={{
-              duration: particle.duration,
-              delay: particle.delay,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          >
-            {particle.symbol}
-          </motion.div>
-        );
-      })}
+      {particles.map((particle) => (
+        <ParticleItem key={particle.id} particle={particle} scrollYProgress={scrollYProgress} />
+      ))}
     </div>
   );
 };
