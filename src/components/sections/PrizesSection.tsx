@@ -99,31 +99,31 @@ const PrizesSection = () => {
           
           {/* Vibeathon Podium (Spans 7 cols) */}
           <div className="lg:col-span-7">
-             <div className="bg-card/30 rounded-3xl border border-white/5 p-6 md:p-8 h-full">
+             <div className="bg-card/30 rounded-3xl border border-white/5 p-4 md:p-8 h-full">
                 <h3 className="text-center font-poppins text-lg font-bold mb-8 flex items-center justify-center gap-2">
                   <Trophy className="w-5 h-5 text-primary" />
                   VIBEATHON Winners
                 </h3>
-                <div className="flex flex-col md:flex-row items-end justify-center gap-4 min-h-[250px]">
+                <div className="flex flex-row items-end justify-center gap-2 md:gap-4 min-h-[250px]">
                   {vibeathonWinners.map((winner, index) => (
                     <motion.div
                       key={winner.rank}
                       initial={{ opacity: 0, y: 50 }}
                       animate={isInView ? { opacity: 1, y: 0 } : {}}
                       transition={{ delay: 0.3 + index * 0.1, type: "spring" }}
-                      className={`w-full md:w-1/3 relative ${winner.rank === 1 ? "order-first md:order-2 z-10" : winner.rank === 2 ? "md:order-1" : "md:order-3"}`}
+                      className={`w-1/3 relative ${winner.rank === 1 ? "order-2 z-10" : winner.rank === 2 ? "order-1" : "order-3"}`}
                     >
                       <div 
                         className={`
-                          relative p-4 rounded-t-2xl border-t border-x backdrop-blur-sm text-center flex flex-col items-center justify-end
-                          ${winner.rank === 1 ? "h-56 bg-primary/10 border-primary/50 shadow-[0_-10px_30px_hsl(270_100%_65%/0.15)]" : 
-                            winner.rank === 2 ? "h-40 bg-secondary/10 border-secondary/50" : 
-                            "h-32 bg-accent/10 border-accent/50"}
+                          relative p-2 md:p-4 rounded-t-xl md:rounded-t-2xl border-t border-x backdrop-blur-sm text-center flex flex-col items-center justify-end
+                          ${winner.rank === 1 ? "h-48 md:h-56 bg-primary/10 border-primary/50 shadow-[0_-10px_30px_hsl(270_100%_65%/0.15)]" : 
+                            winner.rank === 2 ? "h-36 md:h-40 bg-secondary/10 border-secondary/50" : 
+                            "h-28 md:h-32 bg-accent/10 border-accent/50"}
                         `}
                       >
-                        <div className="absolute -top-5 left-1/2 -translate-x-1/2">
+                        <div className="absolute -top-4 md:-top-5 left-1/2 -translate-x-1/2">
                           <winner.icon 
-                            className={`w-10 h-10 
+                            className={`w-8 h-8 md:w-10 md:h-10 
                               ${winner.rank === 1 ? "text-primary drop-shadow-[0_0_10px_rgba(168,85,247,0.5)]" : 
                                 winner.rank === 2 ? "text-secondary" : "text-accent"}
                             `} 
@@ -131,11 +131,11 @@ const PrizesSection = () => {
                         </div>
                         
                         <div className="mt-4">
-                          <p className="font-mono text-xs text-muted-foreground mb-1">{winner.label}</p>
-                          <p className="font-poppins font-bold text-xl md:text-2xl">₹<AnimatedCounter value={winner.amount} /></p>
+                          <p className="font-mono text-[10px] md:text-xs text-muted-foreground mb-1 whitespace-nowrap overflow-hidden text-ellipsis w-full">{winner.label}</p>
+                          <p className="font-poppins font-bold text-sm md:text-xl lg:text-2xl break-all">₹<AnimatedCounter value={winner.amount} /></p>
                         </div>
                       </div>
-                      <div className={`h-2 w-full rounded-b-sm ${
+                      <div className={`h-1.5 md:h-2 w-full rounded-b-sm ${
                         winner.rank === 1 ? "bg-primary" : winner.rank === 2 ? "bg-secondary" : "bg-accent"
                       }`} />
                     </motion.div>
