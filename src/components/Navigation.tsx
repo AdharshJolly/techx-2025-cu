@@ -35,9 +35,11 @@ const Navigation = () => {
         <nav
           className={`
             flex items-center justify-between transition-all duration-300
-            ${isScrolled 
-              ? "w-full max-w-5xl bg-black/60 backdrop-blur-xl border border-white/10 rounded-full shadow-[0_0_20px_rgba(0,0,0,0.5)] py-3 px-6" 
-              : "w-full max-w-7xl bg-transparent py-4 px-4"}
+            ${
+              isScrolled
+                ? "w-full max-w-5xl bg-black/60 backdrop-blur-xl border border-white/10 rounded-full shadow-[0_0_20px_rgba(0,0,0,0.5)] py-3 px-6"
+                : "w-full max-w-7xl bg-transparent py-4 px-4"
+            }
           `}
         >
           {/* Logo */}
@@ -45,7 +47,7 @@ const Navigation = () => {
             <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center border border-primary/50 group-hover:bg-primary/30 transition-colors">
               <Terminal className="w-5 h-5 text-primary" />
             </div>
-            <div className="font-poppins font-bold text-xl tracking-tight">
+            <div className="font-poppins font-bold text-3xl tracking-tight">
               <span className="text-white">TECH</span>
               <span className="text-primary">X</span>
             </div>
@@ -64,7 +66,12 @@ const Navigation = () => {
                 </a>
               ))}
             </div>
-            <Button variant="default" size="sm" className="rounded-full px-6 shadow-[0_0_15px_hsl(270_100%_65%/0.4)] hover:shadow-[0_0_25px_hsl(270_100%_65%/0.6)]" asChild>
+            <Button
+              variant="default"
+              size="sm"
+              className="rounded-full px-6 shadow-[0_0_15px_hsl(270_100%_65%/0.4)] hover:shadow-[0_0_25px_hsl(270_100%_65%/0.6)]"
+              asChild
+            >
               <a href="#registration">Register</a>
             </Button>
           </div>
@@ -74,7 +81,11 @@ const Navigation = () => {
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="md:hidden w-10 h-10 flex items-center justify-center rounded-full bg-white/10 text-foreground border border-white/10"
           >
-            {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {isMobileMenuOpen ? (
+              <X className="w-5 h-5" />
+            ) : (
+              <Menu className="w-5 h-5" />
+            )}
           </button>
         </nav>
       </motion.div>
@@ -105,7 +116,10 @@ const Navigation = () => {
               ))}
               <div className="h-px bg-white/10 my-2" />
               <Button variant="hero" size="lg" className="w-full" asChild>
-                <a href="#registration" onClick={() => setIsMobileMenuOpen(false)}>
+                <a
+                  href="#registration"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
                   Register Now
                 </a>
               </Button>

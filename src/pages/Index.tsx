@@ -19,7 +19,11 @@ const Index = () => {
   return (
     <>
       <PageLoader onLoadComplete={() => setIsLoaded(true)} />
-      <div className={`min-h-screen relative transition-opacity duration-500 ${isLoaded ? "opacity-100" : "opacity-0"}`}>
+      <div
+        className={`min-h-screen relative transition-opacity duration-500 ${
+          isLoaded ? "opacity-100" : "opacity-0"
+        }`}
+      >
         <FloatingParticles />
         <ScrollProgress />
         <Navigation />
@@ -31,7 +35,7 @@ const Index = () => {
           <VibeathonSection />
           <PrizesSection />
           <RegistrationSection />
-          <SponsorsSection />
+          {/* <SponsorsSection /> */}
         </main>
         <Footer />
       </div>
