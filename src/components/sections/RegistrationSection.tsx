@@ -1,171 +1,193 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
-import { useRef } from "react";
+import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { Award, Calendar, Coffee, Ticket } from "lucide-react";
+import { Check, QrCode, Ticket } from "lucide-react";
 
 const pricingTiers = [
   {
-    title: "IEEE CS Members",
+    id: "ieee-cs",
+    title: "IEEE CS Member",
     price: 299,
-    highlight: true,
+    originalPrice: 499,
+    color: "primary",
   },
   {
-    title: "IEEE Members",
+    id: "ieee",
+    title: "IEEE Member",
     price: 399,
+    originalPrice: 599,
+    color: "secondary",
   },
   {
-    title: "Non-IEEE Members",
+    id: "non-ieee",
+    title: "Non-IEEE Member",
     price: 499,
+    originalPrice: 699,
+    color: "accent",
   },
 ];
 
 const benefits = [
-  { icon: Calendar, label: "Access to all workshops and events" },
-  { icon: Ticket, label: "VIBEATHON eligibility" },
-  { icon: Award, label: "Certificates" },
-  { icon: Coffee, label: "Snacks for all three days" },
-  { icon: Award, label: "Prize eligibility" },
+  "Full 3-Day Event Access",
+  "Workshops & Challenges",
+  "VIBEATHON Eligibility",
+  "Official Certificate",
+  "Refreshments Included",
 ];
 
 const RegistrationSection = () => {
+  const [selectedTier, setSelectedTier] = useState(pricingTiers[0]);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
     <section id="registration" className="py-24 md:py-32 relative overflow-hidden">
-      {/* Background glow */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-primary/10 rounded-full blur-[150px]" />
-      
       <div className="container relative z-10">
         <div className="text-center mb-16" ref={ref}>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5 }}
             className="section-tag mb-4"
           >
-            Registration
+            Get Your Pass
           </motion.p>
           
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="font-poppins text-3xl md:text-5xl font-bold mb-4"
+            transition={{ delay: 0.1 }}
+            className="font-poppins text-3xl md:text-5xl font-bold mb-8"
           >
-            Join <span className="text-gradient">TECHX 2025</span>
+            Secure Your <span className="text-gradient">Spot</span>
           </motion.h2>
-          
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-muted-foreground max-w-xl mx-auto"
-          >
-            Secure your spot and be part of the most innovative tech event of the year
-          </motion.p>
         </div>
-        
-        {/* Pricing cards with 3D hover */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-12"
-        >
-          {pricingTiers.map((tier, index) => (
-            <motion.div
-              key={tier.title}
-              initial={{ opacity: 0, scale: 0.9, rotateY: -15 }}
-              animate={isInView ? { opacity: 1, scale: 1, rotateY: 0 } : {}}
-              transition={{ 
-                duration: 0.5, 
-                delay: 0.4 + index * 0.1,
-                type: "spring"
-              }}
-              whileHover={{ 
-                scale: 1.05, 
-                y: -10,
-                boxShadow: tier.highlight 
-                  ? "0 20px 60px hsl(270 100% 65% / 0.3)"
-                  : "0 20px 40px hsl(270 100% 65% / 0.15)"
-              }}
-              className={`relative p-6 md:p-8 rounded-2xl border backdrop-blur-sm text-center transition-all duration-300 cursor-default ${
-                tier.highlight
-                  ? "bg-gradient-to-b from-primary/20 to-secondary/10 border-primary/50"
-                  : "bg-card/50 border-border/50 hover:border-border"
-              }`}
-            >
-              {tier.highlight && (
-                <motion.div 
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                  transition={{ delay: 0.7, type: "spring" }}
-                  className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-primary text-xs font-semibold text-primary-foreground"
-                >
-                  Best Value
-                </motion.div>
-              )}
-              
-              <p className="font-mono text-sm text-muted-foreground mb-3">{tier.title}</p>
-              <p className={`font-poppins text-4xl font-bold ${tier.highlight ? "text-gradient" : "text-foreground"}`}>
-                ₹{tier.price}
-              </p>
-              
-              {/* Shine effect */}
-              <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none">
-                <motion.div
-                  initial={{ x: "-100%", opacity: 0 }}
-                  whileHover={{ x: "100%", opacity: 1 }}
-                  transition={{ duration: 0.6 }}
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
-                />
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-        
-        {/* Benefits with stagger */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.6 }}
-          className="max-w-2xl mx-auto mb-12"
-        >
-          <h3 className="font-poppins text-lg font-semibold text-center mb-6">What's Included</h3>
-          <div className="grid sm:grid-cols-2 gap-4">
-            {benefits.map((benefit, i) => (
-              <motion.div 
-                key={benefit.label} 
-                initial={{ opacity: 0, x: -20 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ delay: 0.7 + i * 0.1 }}
-                whileHover={{ x: 5, backgroundColor: "hsl(var(--card) / 0.8)" }}
-                className="flex items-center gap-3 p-3 rounded-lg bg-card/30 border border-border/30 transition-all duration-300"
+
+        <div className="max-w-5xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left: Ticket Selection */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.6 }}
+            className="space-y-4"
+          >
+            <h3 className="text-xl font-bold font-poppins mb-6">Select your category:</h3>
+            {pricingTiers.map((tier) => (
+              <div
+                key={tier.id}
+                onClick={() => setSelectedTier(tier)}
+                className={`
+                  cursor-pointer p-4 rounded-xl border transition-all duration-300 flex items-center justify-between
+                  ${selectedTier.id === tier.id 
+                    ? `bg-${tier.color}/10 border-${tier.color} shadow-[0_0_20px_hsl(var(--${tier.color})_/_0.2)]` 
+                    : "bg-card/50 border-border/50 hover:bg-card hover:border-border"}
+                `}
               >
-                <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                  <benefit.icon className="w-4 h-4 text-primary" />
+                <div className="flex items-center gap-4">
+                  <div className={`
+                    w-6 h-6 rounded-full border-2 flex items-center justify-center
+                    ${selectedTier.id === tier.id ? `border-${tier.color} bg-${tier.color}` : "border-muted-foreground"}
+                  `}>
+                    {selectedTier.id === tier.id && <Check className="w-4 h-4 text-white" />}
+                  </div>
+                  <span className={`font-semibold ${selectedTier.id === tier.id ? "text-foreground" : "text-muted-foreground"}`}>
+                    {tier.title}
+                  </span>
                 </div>
-                <span className="text-sm text-muted-foreground">{benefit.label}</span>
-              </motion.div>
+                <span className="font-mono font-bold">₹{tier.price}</span>
+              </div>
             ))}
-          </div>
-        </motion.div>
-        
-        {/* CTA with pulse */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.9 }}
-          className="text-center"
-        >
-          <Button variant="hero" size="xl" className="animate-pulse-glow" asChild>
-            <a href="#" target="_blank" rel="noopener noreferrer">
-              Register Now
-            </a>
-          </Button>
-        </motion.div>
+          </motion.div>
+
+          {/* Right: The Holographic Ticket */}
+          <motion.div
+            initial={{ opacity: 0, x: 50, rotateY: -10 }}
+            animate={isInView ? { opacity: 1, x: 0, rotateY: 0 } : {}}
+            transition={{ duration: 0.8, type: "spring" }}
+            className="perspective-1000"
+          >
+            <div className="relative w-full aspect-[3/5] md:aspect-[4/5] max-w-sm mx-auto">
+              {/* Ticket Glow */}
+              <div className={`absolute inset-0 transition-colors duration-500 blur-[60px] rounded-full
+                 ${selectedTier.color === 'primary' ? 'bg-primary/20' : 
+                   selectedTier.color === 'secondary' ? 'bg-secondary/20' : 'bg-accent/20'}
+              `} />
+              
+              <div className="relative h-full bg-black/40 backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden flex flex-col shadow-2xl">
+                {/* Holographic Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none z-10" />
+                <div className="absolute -inset-full bg-gradient-to-r from-transparent via-white/10 to-transparent rotate-45 animate-shimmer pointer-events-none z-10" />
+
+                {/* Top Section */}
+                <div className={`p-8 transition-colors duration-500 bg-gradient-to-b
+                   ${selectedTier.color === 'primary' ? 'from-primary/20' : 
+                     selectedTier.color === 'secondary' ? 'from-secondary/20' : 'from-accent/20'}
+                   to-transparent
+                `}>
+                  <div className="flex justify-between items-start mb-8">
+                    <Ticket className={`w-8 h-8 
+                       ${selectedTier.color === 'primary' ? 'text-primary' : 
+                         selectedTier.color === 'secondary' ? 'text-secondary' : 'text-accent'}
+                    `} />
+                    <span className="font-mono text-xs border border-white/20 px-2 py-1 rounded">2025</span>
+                  </div>
+                  <h3 className="font-poppins text-3xl font-bold mb-2">TECHX</h3>
+                  <p className="text-sm text-muted-foreground uppercase tracking-widest">All Access Pass</p>
+                </div>
+
+                {/* Middle Content */}
+                <div className="flex-1 p-8 pt-0 flex flex-col justify-between">
+                  <div className="space-y-4 my-6">
+                    {benefits.map((benefit, i) => (
+                      <div key={i} className="flex items-center gap-3 text-sm text-gray-300">
+                        <Check className={`w-4 h-4 
+                           ${selectedTier.color === 'primary' ? 'text-primary' : 
+                             selectedTier.color === 'secondary' ? 'text-secondary' : 'text-accent'}
+                        `} />
+                        {benefit}
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="space-y-2">
+                    <div className="flex justify-between items-end">
+                      <span className="text-muted-foreground text-sm">Total</span>
+                      <div className="text-right">
+                         <span className="text-sm text-muted-foreground line-through mr-2">₹{selectedTier.originalPrice}</span>
+                         <span className={`text-3xl font-bold font-mono
+                            ${selectedTier.color === 'primary' ? 'text-primary' : 
+                              selectedTier.color === 'secondary' ? 'text-secondary' : 'text-accent'}
+                         `}>₹{selectedTier.price}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Perforated Divider */}
+                <div className="relative h-px w-full bg-white/20 my-2">
+                  <div className="absolute left-0 -top-3 w-6 h-6 bg-background rounded-full -ml-3" />
+                  <div className="absolute right-0 -top-3 w-6 h-6 bg-background rounded-full -mr-3" />
+                </div>
+
+                {/* Bottom Section (QR) */}
+                <div className="p-6 bg-black/20 flex items-center justify-between gap-4">
+                  <div className="text-xs text-muted-foreground">
+                    <p>Scan to</p>
+                    <p>Register</p>
+                  </div>
+                  <QrCode className="w-12 h-12 text-white/80" />
+                  <Button size="sm" className={`
+                     ${selectedTier.color === 'primary' ? 'bg-primary hover:bg-primary/90' : 
+                       selectedTier.color === 'secondary' ? 'bg-secondary hover:bg-secondary/90' : 'bg-accent hover:bg-accent/90'}
+                     text-white border-0
+                  `}>
+                    Book Now
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
