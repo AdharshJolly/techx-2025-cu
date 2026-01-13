@@ -104,7 +104,7 @@ const PrizesSection = () => {
                 </div>
                 <div className="font-poppins font-bold text-2xl text-foreground">
                   <span className="text-primary">₹</span>
-                  <AnimatedCounter value={32} suffix="K" />
+                  <AnimatedCounter value={32000} />
                 </div>
               </div>
             </motion.div>
