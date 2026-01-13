@@ -34,12 +34,12 @@ const OrganizersSection = () => {
         <div className="grid lg:grid-cols-2 gap-8">
           {/* CHRIST University Card */}
           <GlowCard glowColor="primary" className="h-full flex flex-col">
-            <div className="flex items-center gap-6 mb-6">
-              <div className="w-20 h-20 rounded-xl bg-white p-2 flex items-center justify-center border border-primary/20 shrink-0">
+            <div className="flex flex-col md:flex-row items-start md:items-center gap-6 mb-6">
+              <div className="w-32 h-32 md:w-40 md:h-40 rounded-xl p-2 flex items-center justify-center shrink-0">
                 <img 
                   src="/assets/images/cu_color.png" 
                   alt="CHRIST University Logo" 
-                  className="w-full h-full object-contain"
+                  className="w-full h-full object-contain filter brightness-0 invert opacity-90 hover:opacity-100 transition-opacity"
                 />
               </div>
               <h3 className="font-poppins text-xl md:text-2xl font-bold">CHRIST (Deemed to be University)</h3>
@@ -69,12 +69,12 @@ const OrganizersSection = () => {
 
           {/* IEEE CS Card */}
           <GlowCard glowColor="secondary" className="h-full flex flex-col">
-            <div className="flex items-center gap-6 mb-6">
-              <div className="w-20 h-20 rounded-xl bg-white p-2 flex items-center justify-center border border-secondary/20 shrink-0">
+            <div className="flex flex-col md:flex-row items-start md:items-center gap-6 mb-6">
+              <div className="w-32 h-32 md:w-40 md:h-40 rounded-xl p-2 flex items-center justify-center shrink-0">
                 <img 
                   src="/assets/images/ieee_cs_bc.png" 
                   alt="IEEE CS Bangalore Chapter Logo" 
-                  className="w-full h-full object-contain"
+                  className="w-full h-full object-contain filter brightness-0 invert opacity-90 hover:opacity-100 transition-opacity"
                 />
               </div>
               <h3 className="font-poppins text-xl md:text-2xl font-bold">IEEE Computer Society</h3>
