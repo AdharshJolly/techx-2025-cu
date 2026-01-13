@@ -13,7 +13,6 @@ import FloatingParticles from "@/components/ui/FloatingParticles";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 import PageLoader from "@/components/ui/PageLoader";
 import NeuralBackground from "@/components/ui/NeuralBackground";
-import CyberCursor from "@/components/ui/CyberCursor";
 
 const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -22,7 +21,6 @@ const Index = () => {
     <>
       <PageLoader onLoadComplete={() => setIsLoaded(true)} />
       <div className={`min-h-screen relative transition-opacity duration-500 ${isLoaded ? "opacity-100" : "opacity-0"}`}>
-        <CyberCursor />
         <NeuralBackground />
         <FloatingParticles />
         <ScrollProgress />

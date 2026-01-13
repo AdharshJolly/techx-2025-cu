@@ -54,7 +54,7 @@ export default {
         },
         neon: {
           violet: "hsl(var(--neon-violet))",
-          magenta: "hsl(var(--neon-magenta))",
+          indigo: "hsl(var(--neon-indigo))",
           glow: "hsl(var(--neon-glow))",
         },
         surface: {
