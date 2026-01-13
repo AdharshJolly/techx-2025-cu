@@ -73,7 +73,7 @@ const HeroSection = () => {
             transition={{ duration: 0.6, type: "spring" }}
             className="inline-block mb-4 md:mb-6"
           >
-            <span className="section-tag px-3 py-1.5 md:px-4 md:py-2 text-[10px] md:text-xs rounded-full bg-primary/10 border border-primary/30 whitespace-nowrap">
+            <span className="section-tag px-2 py-1.5 md:px-4 md:py-2 text-[10px] md:text-xs rounded-full bg-primary/10 border border-primary/30 whitespace-normal tracking-normal md:tracking-widest">
               Flagship IEEE Technical & Innovation Event
             </span>
           </motion.div>
