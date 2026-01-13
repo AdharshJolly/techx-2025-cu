@@ -35,7 +35,7 @@ const OrganizersSection = () => {
           {/* CHRIST University Card */}
           <GlowCard glowColor="primary" className="h-full flex flex-col">
             <div className="flex flex-col md:flex-row items-start md:items-center gap-6 mb-6">
-              <div className="w-32 h-32 md:w-40 md:h-40 rounded-xl p-2 flex items-center justify-center shrink-0">
+              <div className="w-full h-32 md:w-40 md:h-40 rounded-xl p-4 flex items-center justify-center shrink-0 border border-primary/10 bg-primary/5 md:bg-transparent md:border-0">
                 <img 
                   src="/assets/images/cu_color.png" 
                   alt="CHRIST University Logo" 
@@ -70,7 +70,7 @@ const OrganizersSection = () => {
           {/* IEEE CS Card */}
           <GlowCard glowColor="secondary" className="h-full flex flex-col">
             <div className="flex flex-col md:flex-row items-start md:items-center gap-6 mb-6">
-              <div className="w-32 h-32 md:w-40 md:h-40 rounded-xl p-2 flex items-center justify-center shrink-0">
+              <div className="w-full h-32 md:w-40 md:h-40 rounded-xl p-4 flex items-center justify-center shrink-0 border border-secondary/10 bg-secondary/5 md:bg-transparent md:border-0">
                 <img 
                   src="/assets/images/ieee_cs_bc.png" 
                   alt="IEEE CS Bangalore Chapter Logo" 
