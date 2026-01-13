@@ -7,7 +7,7 @@ const stats = [
   { value: 3, label: "Days", suffix: "" },
   { value: 400, label: "Expected Attendees", suffix: "+" },
   { value: 6, label: "Workshops", suffix: "+" },
-  { value: 32000, label: "Prize Pool", prefix: "₹" },
+  { value: 32, label: "Prize Pool", prefix: "₹", suffix: "K" },
 ];
 
 const AboutSection = () => {
@@ -26,7 +26,7 @@ const AboutSection = () => {
           >
             About The Event
           </motion.p>
-          
+
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -35,7 +35,7 @@ const AboutSection = () => {
           >
             What is <span className="text-gradient">TECHX</span>?
           </motion.h2>
-          
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -43,16 +43,34 @@ const AboutSection = () => {
             className="space-y-6 text-lg text-muted-foreground leading-relaxed"
           >
             <p>
-              TECHX 2025 is a flagship technical and innovation event hosted by the IEEE Computer Society at CHRIST University, Kengeri Campus.
+              TECHX 2025 is a flagship technical and innovation event hosted by
+              the IEEE Computer Society at CHRIST University, Kengeri Campus.
             </p>
             <p>
-              Spanning three immersive days, the event introduces students to modern development paradigms such as <span className="text-primary font-medium">vibe coding</span>, <span className="text-primary font-medium">AI-assisted development</span>, <span className="text-primary font-medium">prompt engineering</span>, and <span className="text-primary font-medium">rapid prototyping</span>.
+              Spanning three immersive days, the event introduces students to
+              modern development paradigms such as{" "}
+              <span className="text-primary font-medium">vibe coding</span>,{" "}
+              <span className="text-primary font-medium">
+                AI-assisted development
+              </span>
+              ,{" "}
+              <span className="text-primary font-medium">
+                prompt engineering
+              </span>
+              , and{" "}
+              <span className="text-primary font-medium">
+                rapid prototyping
+              </span>
+              .
             </p>
             <p>
-              TECHX brings together students from diverse disciplines to collaborate, experiment, and innovate using emerging technologies, culminating in a high-intensity innovation sprint called <span className="text-secondary font-semibold">VIBEATHON</span>.
+              TECHX brings together students from diverse disciplines to
+              collaborate, experiment, and innovate using emerging technologies,
+              culminating in a high-intensity innovation sprint called{" "}
+              <span className="text-secondary font-semibold">VIBEATHON</span>.
             </p>
           </motion.div>
-          
+
           {/* Stats with loading animation */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16">
             {stats.map((stat, index) => (
@@ -60,26 +78,28 @@ const AboutSection = () => {
                 key={stat.label}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ 
-                  duration: 0.5, 
+                transition={{
+                  duration: 0.5,
                   delay: 0.4 + index * 0.1,
                   type: "spring",
-                  stiffness: 200
+                  stiffness: 200,
                 }}
-                whileHover={{ 
+                whileHover={{
                   y: -5,
-                  boxShadow: "0 10px 40px hsl(270 100% 65% / 0.2)"
+                  boxShadow: "0 10px 40px hsl(270 100% 65% / 0.2)",
                 }}
                 className="text-center p-6 rounded-2xl bg-card/50 border border-border/50 backdrop-blur-sm transition-all duration-300 hover:border-primary/40"
               >
                 <p className="font-poppins text-3xl md:text-4xl font-bold text-gradient">
-                  <AnimatedCounter 
-                    value={stat.value} 
-                    prefix={stat.prefix || ""} 
-                    suffix={stat.suffix || ""} 
+                  <AnimatedCounter
+                    value={stat.value}
+                    prefix={stat.prefix || ""}
+                    suffix={stat.suffix || ""}
                   />
                 </p>
-                <p className="font-mono text-sm text-muted-foreground mt-2">{stat.label}</p>
+                <p className="font-mono text-sm text-muted-foreground mt-2">
+                  {stat.label}
+                </p>
               </motion.div>
             ))}
           </div>
