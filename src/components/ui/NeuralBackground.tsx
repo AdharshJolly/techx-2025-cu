@@ -64,7 +64,7 @@ const NeuralBackground = () => {
         if (!ctx) return;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(168, 85, 247, 0.5)"; // Primary color (Purple)
+        ctx.fillStyle = "hsla(285, 100%, 75%, 0.7)"; // Ultra Vivid Purple
         ctx.fill();
       }
     }
@@ -91,8 +91,8 @@ const NeuralBackground = () => {
 
           if (distance < connectionDistance) {
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(168, 85, 247, ${0.15 - distance / connectionDistance * 0.15})`;
-            ctx.lineWidth = 1;
+            ctx.strokeStyle = `hsla(285, 100%, 75%, ${0.25 - distance / connectionDistance * 0.25})`;
+            ctx.lineWidth = 1.5;
             ctx.moveTo(particle.x, particle.y);
             ctx.lineTo(particles[j].x, particles[j].y);
             ctx.stroke();
