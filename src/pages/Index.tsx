@@ -12,6 +12,7 @@ import Footer from "@/components/sections/Footer";
 import FloatingParticles from "@/components/ui/FloatingParticles";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 import PageLoader from "@/components/ui/PageLoader";
+import NeuralBackground from "@/components/ui/NeuralBackground";
 
 const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -24,6 +25,7 @@ const Index = () => {
           isLoaded ? "opacity-100" : "opacity-0"
         }`}
       >
+        <NeuralBackground />
         <FloatingParticles />
         <ScrollProgress />
         <Navigation />
