@@ -27,7 +27,7 @@ const OrganizersSection = () => {
             transition={{ delay: 0.1 }}
             className="font-poppins text-3xl md:text-5xl font-bold mb-8"
           >
-            Centers of <span className="text-gradient">Excellence</span>
+            Organized <span className="text-gradient">By</span>
           </motion.h2>
         </div>
 
