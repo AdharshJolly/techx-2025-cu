@@ -6,14 +6,14 @@ import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 import GlowCard from "@/components/ui/GlowCard";
 
 const vibeathonWinners = [
-  { rank: 2, label: "Runner-up", amount: 5000, color: "secondary", icon: Medal, percent: 15 },
-  { rank: 1, label: "Winner", amount: 10000, color: "primary", icon: Crown, percent: 31 },
-  { rank: 3, label: "2nd Runner-up", amount: 3000, color: "accent", icon: Medal, percent: 9 },
+  { rank: 2, label: "Runner-up", amount: 5, color: "secondary", icon: Medal, percent: 15, suffix: "K" },
+  { rank: 1, label: "Winner", amount: 10, color: "primary", icon: Crown, percent: 31, suffix: "K" },
+  { rank: 3, label: "2nd Runner-up", amount: 3, color: "accent", icon: Medal, percent: 9, suffix: "K" },
 ];
 
 const categoryPrizes = [
-  { label: "Prompt Engineering Battle", amount: 7000, icon: Zap, percent: 22 },
-  { label: "Sector Debate Awards", amount: 7000, icon: Trophy, percent: 22 },
+  { label: "Prompt Engineering Battle", amount: 7, icon: Zap, percent: 22, suffix: "K" },
+  { label: "Sector Debate Awards", amount: 7, icon: Trophy, percent: 22, suffix: "K" },
 ];
 
 const PrizesSection = () => {
@@ -132,7 +132,7 @@ const PrizesSection = () => {
                         
                         <div className="mt-4">
                           <p className="font-mono text-[10px] md:text-xs text-muted-foreground mb-1 whitespace-nowrap overflow-hidden text-ellipsis w-full">{winner.label}</p>
-                          <p className="font-poppins font-bold text-sm md:text-xl lg:text-2xl break-all">₹<AnimatedCounter value={winner.amount} /></p>
+                          <p className="font-poppins font-bold text-sm md:text-xl lg:text-2xl break-all">₹<AnimatedCounter value={winner.amount} suffix={winner.suffix} /></p>
                         </div>
                       </div>
                       <div className={`h-1.5 md:h-2 w-full rounded-b-sm ${
@@ -158,7 +158,7 @@ const PrizesSection = () => {
                     <prize.icon className="w-6 h-6" />
                   </div>
                   <div className="text-right">
-                    <span className="font-mono font-bold text-2xl">₹{prize.amount.toLocaleString()}</span>
+                    <span className="font-mono font-bold text-2xl">₹<AnimatedCounter value={prize.amount} suffix={prize.suffix} /></span>
                   </div>
                 </div>
                 <h4 className="font-poppins font-bold text-lg mb-1">{prize.label}</h4>
