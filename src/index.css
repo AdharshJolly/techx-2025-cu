@@ -61,13 +61,34 @@
     scroll-behavior: smooth;
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
   body {
     @apply bg-background text-foreground font-inter antialiased;
+    line-height: 1.7;
     /* Clean Neon Background Glows (No more cloudy look) */
     background-image: 
       radial-gradient(ellipse 60% 40% at 50% -10%, hsl(285 100% 75% / 0.15), transparent),
       radial-gradient(ellipse 40% 30% at 80% 60%, hsl(260 100% 80% / 0.1), transparent);
     background-attachment: fixed;
+  }
+
+  p {
+    line-height: 1.7;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -0.02em;
+    line-height: 1.2;
   }
 }
 
@@ -96,5 +117,33 @@
       linear-gradient(hsl(285 100% 75% / 0.05) 1px, transparent 1px),
       linear-gradient(90deg, hsl(285 100% 75% / 0.05) 1px, transparent 1px);
     background-size: 60px 60px;
+  }
+
+  .glassmorphism {
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .glassmorphism-light {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  /* Smooth GPU-accelerated transitions */
+  .smooth-transform {
+    will-change: transform;
+    transform: translateZ(0);
+  }
+
+  /* Icon hover animation helper */
+  .icon-hover {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .icon-hover:hover {
+    transform: scale(1.1) rotate(5deg);
   }
 }

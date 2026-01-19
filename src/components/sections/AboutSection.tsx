@@ -15,7 +15,10 @@ const AboutSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="about" className="py-24 md:py-32 relative">
+    <section id="about" className="py-32 md:py-40 relative">
+      {/* Section separator gradient */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+      
       <div className="container">
         <div className="max-w-4xl mx-auto" ref={ref}>
           <motion.p
@@ -40,7 +43,8 @@ const AboutSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="space-y-6 text-lg text-muted-foreground leading-relaxed"
+            className="space-y-6 text-lg text-muted-foreground"
+            style={{ lineHeight: '1.8' }}
           >
             <p>
               TECHX 2025 is a flagship technical and innovation event hosted by
@@ -85,10 +89,12 @@ const AboutSection = () => {
                   stiffness: 200,
                 }}
                 whileHover={{
-                  y: -5,
-                  boxShadow: "0 10px 40px hsl(270 100% 65% / 0.2)",
+                  y: -8,
+                  scale: 1.05,
+                  boxShadow: "0 15px 60px hsl(270 100% 65% / 0.3)",
+                  transition: { duration: 0.2 }
                 }}
-                className="text-center p-6 rounded-2xl bg-card/50 border border-border/50 backdrop-blur-sm transition-all duration-300 hover:border-primary/40"
+                className="text-center p-6 rounded-2xl bg-card/50 border border-border/50 backdrop-blur-sm transition-all duration-300 hover:border-primary/50 cursor-default will-change-transform"
               >
                 <p className="font-poppins text-3xl md:text-4xl font-bold text-gradient">
                   <AnimatedCounter

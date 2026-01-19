@@ -70,8 +70,10 @@ const VibeathonSection = () => {
     <section
       id="vibeathon"
       ref={containerRef}
-      className="py-24 md:py-32 relative overflow-hidden bg-background"
+      className="py-32 md:py-40 relative overflow-hidden bg-background"
     >
+      {/* Section separator gradient */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent" />
       <BinaryRain />
 
       {/* Background Glows */}

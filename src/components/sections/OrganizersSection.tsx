@@ -10,7 +10,10 @@ const OrganizersSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="organizers" className="py-20 relative">
+    <section id="organizers" className="py-32 md:py-40 relative">
+      {/* Section separator gradient */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent" />
+      
       <div className="container relative z-10">
         <div className="text-center mb-16" ref={ref}>
           <motion.p
@@ -47,7 +50,7 @@ const OrganizersSection = () => {
               </h3>
             </div>
 
-            <div className="space-y-4 text-muted-foreground text-sm leading-relaxed flex-grow">
+            <div className="space-y-4 text-muted-foreground text-sm flex-grow" style={{ lineHeight: '1.7' }}>
               <p>
                 CHRIST (Deemed to be University) was born out of the educational
                 vision of St Kuriakose Elias Chavara, an educationalist and
@@ -106,7 +109,7 @@ const OrganizersSection = () => {
               </h3>
             </div>
 
-            <div className="space-y-4 text-muted-foreground text-sm leading-relaxed flex-grow">
+            <div className="space-y-4 text-muted-foreground text-sm flex-grow" style={{ lineHeight: '1.7' }}>
               <p>
                 IEEE Computer Society Bangalore Chapter is a professional
                 chapter of the IEEE Computer Society, which is a growing and

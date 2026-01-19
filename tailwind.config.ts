@@ -56,6 +56,9 @@ export default {
           violet: "hsl(var(--neon-violet))",
           indigo: "hsl(var(--neon-indigo))",
           glow: "hsl(var(--neon-glow))",
+          cyan: "hsl(180 100% 70%)",
+          pink: "hsl(320 100% 70%)",
+          green: "hsl(150 100% 60%)",
         },
         surface: {
           DEFAULT: "hsl(var(--surface))",
@@ -92,6 +95,22 @@ export default {
           "0%": { backgroundPosition: "-200% 0" },
           "100%": { backgroundPosition: "200% 0" },
         },
+        "fade-in-up": {
+          "0%": { opacity: "0", transform: "translateY(20px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        "fade-in": {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+        "scale-in": {
+          "0%": { opacity: "0", transform: "scale(0.9)" },
+          "100%": { opacity: "1", transform: "scale(1)" },
+        },
+        "slide-in-right": {
+          "0%": { opacity: "0", transform: "translateX(-20px)" },
+          "100%": { opacity: "1", transform: "translateX(0)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -99,8 +118,13 @@ export default {
         "pulse-glow": "pulse-glow 2s ease-in-out infinite",
         "float": "float 6s ease-in-out infinite",
         "shimmer": "shimmer 3s linear infinite",
+        "fade-in-up": "fade-in-up 0.5s ease-out",
+        "fade-in": "fade-in 0.4s ease-out",
+        "scale-in": "scale-in 0.3s ease-out",
+        "slide-in-right": "slide-in-right 0.4s ease-out",
       },
     },
   },
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;

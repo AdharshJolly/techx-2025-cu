@@ -10,9 +10,9 @@ interface GlowCardProps {
 }
 
 const glowColors = {
-  primary: "hover:shadow-[0_0_40px_hsl(270_100%_65%/0.3)] hover:border-primary/60",
-  secondary: "hover:shadow-[0_0_40px_hsl(320_100%_60%/0.3)] hover:border-secondary/60",
-  accent: "hover:shadow-[0_0_40px_hsl(280_100%_70%/0.3)] hover:border-accent/60",
+  primary: "hover:shadow-[0_0_50px_hsl(270_100%_65%/0.4),0_0_100px_hsl(270_100%_65%/0.2)] hover:border-primary/70",
+  secondary: "hover:shadow-[0_0_50px_hsl(320_100%_60%/0.4),0_0_100px_hsl(320_100%_60%/0.2)] hover:border-secondary/70",
+  accent: "hover:shadow-[0_0_50px_hsl(280_100%_70%/0.4),0_0_100px_hsl(280_100%_70%/0.2)] hover:border-accent/70",
 };
 
 const GlowCard = ({ 
@@ -27,11 +27,20 @@ const GlowCard = ({
       initial={{ opacity: 0, y: 30, scale: 0.95 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.5, delay }}
-      whileHover={hover ? { y: -5, scale: 1.02 } : undefined}
+      transition={{ 
+        duration: 0.5, 
+        delay,
+        type: "spring",
+        stiffness: 100
+      }}
+      whileHover={hover ? { 
+        y: -8, 
+        scale: 1.02,
+        transition: { duration: 0.2 }
+      } : undefined}
       className={`
         relative p-6 rounded-2xl bg-card/50 border border-border/50 backdrop-blur-sm
-        transition-all duration-300
+        transition-all duration-300 cursor-default will-change-transform
         ${hover ? glowColors[glowColor] : ""}
         ${className}
       `}
