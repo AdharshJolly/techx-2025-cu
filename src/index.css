@@ -82,6 +82,83 @@
     background-attachment: fixed;
   }
 
+  /* Custom Scrollbar Styling */
+  ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(280 50% 2%);
+    border-left: 1px solid hsl(280 30% 15%);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, hsl(285 100% 75%), hsl(260 100% 80%));
+    border-radius: 6px;
+    border: 2px solid hsl(280 50% 2%);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, hsl(285 100% 80%), hsl(260 100% 85%));
+    box-shadow: 0 0 10px hsl(285 100% 75% / 0.5);
+  }
+
+  ::-webkit-scrollbar-thumb:active {
+    background: linear-gradient(180deg, hsl(285 100% 70%), hsl(260 100% 75%));
+  }
+
+  /* Firefox Scrollbar */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(285 100% 75%) hsl(280 50% 2%);
+  }
+
+  /* Text Selection */
+  ::selection {
+    background: hsl(285 100% 75% / 0.3);
+    color: hsl(280 20% 99%);
+    text-shadow: 0 0 8px hsl(285 100% 75% / 0.5);
+  }
+
+  ::-moz-selection {
+    background: hsl(285 100% 75% / 0.3);
+    color: hsl(280 20% 99%);
+    text-shadow: 0 0 8px hsl(285 100% 75% / 0.5);
+  }
+
+  /* Input Placeholder Styling */
+  ::placeholder {
+    color: hsl(280 15% 60%);
+    opacity: 1;
+  }
+
+  ::-webkit-input-placeholder {
+    color: hsl(280 15% 60%);
+  }
+
+  ::-moz-placeholder {
+    color: hsl(280 15% 60%);
+    opacity: 1;
+  }
+
+  /* Autofill Styling */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:focus {
+    -webkit-text-fill-color: hsl(280 20% 99%);
+    -webkit-box-shadow: 0 0 0px 1000px hsl(280 40% 4%) inset;
+    box-shadow: 0 0 0px 1000px hsl(280 40% 4%) inset;
+    transition: background-color 5000s ease-in-out 0s;
+    border: 1px solid hsl(285 100% 75% / 0.3);
+  }
+
   p {
     line-height: 1.7;
   }
@@ -145,5 +222,44 @@
   
   .icon-hover:hover {
     transform: scale(1.1) rotate(5deg);
+  }
+
+  /* Themed Cursor Styles - Ensuring Visibility */
+  * {
+    cursor: default;
+  }
+
+  a, button, [role="button"], .cursor-pointer {
+    cursor: pointer;
+  }
+
+  input, textarea, select {
+    cursor: text;
+  }
+
+  input[type="checkbox"], input[type="radio"] {
+    cursor: pointer;
+  }
+
+  [disabled], .disabled {
+    cursor: not-allowed;
+  }
+
+  .cursor-move {
+    cursor: move;
+  }
+
+  .cursor-grab {
+    cursor: grab;
+  }
+
+  .cursor-grabbing {
+    cursor: grabbing;
+  }
+
+  /* Enhanced focus outline for better visibility */
+  :focus-visible {
+    outline: 2px solid hsl(285 100% 75%);
+    outline-offset: 2px;
   }
 }
