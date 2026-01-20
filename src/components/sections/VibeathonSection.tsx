@@ -47,7 +47,7 @@ const BinaryRain = () => {
           }}
         >
           {Array.from({ length: 12 }, () =>
-            Math.random() > 0.5 ? "1" : "0"
+            Math.random() > 0.5 ? "1" : "0",
           ).join("")}
         </motion.div>
       ))}
@@ -123,7 +123,7 @@ const VibeathonSection = () => {
           {/* Main Content Grid */}
           <div className="grid lg:grid-cols-12 gap-8">
             {/* Left Column - Event Details Card */}
-            <div className="lg:col-span-4">
+            <div className="lg:col-span-6">
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -143,7 +143,9 @@ const VibeathonSection = () => {
                         <Users className="w-5 h-5 text-primary" />
                       </div>
                       <div>
-                        <div className="font-poppins font-bold text-white">3-4 Members</div>
+                        <div className="font-poppins font-bold text-white">
+                          3-4 Members
+                        </div>
                         <div className="text-xs text-white/70">Team Size</div>
                       </div>
                     </div>
@@ -177,7 +179,9 @@ const VibeathonSection = () => {
                     <div className="group">
                       <div className="flex justify-between text-sm mb-2">
                         <span className="text-muted-foreground">Duration</span>
-                        <span className="font-mono text-secondary font-semibold">6 Hours</span>
+                        <span className="font-mono text-secondary font-semibold">
+                          6 Hours
+                        </span>
                       </div>
                       <div className="h-2 bg-muted rounded-full overflow-hidden">
                         <motion.div
@@ -193,21 +197,24 @@ const VibeathonSection = () => {
                       <div className="p-3 rounded-lg bg-background/50 border border-border">
                         <Code className="w-5 h-5 text-primary mb-2" />
                         <div className="text-sm font-semibold">AI Tools</div>
-                        <div className="text-xs text-muted-foreground">Authorized</div>
+                        <div className="text-xs text-muted-foreground">
+                          Authorized
+                        </div>
                       </div>
                       <div className="p-3 rounded-lg bg-background/50 border border-border">
                         <Zap className="w-5 h-5 text-secondary mb-2" />
                         <div className="text-sm font-semibold">No-Code</div>
-                        <div className="text-xs text-muted-foreground">Permitted</div>
+                        <div className="text-xs text-muted-foreground">
+                          Permitted
+                        </div>
                       </div>
                     </div>
                   </div>
                 </GlowCard>
               </motion.div>
             </div>
-
-            {/* Middle Column - Deliverables */}
-            <div className="lg:col-span-4">
+            {/* Right Column - Deliverables Card */}
+            <div className="lg:col-span-6">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -227,8 +234,12 @@ const VibeathonSection = () => {
                         <Target className="w-5 h-5 text-secondary" />
                       </div>
                       <div>
-                        <div className="font-poppins font-bold text-white">Deliverables</div>
-                        <div className="text-xs text-white/70">What to submit</div>
+                        <div className="font-poppins font-bold text-white">
+                          Deliverables
+                        </div>
+                        <div className="text-xs text-white/70">
+                          What to submit
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -256,7 +267,9 @@ const VibeathonSection = () => {
                         <div className="w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center shrink-0">
                           <item.icon className="w-4 h-4 text-secondary" />
                         </div>
-                        <span className="text-foreground/90 text-sm">{item.text}</span>
+                        <span className="text-foreground/90 text-sm">
+                          {item.text}
+                        </span>
                       </motion.li>
                     ))}
                   </ul>
@@ -270,124 +283,7 @@ const VibeathonSection = () => {
                 </GlowCard>
               </motion.div>
             </div>
-
-            {/* Right Column - Stats & Info */}
-            <div className="lg:col-span-4 space-y-6">
-              {/* Stats Card */}
-              <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.5 }}
-                className="bg-card/50 border border-border/50 rounded-2xl p-6"
-              >
-                {/* Image */}
-                <div className="h-32 -mx-4 -mt-4 mb-4 rounded-t-xl overflow-hidden relative">
-                  <img
-                    src="/assets/images/vibeathon/hackathon.jpg"
-                    alt="Hackathon"
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary/40 to-accent/40" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <Trophy className="w-12 h-12 text-white drop-shadow-lg" />
-                  </div>
-                </div>
-
-                <h3 className="font-poppins text-lg font-bold mb-4">Competition Stats</h3>
-                
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between p-3 rounded-lg bg-background/50">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center">
-                        <span className="text-xl">🏆</span>
-                      </div>
-                      <div>
-                        <div className="font-bold">Total Prize Pool</div>
-                        <div className="text-xs text-muted-foreground">₹32,000</div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div className="flex gap-3">
-                    <div className="flex-1 p-3 rounded-lg bg-background/50 text-center">
-                      <div className="text-2xl font-bold text-primary">10K</div>
-                      <div className="text-xs text-muted-foreground">1st Place</div>
-                    </div>
-                    <div className="flex-1 p-3 rounded-lg bg-background/50 text-center">
-                      <div className="text-2xl font-bold text-secondary">5K</div>
-                      <div className="text-xs text-muted-foreground">2nd Place</div>
-                    </div>
-                    <div className="flex-1 p-3 rounded-lg bg-background/50 text-center">
-                      <div className="text-2xl font-bold text-accent">3K</div>
-                      <div className="text-xs text-muted-foreground">3rd Place</div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Impact & Innovation Cards */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.6 }}
-                className="grid grid-cols-2 gap-4"
-              >
-                <div className="p-4 rounded-xl bg-card/50 border border-border hover:border-primary/50 transition-all duration-300 group hover:-translate-y-1">
-                  <Rocket className="w-8 h-8 text-primary mb-3 group-hover:scale-110 transition-transform" />
-                  <div className="font-bold mb-1">Impact</div>
-                  <div className="text-xs text-muted-foreground">High Priority</div>
-                </div>
-                <div className="p-4 rounded-xl bg-card/50 border border-border hover:border-secondary/50 transition-all duration-300 group hover:-translate-y-1">
-                  <Lightbulb className="w-8 h-8 text-secondary mb-3 group-hover:scale-110 transition-transform" />
-                  <div className="font-bold mb-1">Innovation</div>
-                  <div className="text-xs text-muted-foreground">Critical</div>
-                </div>
-              </motion.div>
-            </div>
           </div>
-
-          {/* Bottom Image Gallery */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.7 }}
-            className="mt-12"
-          >
-            <div className="bg-card/30 border border-white/10 rounded-3xl p-6 overflow-hidden">
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="font-poppins text-lg font-bold flex items-center gap-2">
-                  <Users className="w-5 h-5 text-primary" />
-                  Last Edition Highlights
-                </h3>
-                <span className="text-xs text-muted-foreground">2024 VIBEATHON</span>
-              </div>
-              
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {[
-                  { src: "/assets/images/vibeathon/team-coding.jpg", label: "Team Work" },
-                  { src: "/assets/images/vibeathon/team-working.jpg", label: "Coding" },
-                  { src: "/assets/images/vibeathon/collaboration.jpg", label: "Strategy" },
-                  { src: "/assets/images/vibeathon/hackathon.jpg", label: "Innovation" },
-                ].map((img, i) => (
-                  <motion.div
-                    key={i}
-                    whileHover={{ scale: 1.02, y: -4 }}
-                    className="relative h-32 rounded-xl overflow-hidden cursor-pointer group"
-                  >
-                    <img
-                      src={img.src}
-                      alt={img.label}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
-                    <div className="absolute bottom-3 left-3">
-                      <span className="text-white font-medium text-sm">{img.label}</span>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </motion.div>
         </div>
       </div>
     </section>
