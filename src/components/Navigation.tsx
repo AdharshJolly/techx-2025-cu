@@ -14,22 +14,64 @@ const navLinks = [
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
+    let ticking = false;
+    
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY;
+          
+          // Update scrolled state
+          setIsScrolled(currentScrollY > 20);
+          
+          // Show/hide nav based on scroll direction
+          if (currentScrollY > lastScrollY && currentScrollY > 100) {
+            // Scrolling down
+            setIsVisible(false);
+          } else {
+            // Scrolling up
+            setIsVisible(true);
+          }
+          
+          setLastScrollY(currentScrollY);
+          
+          // Update active section
+          const sections = navLinks.map(link => link.href.slice(1));
+          for (const sectionId of sections) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+              const rect = element.getBoundingClientRect();
+              if (rect.top <= 150 && rect.bottom >= 150) {
+                setActiveSection(sectionId);
+                break;
+              }
+            }
+          }
+          
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [lastScrollY]);
 
   return (
     <>
       <motion.div
         initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5 }}
+        animate={{ 
+          y: isVisible ? 0 : -100,
+          opacity: isVisible ? 1 : 0
+        }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
         className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4"
       >
         <nav
@@ -43,28 +85,47 @@ const Navigation = () => {
           `}
         >
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2 group">
-            <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center border border-primary/50 group-hover:bg-primary/30 transition-colors">
+          <a href="#" className="flex items-center gap-2 group cursor-pointer">
+            <motion.div 
+              whileHover={{ scale: 1.1, rotate: 5 }}
+              className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center border border-primary/50 group-hover:bg-primary/30 transition-all duration-300 group-hover:shadow-[0_0_15px_hsl(270_100%_65%/0.4)]"
+            >
               <Terminal className="w-5 h-5 text-primary" />
-            </div>
+            </motion.div>
             <div className="font-poppins font-bold text-3xl tracking-tight">
-              <span className="text-white">TECH</span>
-              <span className="text-primary">X</span>
+              <span className="text-white group-hover:text-primary transition-colors duration-300">TECH</span>
+              <span className="text-primary group-hover:text-secondary transition-colors duration-300">X</span>
             </div>
           </a>
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-1">
             <div className="flex items-center gap-1 mr-4 bg-white/5 rounded-full p-1 border border-white/5">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="relative px-4 py-1.5 text-sm font-medium text-muted-foreground hover:text-white transition-colors rounded-full hover:bg-white/10"
-                >
-                  {link.label}
-                </a>
-              ))}
+              {navLinks.map((link) => {
+                const isActive = activeSection === link.href.slice(1);
+                return (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    className={`relative px-4 py-1.5 text-sm font-medium transition-all duration-300 rounded-full cursor-pointer
+                      ${isActive 
+                        ? "text-white bg-primary/20 shadow-[0_0_15px_hsl(270_100%_65%/0.3)]" 
+                        : "text-muted-foreground hover:text-white hover:bg-white/10"
+                      }
+                    `}
+                  >
+                    {link.label}
+                    {isActive && (
+                      <motion.div
+                        layoutId="activeSection"
+                        className="absolute inset-0 bg-primary/10 rounded-full -z-10"
+                        initial={false}
+                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      />
+                    )}
+                  </a>
+                );
+              })}
             </div>
             <Button
               variant="default"

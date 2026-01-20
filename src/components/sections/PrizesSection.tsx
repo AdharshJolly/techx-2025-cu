@@ -54,8 +54,10 @@ const PrizesSection = () => {
     <section
       id="prizes"
       ref={containerRef}
-      className="py-24 relative bg-muted/20 overflow-hidden"
+      className="py-32 md:py-40 relative bg-muted/20 overflow-hidden"
     >
+      {/* Section separator gradient */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
       {/* Background Elements */}
       <motion.div
         style={{ y: y1 }}

@@ -39,7 +39,10 @@ const RegistrationSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="registration" className="py-24 md:py-32 relative overflow-hidden">
+    <section id="registration" className="py-32 md:py-40 relative overflow-hidden">
+      {/* Section separator gradient */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-secondary/30 to-transparent" />
+      
       <div className="container relative z-10">
         <div className="text-center mb-16" ref={ref}>
           <motion.p
@@ -70,14 +73,16 @@ const RegistrationSection = () => {
           >
             <h3 className="text-xl font-bold font-poppins mb-6">Select your category:</h3>
             {pricingTiers.map((tier) => (
-              <div
+              <motion.div
                 key={tier.id}
                 onClick={() => setSelectedTier(tier)}
+                whileHover={{ scale: 1.02, y: -2 }}
+                whileTap={{ scale: 0.98 }}
                 className={`
-                  cursor-pointer p-4 rounded-xl border transition-all duration-300 flex items-center justify-between
+                  cursor-pointer p-4 rounded-xl border transition-all duration-300 flex items-center justify-between will-change-transform
                   ${selectedTier.id === tier.id 
                     ? `bg-${tier.color}/10 border-${tier.color} shadow-[0_0_20px_hsl(var(--${tier.color})_/_0.2)]` 
-                    : "bg-card/50 border-border/50 hover:bg-card hover:border-border"}
+                    : "bg-card/50 border-border/50 hover:bg-card hover:border-border hover:shadow-lg"}
                 `}
               >
                 <div className="flex items-center gap-4">
@@ -92,7 +97,7 @@ const RegistrationSection = () => {
                   </span>
                 </div>
                 <span className="font-mono font-bold">₹{tier.price}</span>
-              </div>
+              </motion.div>
             ))}
           </motion.div>
 

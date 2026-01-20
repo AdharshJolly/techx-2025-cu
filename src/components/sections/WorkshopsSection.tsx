@@ -61,7 +61,10 @@ const WorkshopsSection = () => {
   const [activeTrack, setActiveTrack] = useState<TrackType>("workshops");
 
   return (
-    <section id="workshops" className="py-24 relative overflow-hidden">
+    <section id="workshops" className="py-32 md:py-40 relative overflow-hidden">
+      {/* Section separator gradient */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+      
       <div className="container relative z-10">
         <div className="text-center mb-16">
           <motion.p
@@ -140,14 +143,14 @@ const WorkshopsSection = () => {
                           {workshop.level}
                         </Badge>
                         <div className="flex items-center text-sm text-muted-foreground">
-                          <Clock className="w-4 h-4 mr-1.5" />
+                          <Clock className="w-4 h-4 mr-1.5 group-hover:text-primary transition-colors duration-300" />
                           {workshop.time}
                         </div>
                       </div>
-                      <h3 className="text-xl font-bold font-poppins group-hover:text-primary transition-colors">
+                      <h3 className="text-xl font-bold font-poppins group-hover:text-primary transition-colors duration-300">
                         {workshop.title}
                       </h3>
-                      <p className="text-muted-foreground text-sm leading-relaxed">
+                      <p className="text-muted-foreground text-sm" style={{ lineHeight: '1.7' }}>
                         {workshop.description}
                       </p>
                       <div className="flex flex-wrap gap-2 pt-2">
@@ -190,10 +193,10 @@ const WorkshopsSection = () => {
                           {challenge.time}
                         </div>
                       </div>
-                      <h3 className="text-xl font-bold font-poppins group-hover:text-secondary transition-colors">
+                      <h3 className="text-xl font-bold font-poppins group-hover:text-secondary transition-colors duration-300">
                         {challenge.title}
                       </h3>
-                      <p className="text-muted-foreground text-sm leading-relaxed">
+                      <p className="text-muted-foreground text-sm" style={{ lineHeight: '1.7' }}>
                         {challenge.description}
                       </p>
                       

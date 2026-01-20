@@ -46,7 +46,10 @@ const days = [
 
 const JourneySection = () => {
   return (
-    <section id="journey" className="py-24 relative overflow-hidden">
+    <section id="journey" className="py-32 md:py-40 relative overflow-hidden">
+      {/* Section separator gradient */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-secondary/30 to-transparent" />
+      
       <div className="container relative z-10">
         <div className="text-center mb-24">
           <motion.p
@@ -150,12 +153,20 @@ const JourneySection = () => {
                       <h3 className="font-poppins text-xl font-bold mb-4">{day.title}</h3>
                       <ul className="space-y-3 mb-6">
                         {day.items.map((item, i) => (
-                          <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                          <motion.li 
+                            key={i} 
+                            initial={{ opacity: 0, x: -10 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.6 + index * 0.2 + i * 0.05 }}
+                            className="flex items-start gap-2 text-sm text-muted-foreground"
+                            style={{ lineHeight: '1.7' }}
+                          >
                             <span className={`mt-1.5 w-1.5 h-1.5 rounded-full shrink-0
                                 ${index === 0 ? "bg-primary" : index === 1 ? "bg-secondary" : "bg-accent"}
                             `} />
                             {item}
-                          </li>
+                          </motion.li>
                         ))}
                       </ul>
                     </div>
