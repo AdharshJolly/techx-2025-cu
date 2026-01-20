@@ -92,12 +92,20 @@ const HeroSection = () => {
             className="font-poppins text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[1.1] md:leading-tight mb-4 tracking-tight"
           >
             <motion.span
-              className="text-gradient inline-block"
+              className="text-foreground inline-block"
               initial={{ y: 50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              TECHX
+              Tech
+            </motion.span>
+            <motion.span
+              className="text-primary inline-block"
+              initial={{ y: 50, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
+              X
             </motion.span>{" "}
             <br className="sm:hidden" />
             <motion.span
@@ -106,7 +114,7 @@ const HeroSection = () => {
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              2025
+              Bangalore
             </motion.span>
           </motion.h1>
 

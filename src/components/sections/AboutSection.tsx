@@ -41,7 +41,7 @@ const AboutSection = () => {
               About The Event
             </span>
             <h2 className="font-poppins text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              What is <span className="text-gradient">TECHX</span>?
+              What is <span className="text-gradient">TechX</span>?
             </h2>
           </motion.div>
 
@@ -60,7 +60,7 @@ const AboutSection = () => {
                   <div className="h-64 md:h-80 -mx-4 -mt-4 mb-6 relative">
                     <img
                       src="/assets/images/about/tech-event.jpg"
-                      alt="TECHX Event"
+                      alt="TechX Event"
                       className="w-full h-full object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/20 to-primary/80" />
@@ -70,7 +70,7 @@ const AboutSection = () => {
                           <Trophy className="w-6 h-6 text-primary" />
                         </div>
                         <div>
-                          <div className="font-poppins font-bold text-xl text-white">TECHX 2025</div>
+                          <div className="font-poppins font-bold text-xl text-white">TechX 2025</div>
                           <div className="text-sm text-white/70">IEEE Computer Society</div>
                         </div>
                       </div>
@@ -110,7 +110,7 @@ const AboutSection = () => {
                 className="space-y-6"
               >
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                  TECHX 2025 is a flagship technical and innovation event hosted by
+                  TechX 2025 is a flagship technical and innovation event hosted by
                   the IEEE Computer Society at CHRIST University, Kengeri Campus.
                 </p>
                 
@@ -124,7 +124,7 @@ const AboutSection = () => {
                 </p>
                 
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                  TECHX brings together students from diverse disciplines to
+                  TechX brings together students from diverse disciplines to
                   collaborate, experiment, and innovate using emerging technologies,
                   culminating in a high-intensity innovation sprint called{" "}
                   <span className="text-secondary font-semibold">VIBEATHON</span>.

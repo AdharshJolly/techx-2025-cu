@@ -86,16 +86,11 @@ const Navigation = () => {
         >
           {/* Logo */}
           <a href="#" className="flex items-center gap-2 group cursor-pointer">
-            <motion.div 
-              whileHover={{ scale: 1.1, rotate: 5 }}
-              className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center border border-primary/50 group-hover:bg-primary/30 transition-all duration-300 group-hover:shadow-[0_0_15px_hsl(270_100%_65%/0.4)]"
-            >
-              <Terminal className="w-5 h-5 text-primary" />
-            </motion.div>
-            <div className="font-poppins font-bold text-3xl tracking-tight">
-              <span className="text-white group-hover:text-primary transition-colors duration-300">TECH</span>
-              <span className="text-primary group-hover:text-secondary transition-colors duration-300">X</span>
-            </div>
+            <img 
+              src="/assets/images/techx_logo.png" 
+              alt="TechX Logo" 
+              className="h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+            />
           </a>
 
           {/* Desktop Nav */}

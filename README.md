@@ -1,4 +1,4 @@
-# TECHX 2025
+# TechX 2025
 
 Flagship IEEE Technical & Innovation Event hosted by IEEE Computer Society - CHRIST University.
 

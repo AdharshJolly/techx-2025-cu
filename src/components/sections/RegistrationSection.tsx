@@ -211,7 +211,7 @@ const RegistrationSection = () => {
                     </span>
                   </div>
                   <h3 className="font-poppins text-3xl font-bold mb-2">
-                    TECHX
+                    TechX
                   </h3>
                   <p className="text-sm text-muted-foreground uppercase tracking-widest">
                     All Access Pass

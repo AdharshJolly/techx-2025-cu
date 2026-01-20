@@ -86,27 +86,26 @@ const PageLoader = ({ onLoadComplete }: PageLoaderProps) => {
               />
             </div>
 
-            {/* TECHX Logo */}
+            {/* TechX Logo */}
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.5 }}
               className="relative"
             >
-              <motion.h1
-                className="font-poppins text-5xl md:text-7xl font-bold"
+              <motion.img
+                src="/assets/images/techx_logo.png"
+                alt="TechX Logo"
+                className="h-16 md:h-24 w-auto object-contain"
                 animate={{ 
-                  textShadow: [
-                    "0 0 20px hsl(270 100% 65% / 0.3)",
-                    "0 0 40px hsl(270 100% 65% / 0.6)",
-                    "0 0 20px hsl(270 100% 65% / 0.3)"
+                  filter: [
+                    "drop-shadow(0 0 20px rgba(168, 85, 247, 0.3))",
+                    "drop-shadow(0 0 40px rgba(168, 85, 247, 0.6))",
+                    "drop-shadow(0 0 20px rgba(168, 85, 247, 0.3))"
                   ]
                 }}
                 transition={{ duration: 1.5, repeat: Infinity }}
-              >
-                <span className="text-gradient">TECHX</span>
-                <span className="text-foreground/80"> 2025</span>
-              </motion.h1>
+              />
             </motion.div>
 
             {/* Loading text */}

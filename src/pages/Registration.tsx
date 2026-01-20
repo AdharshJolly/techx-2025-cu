@@ -300,7 +300,7 @@ const Registration = () => {
                 </h1>
                 <p className="text-muted-foreground">
                   {step === 1
-                    ? "Complete your details to secure your spot at TECHX 2025"
+                    ? "Complete your details to secure your spot at TechX 2025"
                     : "Finalize your registration by verifying payment"}
                 </p>
 
