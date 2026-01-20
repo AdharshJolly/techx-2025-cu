@@ -85,38 +85,38 @@ const HeroSection = () => {
           </motion.div>
 
           {/* Main headline with staggered letter animation */}
-          <motion.h1
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
-            className="font-poppins text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[1.1] md:leading-tight mb-4 tracking-tight"
-          >
+          <h1 className="font-aoboshi text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.1] md:leading-none mb-6">
             <motion.span
-              className="text-foreground inline-block"
+              className="text-white inline-block drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]"
               initial={{ y: 50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: [0.215, 0.61, 0.355, 1] }}
             >
               Tech
             </motion.span>
             <motion.span
-              className="text-primary inline-block"
-              initial={{ y: 50, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+              className="text-primary inline-block relative"
+              initial={{ y: 50, opacity: 0, scale: 0.8 }}
+              animate={{ y: 0, opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.35, ease: [0.215, 0.61, 0.355, 1] }}
             >
-              X
+              <span className="relative z-10 drop-shadow-[0_0_20px_rgba(168,85,247,0.5)]">X</span>
+              <motion.span 
+                className="absolute inset-0 bg-primary/20 blur-2xl -z-10"
+                animate={{ opacity: [0.3, 0.6, 0.3] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
             </motion.span>{" "}
             <br className="sm:hidden" />
             <motion.span
-              className="text-foreground inline-block"
+              className="text-white/90 inline-block uppercase text-3xl sm:text-4xl md:text-5xl lg:text-6xl mt-2 block sm:inline-block sm:mt-0"
               initial={{ y: 50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              transition={{ duration: 0.8, delay: 0.5, ease: [0.215, 0.61, 0.355, 1] }}
             >
               Bangalore
             </motion.span>
-          </motion.h1>
+          </h1>
 
           {/* Tagline */}
           <motion.div
