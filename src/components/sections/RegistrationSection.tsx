@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useState, useRef } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Check, QrCode, Ticket, Users, Calendar } from "lucide-react";
 
@@ -93,7 +94,7 @@ const RegistrationSection = () => {
             initial={{ opacity: 0, x: -50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="space-y-4"
+            className="space-y-4 flex flex-col"
           >
             <h3 className="text-xl font-bold font-poppins mb-6">
               Select your category:
@@ -138,6 +139,11 @@ const RegistrationSection = () => {
                 </span>
               </motion.div>
             ))}
+            <Button className="w-full mt-2" size="lg" asChild>
+              <Link to={`/register?category=${selectedTier.id}`}>
+                Register Now
+              </Link>
+            </Button>
           </motion.div>
 
           {/* Right: The Holographic Ticket */}
