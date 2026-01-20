@@ -1,7 +1,8 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
+import { Users, Zap, Cpu, Sparkles } from "lucide-react";
 
 const stats = [
   { value: 3, label: "Days", suffix: "" },
@@ -12,14 +13,77 @@ const stats = [
 
 const AboutSection = () => {
   const ref = useRef(null);
+  const containerRef = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
+
+  const y1 = useTransform(scrollYProgress, [0, 1], [0, -50]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [0, 50]);
+
   return (
-    <section id="about" className="py-32 md:py-40 relative">
+    <section id="about" className="py-32 md:py-40 relative overflow-hidden">
       {/* Section separator gradient */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
       
-      <div className="container">
+      {/* Creative Background Images */}
+      <motion.div style={{ y: y1 }} className="absolute top-40 left-0 w-80 h-80 hidden lg:block">
+        <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/10 to-transparent blur-3xl" />
+        <motion.div
+          initial={{ opacity: 0, rotate: -10, scale: 0.9 }}
+          animate={isInView ? { opacity: 0.6, rotate: 0, scale: 1 } : {}}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="absolute bottom-0 left-10 w-56 h-40 rounded-2xl overflow-hidden shadow-2xl"
+        >
+          <img 
+            src="/assets/images/about/conference.jpg" 
+            alt="Conference audience"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-primary/20" />
+        </motion.div>
+      </motion.div>
+
+      <motion.div style={{ y: y2 }} className="absolute top-60 right-0 w-80 h-80 hidden lg:block">
+        <div className="absolute inset-0 rounded-full bg-gradient-to-bl from-secondary/10 to-transparent blur-3xl" />
+        <motion.div
+          initial={{ opacity: 0, rotate: 10, scale: 0.9 }}
+          animate={isInView ? { opacity: 0.6, rotate: 0, scale: 1 } : {}}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="absolute bottom-0 right-10 w-64 h-48 rounded-2xl overflow-hidden shadow-2xl"
+        >
+          <img 
+            src="/assets/images/about/tech-event.jpg" 
+            alt="Tech event presentation"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-secondary/20" />
+        </motion.div>
+      </motion.div>
+
+      {/* Decorative floating elements */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : {}}
+        transition={{ delay: 0.6 }}
+        className="absolute top-1/3 right-1/4 w-16 h-16 hidden lg:flex items-center justify-center rounded-xl bg-card/50 border border-border/50 backdrop-blur-sm"
+      >
+        <Cpu className="w-8 h-8 text-primary/50" />
+      </motion.div>
+      
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : {}}
+        transition={{ delay: 0.8 }}
+        className="absolute bottom-1/4 left-1/4 w-14 h-14 hidden lg:flex items-center justify-center rounded-xl bg-card/50 border border-border/50 backdrop-blur-sm"
+      >
+        <Sparkles className="w-7 h-7 text-secondary/50" />
+      </motion.div>
+      
+      <div className="container relative z-10">
         <div className="max-w-4xl mx-auto" ref={ref}>
           <motion.p
             initial={{ opacity: 0, x: -20 }}
@@ -73,6 +137,37 @@ const AboutSection = () => {
               culminating in a high-intensity innovation sprint called{" "}
               <span className="text-secondary font-semibold">VIBEATHON</span>.
             </p>
+          </motion.div>
+
+          {/* Integrated Image Cards */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.35 }}
+            className="grid grid-cols-2 gap-4 mt-8 mb-12 md:hidden"
+          >
+            <div className="h-32 rounded-xl overflow-hidden relative">
+              <img 
+                src="/assets/images/about/innovation.jpg" 
+                alt="Innovation"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-primary/40" />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <Zap className="w-8 h-8 text-white" />
+              </div>
+            </div>
+            <div className="h-32 rounded-xl overflow-hidden relative">
+              <img 
+                src="/assets/images/about/conference.jpg" 
+                alt="Conference"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-secondary/40" />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <Users className="w-8 h-8 text-white" />
+              </div>
+            </div>
           </motion.div>
 
           {/* Stats with loading animation */}

@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { Crown, Medal, Trophy, Zap, PieChart } from "lucide-react";
+import { Crown, Medal, Trophy, Zap, PieChart, Star } from "lucide-react";
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 import GlowCard from "@/components/ui/GlowCard";
 
@@ -49,6 +49,8 @@ const PrizesSection = () => {
 
   const y1 = useTransform(scrollYProgress, [0, 1], [50, -50]);
   const y2 = useTransform(scrollYProgress, [0, 1], [-30, 30]);
+  const rotate1 = useTransform(scrollYProgress, [0, 1], [0, 3]);
+  const rotate2 = useTransform(scrollYProgress, [0, 1], [0, -3]);
 
   return (
     <section
@@ -58,15 +60,47 @@ const PrizesSection = () => {
     >
       {/* Section separator gradient */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+      
       {/* Background Elements */}
       <motion.div
-        style={{ y: y1 }}
+        style={{ y: y1, rotate: rotate1 }}
         className="absolute top-20 left-10 w-32 h-32 border border-primary/10 rounded-full"
       />
       <motion.div
-        style={{ y: y2 }}
+        style={{ y: y2, rotate: rotate2 }}
         className="absolute bottom-32 right-16 w-48 h-48 border border-secondary/10 rounded-full"
       />
+
+      {/* Creative Background Images */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        whileInView={{ opacity: 0.4, scale: 1 }}
+        viewport={{ once: true }}
+        className="absolute top-40 right-[10%] w-64 h-80 rounded-2xl overflow-hidden shadow-2xl hidden xl:block"
+      >
+        <img 
+          src="/assets/images/prizes/trophy.jpg" 
+          alt="Trophy"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-l from-primary/40 to-transparent" />
+        <Trophy className="absolute top-4 right-4 w-8 h-8 text-white/90" />
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        whileInView={{ opacity: 0.3, scale: 1 }}
+        viewport={{ once: true }}
+        className="absolute bottom-40 left-[5%] w-56 h-72 rounded-2xl overflow-hidden shadow-2xl hidden xl:block"
+      >
+        <img 
+          src="/assets/images/prizes/awards.jpg" 
+          alt="Awards ceremony"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-secondary/40 to-transparent" />
+        <Crown className="absolute top-4 left-4 w-8 h-8 text-white/90" />
+      </motion.div>
 
       <div className="container relative z-10">
         <div className="text-center mb-16" ref={ref}>
@@ -153,12 +187,18 @@ const PrizesSection = () => {
         <div className="grid lg:grid-cols-12 gap-8 max-w-6xl mx-auto">
           {/* Vibeathon Podium (Spans 7 cols) */}
           <div className="lg:col-span-7">
-            <div className="bg-card/30 rounded-3xl border border-white/5 p-4 md:p-8 h-full">
-              <h3 className="text-center font-poppins text-lg font-bold mb-8 flex items-center justify-center gap-2">
+            <div className="bg-card/30 rounded-3xl border border-white/5 p-4 md:p-8 h-full relative overflow-hidden">
+              {/* Decorative background pattern */}
+              <div className="absolute inset-0 opacity-5">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-primary rounded-full blur-3xl" />
+                <div className="absolute bottom-0 left-0 w-64 h-64 bg-secondary rounded-full blur-3xl" />
+              </div>
+              
+              <h3 className="text-center font-poppins text-lg font-bold mb-8 flex items-center justify-center gap-2 relative z-10">
                 <Trophy className="w-5 h-5 text-primary" />
                 VIBEATHON Winners
               </h3>
-              <div className="flex flex-row items-end justify-center gap-2 md:gap-4 min-h-[250px]">
+              <div className="flex flex-row items-end justify-center gap-2 md:gap-4 min-h-[250px] relative z-10">
                 {vibeathonWinners.map((winner, index) => (
                   <motion.div
                     key={winner.rank}
@@ -231,9 +271,18 @@ const PrizesSection = () => {
                 key={prize.label}
                 glowColor={index === 0 ? "secondary" : "accent"}
                 delay={0.5 + index * 0.1}
-                className="flex-1 flex flex-col justify-center"
+                className="flex-1 flex flex-col justify-center relative overflow-hidden"
               >
-                <div className="flex items-start justify-between mb-4">
+                {/* Decorative image background */}
+                <div className="absolute -right-8 -bottom-8 w-32 h-32 opacity-10">
+                  <img 
+                    src="/assets/images/prizes/celebration.jpg" 
+                    alt=""
+                    className="w-full h-full object-cover rounded-full"
+                  />
+                </div>
+                
+                <div className="flex items-start justify-between mb-4 relative z-10">
                   <div
                     className={`p-3 rounded-xl ${
                       index === 0
@@ -250,10 +299,10 @@ const PrizesSection = () => {
                     </span>
                   </div>
                 </div>
-                <h4 className="font-poppins font-bold text-lg mb-1">
+                <h4 className="font-poppins font-bold text-lg mb-1 relative z-10">
                   {prize.label}
                 </h4>
-                <div className="text-sm text-muted-foreground">
+                <div className="text-sm text-muted-foreground relative z-10">
                   Performance Based Award
                 </div>
               </GlowCard>

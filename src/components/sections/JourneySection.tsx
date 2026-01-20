@@ -1,5 +1,6 @@
-import { motion } from "framer-motion";
-import { Flag, Lightbulb, Trophy } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
+import { Flag, Lightbulb, Trophy, Users, Code, Mic } from "lucide-react";
 import GlowCard from "@/components/ui/GlowCard";
 
 const days = [
@@ -9,6 +10,7 @@ const days = [
     icon: Flag,
     color: "primary" as const,
     hex: "hsl(270, 100%, 65%)",
+    image: "/assets/images/journey/keynote.jpg",
     items: [
       "Inauguration Ceremony",
       "Inspiring Keynote Address",
@@ -22,6 +24,7 @@ const days = [
     icon: Lightbulb,
     color: "secondary" as const,
     hex: "hsl(320, 100%, 60%)",
+    image: "/assets/images/journey/workshop.jpg",
     items: [
       "Prompt Engineering Battle",
       "Sector-wise Idea Debate",
@@ -35,6 +38,7 @@ const days = [
     icon: Trophy,
     color: "accent" as const,
     hex: "hsl(280, 100%, 70%)",
+    image: "/assets/images/journey/activities.jpg",
     items: [
       "VIBEATHON Finale",
       "Final Product Demonstrations",
@@ -45,11 +49,58 @@ const days = [
 ];
 
 const JourneySection = () => {
+  const containerRef = useRef(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
+
+  const y1 = useTransform(scrollYProgress, [0, 1], [0, -30]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [0, 30]);
+
   return (
     <section id="journey" className="py-32 md:py-40 relative overflow-hidden">
       {/* Section separator gradient */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-secondary/30 to-transparent" />
       
+      {/* Creative Background Images */}
+      <motion.div style={{ y: y1 }} className="absolute top-20 left-0 w-64 h-64 hidden xl:block pointer-events-none">
+        <div className="absolute inset-0 rounded-full bg-primary/5 blur-3xl" />
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 0.5, scale: 1 }}
+          viewport={{ once: true }}
+          className="absolute bottom-0 left-0 w-48 h-36 rounded-2xl overflow-hidden shadow-xl"
+        >
+          <img 
+            src="/assets/images/journey/keynote.jpg" 
+            alt="Day 1 Keynote"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-primary/30" />
+          <Mic className="absolute bottom-2 right-2 w-5 h-5 text-white/80" />
+        </motion.div>
+      </motion.div>
+
+      <motion.div style={{ y: y2 }} className="absolute bottom-20 right-0 w-64 h-64 hidden xl:block pointer-events-none">
+        <div className="absolute inset-0 rounded-full bg-secondary/5 blur-3xl" />
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 0.5, scale: 1 }}
+          viewport={{ once: true }}
+          className="absolute top-0 right-0 w-52 h-40 rounded-2xl overflow-hidden shadow-xl"
+        >
+          <img 
+            src="/assets/images/journey/activities.jpg" 
+            alt="Day 3 Activities"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-secondary/30" />
+          <Trophy className="absolute bottom-2 right-2 w-5 h-5 text-white/80" />
+        </motion.div>
+      </motion.div>
+
       <div className="container relative z-10">
         <div className="text-center mb-24">
           <motion.p
@@ -142,8 +193,25 @@ const JourneySection = () => {
                   <GlowCard 
                     glowColor={day.color} 
                     delay={0.4 + index * 0.2}
-                    className="h-full flex flex-col justify-between"
+                    className="h-full flex flex-col"
                   >
+                    {/* Day Image - Mobile Only */}
+                    <div className="md:hidden h-28 -mx-4 -mt-4 mb-4 rounded-t-xl overflow-hidden relative">
+                      <img 
+                        src={day.image} 
+                        alt={day.title}
+                        className="w-full h-full object-cover"
+                      />
+                      <div className={`absolute inset-0 bg-gradient-to-t from-black/80 via-${day.color}/30 to-transparent`} />
+                      <div className="absolute bottom-3 left-4">
+                        <span className={`font-mono text-xs font-bold uppercase tracking-wider ${
+                          index === 0 ? "text-primary" : index === 1 ? "text-secondary" : "text-accent"
+                        }`}>
+                          {day.day}
+                        </span>
+                      </div>
+                    </div>
+                    
                     <div>
                       <span className={`hidden md:block font-mono text-xs font-bold uppercase tracking-wider mb-2
                           ${index === 0 ? "text-primary" : index === 1 ? "text-secondary" : "text-accent"}
@@ -151,6 +219,22 @@ const JourneySection = () => {
                           {day.day}
                       </span>
                       <h3 className="font-poppins text-xl font-bold mb-4">{day.title}</h3>
+                      
+                      {/* Image Thumbnail - Desktop */}
+                      <div className="hidden md:block h-24 -mx-4 mb-4 rounded-lg overflow-hidden relative">
+                        <img 
+                          src={day.image} 
+                          alt={day.title}
+                          className="w-full h-full object-cover"
+                        />
+                        <div className={`absolute inset-0 bg-gradient-to-t from-black/80 via-${day.color}/20 to-transparent`} />
+                        <div className="absolute bottom-2 left-3">
+                          <Users className={`w-4 h-4 ${
+                            index === 0 ? "text-primary" : index === 1 ? "text-secondary" : "text-accent"
+                          }`} />
+                        </div>
+                      </div>
+                      
                       <ul className="space-y-3 mb-6">
                         {day.items.map((item, i) => (
                           <motion.li 

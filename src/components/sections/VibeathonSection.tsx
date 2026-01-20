@@ -54,6 +54,33 @@ const BinaryRain = () => {
   );
 };
 
+const FloatingImageCard = ({ 
+  src, 
+  alt, 
+  className,
+  delay = 0 
+}: { 
+  src: string; 
+  alt: string; 
+  className?: string;
+  delay?: number;
+}) => (
+  <motion.div
+    initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
+    animate={{ opacity: 1, scale: 1, rotate: 0 }}
+    transition={{ duration: 0.8, delay }}
+    whileHover={{ scale: 1.05, rotate: 0, zIndex: 10 }}
+    className={`relative overflow-hidden rounded-2xl shadow-2xl ${className}`}
+  >
+    <img 
+      src={src} 
+      alt={alt}
+      className="w-full h-full object-cover"
+    />
+    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
+  </motion.div>
+);
+
 const VibeathonSection = () => {
   const ref = useRef(null);
   const containerRef = useRef(null);
@@ -65,6 +92,8 @@ const VibeathonSection = () => {
   });
 
   const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
+  const rotate1 = useTransform(scrollYProgress, [0, 1], [0, 5]);
+  const rotate2 = useTransform(scrollYProgress, [0, 1], [0, -5]);
 
   return (
     <section
@@ -78,6 +107,25 @@ const VibeathonSection = () => {
 
       {/* Background Glows */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px]" />
+
+      {/* Creative Floating Images - Decorative Background Elements */}
+      <motion.div style={{ y, rotate: rotate1 }} className="absolute top-20 left-10 w-48 h-64 hidden xl:block pointer-events-none z-0">
+        <FloatingImageCard 
+          src="/assets/images/vibeathon/team-coding.jpg" 
+          alt="Team coding collaboration"
+          className="w-full h-full opacity-40"
+          delay={0.2}
+        />
+      </motion.div>
+      
+      <motion.div style={{ y: useTransform(scrollYProgress, [0, 1], [-50, 50]), rotate: rotate2 }} className="absolute bottom-20 right-10 w-56 h-72 hidden xl:block pointer-events-none z-0">
+        <FloatingImageCard 
+          src="/assets/images/vibeathon/hackathon.jpg" 
+          alt="Hackathon team working"
+          className="w-full h-full opacity-40"
+          delay={0.4}
+        />
+      </motion.div>
 
       <div className="container relative z-10">
         <div className="max-w-6xl mx-auto" ref={ref}>
@@ -110,13 +158,29 @@ const VibeathonSection = () => {
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-8">
-            {/* Left Column: System Status */}
+          <div className="grid lg:grid-cols-2 gap-8 items-center">
+            {/* Left Column: System Status with Integrated Image */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 }}
+              className="relative"
             >
+              {/* Image Overlay - Top Right */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8, rotate: 3 }}
+                animate={isInView ? { opacity: 1, scale: 1, rotate: 0 } : {}}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                className="absolute -top-4 -right-4 w-32 h-32 rounded-xl overflow-hidden shadow-lg z-10 hidden md:block"
+              >
+                <img 
+                  src="/assets/images/vibeathon/collaboration.jpg" 
+                  alt="Team collaboration"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-primary/30" />
+              </motion.div>
+
               <GlowCard glowColor="primary" className="h-full">
                 <div className="flex items-center gap-3 mb-8 border-b border-primary/20 pb-4">
                   <Layout className="w-6 h-6 text-primary" />
@@ -176,15 +240,51 @@ const VibeathonSection = () => {
                   </div>
                 </div>
               </GlowCard>
+
+              {/* Image Overlay - Bottom Left */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8, rotate: -3 }}
+                animate={isInView ? { opacity: 1, scale: 1, rotate: 0 } : {}}
+                transition={{ duration: 0.8, delay: 0.5 }}
+                className="absolute -bottom-4 -left-4 w-28 h-28 rounded-xl overflow-hidden shadow-lg z-10 hidden md:block"
+              >
+                <img 
+                  src="/assets/images/vibeathon/team-working.jpg" 
+                  alt="Team working together"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-secondary/30" />
+              </motion.div>
             </motion.div>
 
-            {/* Right Column: Objectives */}
+            {/* Right Column: Objectives with Integrated Image */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="space-y-6"
+              className="space-y-6 relative"
             >
+              {/* Integrated Image Card within content flow */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="relative h-48 rounded-2xl overflow-hidden mb-6 md:hidden"
+              >
+                <img 
+                  src="/assets/images/vibeathon/team-coding.jpg" 
+                  alt="Vibeathon team collaboration"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-primary/40 to-secondary/40" />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="text-center">
+                    <Users className="w-12 h-12 text-white mx-auto mb-2" />
+                    <span className="text-white font-poppins font-bold">3-4 Members</span>
+                  </div>
+                </div>
+              </motion.div>
+
               <GlowCard glowColor="secondary">
                 <div className="flex items-center gap-3 mb-6">
                   <Target className="w-6 h-6 text-secondary" />

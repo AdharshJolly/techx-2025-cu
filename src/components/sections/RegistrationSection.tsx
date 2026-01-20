@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { Check, QrCode, Ticket } from "lucide-react";
+import { Check, QrCode, Ticket, Users, Calendar } from "lucide-react";
 
 const pricingTiers = [
   {
@@ -43,6 +43,44 @@ const RegistrationSection = () => {
       {/* Section separator gradient */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-secondary/30 to-transparent" />
       
+      {/* Creative Background Images */}
+      <motion.div
+        initial={{ opacity: 0, x: -50 }}
+        animate={isInView ? { opacity: 0.3, x: 0 } : {}}
+        transition={{ duration: 0.8, delay: 0.2 }}
+        className="absolute top-20 left-0 w-80 h-96 rounded-r-3xl overflow-hidden hidden xl:block"
+      >
+        <img 
+          src="/assets/images/registration/registration.jpg" 
+          alt="Event registration"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/50 to-transparent" />
+        <div className="absolute bottom-8 left-8">
+          <Users className="w-10 h-10 text-white/90 mb-2" />
+          <span className="text-white font-poppins font-bold text-lg">400+ Attendees</span>
+        </div>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, x: 50 }}
+        animate={isInView ? { opacity: 0.3, x: 0 } : {}}
+        transition={{ duration: 0.8, delay: 0.4 }}
+        className="absolute bottom-20 right-0 w-72 h-80 rounded-l-3xl overflow-hidden hidden xl:block"
+      >
+        <img 
+          src="/assets/images/registration/ticket.jpg" 
+          alt="Event ticket"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-l from-secondary/50 to-transparent" />
+        <div className="absolute bottom-8 right-8 text-right">
+          <Calendar className="w-10 h-10 text-white/90 mb-2 ml-auto" />
+          <span className="text-white font-poppins font-bold text-lg">3 Days</span>
+          <p className="text-white/80 text-sm">of innovation</p>
+        </div>
+      </motion.div>
+
       <div className="container relative z-10">
         <div className="text-center mb-16" ref={ref}>
           <motion.p
@@ -116,6 +154,15 @@ const RegistrationSection = () => {
               `} />
               
               <div className="relative h-full bg-black/40 backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden flex flex-col shadow-2xl">
+                {/* Background Image */}
+                <div className="absolute inset-0 opacity-20">
+                  <img 
+                    src="/assets/images/registration/ticket.jpg" 
+                    alt=""
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                
                 {/* Holographic Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none z-10" />
                 <div className="absolute -inset-full bg-gradient-to-r from-transparent via-white/10 to-transparent rotate-45 animate-shimmer pointer-events-none z-10" />
@@ -176,6 +223,7 @@ const RegistrationSection = () => {
                   <p className="text-xs text-muted-foreground">
                     Present this digital pass at the venue
                   </p>
+                  <QrCode className="w-16 h-16 mx-auto mt-4 text-muted-foreground/50" />
                 </div>
               </div>
             </div>
