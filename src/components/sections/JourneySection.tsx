@@ -1,6 +1,14 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Flag, Lightbulb, Trophy, Users, Calendar, Mic, Zap } from "lucide-react";
+import {
+  Flag,
+  Lightbulb,
+  Trophy,
+  Users,
+  Calendar,
+  Mic,
+  Zap,
+} from "lucide-react";
 import GlowCard from "@/components/ui/GlowCard";
 
 const days = [
@@ -59,7 +67,7 @@ const JourneySection = () => {
     <section id="journey" className="py-32 md:py-40 relative overflow-hidden">
       {/* Section separator gradient */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-secondary/30 to-transparent" />
-      
+
       {/* Background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-secondary/5 rounded-full blur-[120px]" />
 
@@ -72,9 +80,7 @@ const JourneySection = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <span className="section-tag mb-4 inline-block">
-              Event Roadmap
-            </span>
+            <span className="section-tag mb-4 inline-block">Event Roadmap</span>
             <h2 className="font-poppins text-4xl md:text-5xl lg:text-6xl font-bold">
               Your Path to <span className="text-gradient">Innovation</span>
             </h2>
@@ -128,32 +134,44 @@ const JourneySection = () => {
                       `}
                       style={{ boxShadow: `0 0 25px ${day.hex}40` }}
                     >
-                      <day.icon 
+                      <day.icon
                         className={`w-7 h-7 md:w-10 md:h-10 ${
-                          index === 0 ? "text-primary" : index === 1 ? "text-secondary" : "text-accent"
-                        }`} 
+                          index === 0
+                            ? "text-primary"
+                            : index === 1
+                              ? "text-secondary"
+                              : "text-accent"
+                        }`}
                       />
-                      
+
                       {/* Ripple Effect */}
-                      <div className={`absolute inset-0 rounded-full opacity-20 animate-ping ${
-                        index === 0 ? "bg-primary" : index === 1 ? "bg-secondary" : "bg-accent"
-                      }`} />
+                      <div
+                        className={`absolute inset-0 rounded-full opacity-20 animate-ping ${
+                          index === 0
+                            ? "bg-primary"
+                            : index === 1
+                              ? "bg-secondary"
+                              : "bg-accent"
+                        }`}
+                      />
                     </motion.div>
 
                     {/* Day Label */}
-                    <span className={`font-mono text-sm md:text-base font-bold uppercase tracking-wider ${
-                      index === 0 ? "text-primary" : index === 1 ? "text-secondary" : "text-accent"
-                    }`}>
+                    <span
+                      className={`font-mono text-sm md:text-base font-bold uppercase tracking-wider ${
+                        index === 0
+                          ? "text-primary"
+                          : index === 1
+                            ? "text-secondary"
+                            : "text-accent"
+                      }`}
+                    >
                       {day.day}
                     </span>
                   </div>
 
                   {/* Content Card */}
-                  <GlowCard 
-                    glowColor={day.color} 
-                    delay={0}
-                    className="h-full"
-                  >
+                  <GlowCard glowColor={day.color} delay={0} className="h-full">
                     {/* Day Image */}
                     <div className="h-40 -mx-4 -mt-4 mb-4 rounded-t-xl overflow-hidden relative">
                       <img
@@ -161,29 +179,43 @@ const JourneySection = () => {
                         alt={day.title}
                         className="w-full h-full object-cover"
                       />
-                      <div className={`absolute inset-0 bg-gradient-to-b from-transparent via-${day.color}/20 to-${day.color}/80`} />
+                      <div
+                        className={`absolute inset-0 bg-gradient-to-b from-transparent via-${day.color}/20 to-${day.color}/80`}
+                      />
                       <div className="absolute bottom-4 left-4 flex items-center gap-2">
                         <day.accentIcon className="w-5 h-5 text-white" />
-                        <span className="text-white font-medium">{day.day}</span>
+                        <span className="text-white font-medium">
+                          {day.day}
+                        </span>
                       </div>
                     </div>
-                    
+
                     <div>
-                      <h3 className="font-poppins text-xl font-bold mb-4">{day.title}</h3>
-                      
+                      <h3 className="font-poppins text-xl font-bold mb-4">
+                        {day.title}
+                      </h3>
+
                       <ul className="space-y-3">
                         {day.items.map((item, i) => (
-                          <motion.li 
-                            key={i} 
+                          <motion.li
+                            key={i}
                             initial={{ opacity: 0, x: -10 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            transition={{ delay: 0.5 + index * 0.15 + i * 0.05 }}
+                            transition={{
+                              delay: 0.5 + index * 0.15 + i * 0.05,
+                            }}
                             className="flex items-start gap-3 text-sm text-muted-foreground"
                           >
-                            <span className={`mt-1 w-2 h-2 rounded-full shrink-0 ${
-                              index === 0 ? "bg-primary" : index === 1 ? "bg-secondary" : "bg-accent"
-                            }`} />
+                            <span
+                              className={`mt-1 w-2 h-2 rounded-full shrink-0 ${
+                                index === 0
+                                  ? "bg-primary"
+                                  : index === 1
+                                    ? "bg-secondary"
+                                    : "bg-accent"
+                              }`}
+                            />
                             {item}
                           </motion.li>
                         ))}
@@ -194,48 +226,6 @@ const JourneySection = () => {
               ))}
             </div>
           </div>
-
-          {/* Bottom Banner */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.7 }}
-            className="mt-16"
-          >
-            <div className="bg-card/50 border border-white/10 rounded-3xl p-6 overflow-hidden">
-              <div className="grid md:grid-cols-2 gap-6 items-center">
-                <div className="relative h-48 rounded-2xl overflow-hidden">
-                  <img
-                    src="/assets/images/vibeathon/hackathon.jpg"
-                    alt="VIBEATHON"
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary/60 to-secondary/60" />
-                </div>
-                <div className="text-center md:text-left">
-                  <h3 className="font-poppins text-2xl font-bold mb-2">Ready to Innovate?</h3>
-                  <p className="text-muted-foreground mb-4">
-                    Join us for the ultimate 6-hour innovation sprint and compete for ₹32,000 in prizes!
-                  </p>
-                  <div className="flex flex-wrap gap-4 justify-center md:justify-start">
-                    <div className="px-4 py-2 rounded-lg bg-primary/10 border border-primary/30">
-                      <span className="font-mono font-bold text-primary">10K</span>
-                      <span className="text-xs text-muted-foreground ml-1">Winner</span>
-                    </div>
-                    <div className="px-4 py-2 rounded-lg bg-secondary/10 border border-secondary/30">
-                      <span className="font-mono font-bold text-secondary">5K</span>
-                      <span className="text-xs text-muted-foreground ml-1">Runner-up</span>
-                    </div>
-                    <div className="px-4 py-2 rounded-lg bg-accent/10 border border-accent/30">
-                      <span className="font-mono font-bold text-accent">3K</span>
-                      <span className="text-xs text-muted-foreground ml-1">3rd Place</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
         </div>
       </div>
     </section>
