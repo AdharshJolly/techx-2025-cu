@@ -96,7 +96,7 @@ const RegistrationSection = () => {
                     {tier.title}
                   </span>
                 </div>
-                <span className="font-mono font-bold">₹{tier.price}</span>
+                <span className="font-mono font-bold">₹{tier.price} <span className="text-[10px] text-muted-foreground ml-1 font-normal">(+ GST)</span></span>
               </motion.div>
             ))}
           </motion.div>
@@ -154,11 +154,12 @@ const RegistrationSection = () => {
                   <div className="space-y-2">
                     <div className="flex justify-between items-end">
                       <span className="text-muted-foreground text-sm">Amount Payable</span>
-                      <div className="text-right">
+                      <div className="text-right flex flex-col items-end">
                          <span className={`text-3xl font-bold font-mono
                             ${selectedTier.color === 'primary' ? 'text-primary' : 
                               selectedTier.color === 'secondary' ? 'text-secondary' : 'text-accent'}
                          `}>₹{selectedTier.price}</span>
+                         <span className="text-xs text-muted-foreground/80 mt-1 font-medium tracking-wide">(+ GST)</span>
                       </div>
                     </div>
                   </div>

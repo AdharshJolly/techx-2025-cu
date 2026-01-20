@@ -14,6 +14,7 @@ import FloatingParticles from "@/components/ui/FloatingParticles";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 import PageLoader from "@/components/ui/PageLoader";
 import NeuralBackground from "@/components/ui/NeuralBackground";
+import PreviousEventSection from "@/components/sections/PreviousEventSection";
 
 const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -35,6 +36,7 @@ const Index = () => {
           <PrizesSection />
           <RegistrationSection />
           {/* <SponsorsSection /> */}
+          <PreviousEventSection />
           <OrganizersSection />
         </main>
         <Footer />
