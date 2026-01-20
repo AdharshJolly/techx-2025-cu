@@ -22,13 +22,16 @@ const Index = () => {
   return (
     <>
       <PageLoader onLoadComplete={() => setIsLoaded(true)} />
-      <div className={`min-h-screen relative transition-opacity duration-500 ${isLoaded ? "opacity-100" : "opacity-0"}`}>
+      <div
+        className={`min-h-screen relative transition-opacity duration-500 ${isLoaded ? "opacity-100" : "opacity-0"}`}
+      >
         <NeuralBackground />
         <FloatingParticles />
         <ScrollProgress />
         <Navigation />
         <main>
           <HeroSection />
+          <PreviousEventSection />
           <AboutSection />
           <JourneySection />
           <ScheduleSection />
@@ -36,7 +39,6 @@ const Index = () => {
           <PrizesSection />
           <RegistrationSection />
           {/* <SponsorsSection /> */}
-          <PreviousEventSection />
           <OrganizersSection />
         </main>
         <Footer />
