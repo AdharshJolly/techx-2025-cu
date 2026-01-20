@@ -2,7 +2,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import {
-  Clock,
+  ArrowRight,
   Code,
   FileText,
   Layout,
@@ -10,6 +10,7 @@ import {
   Rocket,
   Target,
   Terminal,
+  Trophy,
   Users,
   Zap,
 } from "lucide-react";
@@ -21,7 +22,7 @@ const BinaryRain = () => {
   >([]);
 
   useEffect(() => {
-    const newDrops = Array.from({ length: 20 }, (_, i) => ({
+    const newDrops = Array.from({ length: 15 }, (_, i) => ({
       id: i,
       left: Math.random() * 100,
       delay: Math.random() * 5,
@@ -31,11 +32,11 @@ const BinaryRain = () => {
   }, []);
 
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
+    <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-15">
       {drops.map((drop) => (
         <motion.div
           key={drop.id}
-          className="absolute top-0 text-primary/50 font-mono text-xs writing-vertical-rl"
+          className="absolute top-0 text-primary/40 font-mono text-xs writing-vertical-rl"
           style={{ left: `${drop.left}%` }}
           animate={{ top: ["-20%", "120%"] }}
           transition={{
@@ -45,7 +46,7 @@ const BinaryRain = () => {
             ease: "linear",
           }}
         >
-          {Array.from({ length: 15 }, () =>
+          {Array.from({ length: 12 }, () =>
             Math.random() > 0.5 ? "1" : "0"
           ).join("")}
         </motion.div>
@@ -53,33 +54,6 @@ const BinaryRain = () => {
     </div>
   );
 };
-
-const FloatingImageCard = ({ 
-  src, 
-  alt, 
-  className,
-  delay = 0 
-}: { 
-  src: string; 
-  alt: string; 
-  className?: string;
-  delay?: number;
-}) => (
-  <motion.div
-    initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
-    animate={{ opacity: 1, scale: 1, rotate: 0 }}
-    transition={{ duration: 0.8, delay }}
-    whileHover={{ scale: 1.05, rotate: 0, zIndex: 10 }}
-    className={`relative overflow-hidden rounded-2xl shadow-2xl ${className}`}
-  >
-    <img 
-      src={src} 
-      alt={alt}
-      className="w-full h-full object-cover"
-    />
-    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
-  </motion.div>
-);
 
 const VibeathonSection = () => {
   const ref = useRef(null);
@@ -90,10 +64,6 @@ const VibeathonSection = () => {
     target: containerRef,
     offset: ["start end", "end start"],
   });
-
-  const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
-  const rotate1 = useTransform(scrollYProgress, [0, 1], [0, 5]);
-  const rotate2 = useTransform(scrollYProgress, [0, 1], [0, -5]);
 
   return (
     <section
@@ -106,34 +76,16 @@ const VibeathonSection = () => {
       <BinaryRain />
 
       {/* Background Glows */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px]" />
-
-      {/* Creative Floating Images - Decorative Background Elements */}
-      <motion.div style={{ y, rotate: rotate1 }} className="absolute top-20 left-10 w-48 h-64 hidden xl:block pointer-events-none z-0">
-        <FloatingImageCard 
-          src="/assets/images/vibeathon/team-coding.jpg" 
-          alt="Team coding collaboration"
-          className="w-full h-full opacity-40"
-          delay={0.2}
-        />
-      </motion.div>
-      
-      <motion.div style={{ y: useTransform(scrollYProgress, [0, 1], [-50, 50]), rotate: rotate2 }} className="absolute bottom-20 right-10 w-56 h-72 hidden xl:block pointer-events-none z-0">
-        <FloatingImageCard 
-          src="/assets/images/vibeathon/hackathon.jpg" 
-          alt="Hackathon team working"
-          className="w-full h-full opacity-40"
-          delay={0.4}
-        />
-      </motion.div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px]" />
 
       <div className="container relative z-10">
-        <div className="max-w-6xl mx-auto" ref={ref}>
+        <div className="max-w-7xl mx-auto" ref={ref}>
           {/* Header */}
-          <div className="text-center mb-16 relative">
+          <div className="text-center mb-16">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ duration: 0.6 }}
               className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-6"
             >
               <Terminal className="w-4 h-4 text-primary" />
@@ -142,196 +94,300 @@ const VibeathonSection = () => {
               </span>
             </motion.div>
 
-            <h2 className="font-poppins text-5xl md:text-7xl font-bold mb-6 tracking-tight">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="font-poppins text-5xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight"
+            >
               <span className="relative inline-block">
-                <span className="absolute inset-0 translate-x-[2px] translate-y-[2px] text-primary/30 blur-sm">
+                <span className="absolute inset-0 translate-x-[2px] translate-y-[2px] text-primary/25 blur-sm">
                   VIBEATHON
                 </span>
                 <span className="relative text-transparent bg-clip-text bg-gradient-to-r from-primary via-white to-secondary animate-shimmer bg-[length:200%_auto]">
                   VIBEATHON
                 </span>
               </span>
-            </h2>
+            </motion.h2>
 
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto"
+            >
               The Ultimate 6-Hour Innovation Sprint. Build. Execute. Dominate.
-            </p>
+            </motion.p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-8 items-center">
-            {/* Left Column: System Status with Integrated Image */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="relative"
-            >
-              {/* Image Overlay - Top Right */}
+          {/* Main Content Grid */}
+          <div className="grid lg:grid-cols-12 gap-8">
+            {/* Left Column - Event Details Card */}
+            <div className="lg:col-span-4">
               <motion.div
-                initial={{ opacity: 0, scale: 0.8, rotate: 3 }}
-                animate={isInView ? { opacity: 1, scale: 1, rotate: 0 } : {}}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                className="absolute -top-4 -right-4 w-32 h-32 rounded-xl overflow-hidden shadow-lg z-10 hidden md:block"
+                initial={{ opacity: 0, x: -30 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.3 }}
               >
-                <img 
-                  src="/assets/images/vibeathon/collaboration.jpg" 
-                  alt="Team collaboration"
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-primary/30" />
-              </motion.div>
-
-              <GlowCard glowColor="primary" className="h-full">
-                <div className="flex items-center gap-3 mb-8 border-b border-primary/20 pb-4">
-                  <Layout className="w-6 h-6 text-primary" />
-                  <h3 className="font-mono text-xl font-bold text-primary">
-                    Event Details
-                  </h3>
-                </div>
-
-                <div className="space-y-6">
-                  <div className="group">
-                    <div className="flex justify-between text-sm mb-2">
-                      <span className="text-muted-foreground">Team Size</span>
-                      <span className="font-mono text-primary">
-                        3-4 Members
-                      </span>
-                    </div>
-                    <div className="h-2 bg-muted rounded-full overflow-hidden">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={isInView ? { width: "75%" } : {}}
-                        transition={{ duration: 1, delay: 0.5 }}
-                        className="h-full bg-primary/80 group-hover:bg-primary transition-colors"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="group">
-                    <div className="flex justify-between text-sm mb-2">
-                      <span className="text-muted-foreground">Duration</span>
-                      <span className="font-mono text-secondary">6 Hours</span>
-                    </div>
-                    <div className="h-2 bg-muted rounded-full overflow-hidden">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={isInView ? { width: "60%" } : {}}
-                        transition={{ duration: 1, delay: 0.7 }}
-                        className="h-full bg-secondary/80 group-hover:bg-secondary transition-colors"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-4 mt-8">
-                    <div className="p-4 rounded-lg bg-background/50 border border-border">
-                      <Code className="w-5 h-5 text-primary mb-2" />
-                      <div className="text-sm font-semibold">AI Tools</div>
-                      <div className="text-xs text-muted-foreground">
-                        Authorized
+                <GlowCard glowColor="primary" className="h-full">
+                  {/* Card Header Image */}
+                  <div className="h-40 -mx-4 -mt-4 mb-6 rounded-t-xl overflow-hidden relative">
+                    <img
+                      src="/assets/images/vibeathon/team-coding.jpg"
+                      alt="Team coding"
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/20 to-primary/80" />
+                    <div className="absolute bottom-4 left-4 right-4 flex items-center gap-3">
+                      <div className="p-2 rounded-lg bg-background/80 backdrop-blur-sm">
+                        <Users className="w-5 h-5 text-primary" />
                       </div>
-                    </div>
-                    <div className="p-4 rounded-lg bg-background/50 border border-border">
-                      <Zap className="w-5 h-5 text-secondary mb-2" />
-                      <div className="text-sm font-semibold">No-Code Tools</div>
-                      <div className="text-xs text-muted-foreground">
-                        Permitted
+                      <div>
+                        <div className="font-poppins font-bold text-white">3-4 Members</div>
+                        <div className="text-xs text-white/70">Team Size</div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </GlowCard>
 
-              {/* Image Overlay - Bottom Left */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8, rotate: -3 }}
-                animate={isInView ? { opacity: 1, scale: 1, rotate: 0 } : {}}
-                transition={{ duration: 0.8, delay: 0.5 }}
-                className="absolute -bottom-4 -left-4 w-28 h-28 rounded-xl overflow-hidden shadow-lg z-10 hidden md:block"
-              >
-                <img 
-                  src="/assets/images/vibeathon/team-working.jpg" 
-                  alt="Team working together"
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-secondary/30" />
+                  <div className="flex items-center gap-3 mb-6 border-b border-primary/20 pb-4">
+                    <Layout className="w-5 h-5 text-primary" />
+                    <h3 className="font-mono text-lg font-bold text-primary">
+                      Event Details
+                    </h3>
+                  </div>
+
+                  <div className="space-y-5">
+                    <div className="group">
+                      <div className="flex justify-between text-sm mb-2">
+                        <span className="text-muted-foreground">Team Size</span>
+                        <span className="font-mono text-primary font-semibold">
+                          3-4 Members
+                        </span>
+                      </div>
+                      <div className="h-2 bg-muted rounded-full overflow-hidden">
+                        <motion.div
+                          initial={{ width: 0 }}
+                          animate={isInView ? { width: "75%" } : {}}
+                          transition={{ duration: 1, delay: 0.5 }}
+                          className="h-full bg-primary/80 group-hover:bg-primary transition-colors"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="group">
+                      <div className="flex justify-between text-sm mb-2">
+                        <span className="text-muted-foreground">Duration</span>
+                        <span className="font-mono text-secondary font-semibold">6 Hours</span>
+                      </div>
+                      <div className="h-2 bg-muted rounded-full overflow-hidden">
+                        <motion.div
+                          initial={{ width: 0 }}
+                          animate={isInView ? { width: "60%" } : {}}
+                          transition={{ duration: 1, delay: 0.7 }}
+                          className="h-full bg-secondary/80 group-hover:bg-secondary transition-colors"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-3 pt-4">
+                      <div className="p-3 rounded-lg bg-background/50 border border-border">
+                        <Code className="w-5 h-5 text-primary mb-2" />
+                        <div className="text-sm font-semibold">AI Tools</div>
+                        <div className="text-xs text-muted-foreground">Authorized</div>
+                      </div>
+                      <div className="p-3 rounded-lg bg-background/50 border border-border">
+                        <Zap className="w-5 h-5 text-secondary mb-2" />
+                        <div className="text-sm font-semibold">No-Code</div>
+                        <div className="text-xs text-muted-foreground">Permitted</div>
+                      </div>
+                    </div>
+                  </div>
+                </GlowCard>
               </motion.div>
-            </motion.div>
+            </div>
 
-            {/* Right Column: Objectives with Integrated Image */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="space-y-6 relative"
-            >
-              {/* Integrated Image Card within content flow */}
+            {/* Middle Column - Deliverables */}
+            <div className="lg:col-span-4">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
+                <GlowCard glowColor="secondary" className="h-full">
+                  {/* Card Header Image */}
+                  <div className="h-40 -mx-4 -mt-4 mb-6 rounded-t-xl overflow-hidden relative">
+                    <img
+                      src="/assets/images/vibeathon/collaboration.jpg"
+                      alt="Team collaboration"
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-secondary/20 to-secondary/80" />
+                    <div className="absolute bottom-4 left-4 right-4 flex items-center gap-3">
+                      <div className="p-2 rounded-lg bg-background/80 backdrop-blur-sm">
+                        <Target className="w-5 h-5 text-secondary" />
+                      </div>
+                      <div>
+                        <div className="font-poppins font-bold text-white">Deliverables</div>
+                        <div className="text-xs text-white/70">What to submit</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-3 mb-6 border-b border-secondary/20 pb-4">
+                    <Target className="w-5 h-5 text-secondary" />
+                    <h3 className="font-mono text-lg font-bold text-secondary">
+                      Deliverables
+                    </h3>
+                  </div>
+
+                  <ul className="space-y-4">
+                    {[
+                      { icon: Code, text: "Develop a functional prototype" },
+                      { icon: FileText, text: "Generate executive summary" },
+                      { icon: Rocket, text: "Final deployment & demo" },
+                    ].map((item, i) => (
+                      <motion.li
+                        key={i}
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={isInView ? { opacity: 1, x: 0 } : {}}
+                        transition={{ delay: 0.6 + i * 0.1 }}
+                        className="flex items-center gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors border border-transparent hover:border-white/10"
+                      >
+                        <div className="w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center shrink-0">
+                          <item.icon className="w-4 h-4 text-secondary" />
+                        </div>
+                        <span className="text-foreground/90 text-sm">{item.text}</span>
+                      </motion.li>
+                    ))}
+                  </ul>
+
+                  <div className="mt-6 pt-4 border-t border-border">
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <ArrowRight className="w-4 h-4 text-secondary" />
+                      <span>Detailed guidelines shared at event</span>
+                    </div>
+                  </div>
+                </GlowCard>
+              </motion.div>
+            </div>
+
+            {/* Right Column - Stats & Info */}
+            <div className="lg:col-span-4 space-y-6">
+              {/* Stats Card */}
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                className="bg-card/50 border border-border/50 rounded-2xl p-6"
+              >
+                {/* Image */}
+                <div className="h-32 -mx-4 -mt-4 mb-4 rounded-t-xl overflow-hidden relative">
+                  <img
+                    src="/assets/images/vibeathon/hackathon.jpg"
+                    alt="Hackathon"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary/40 to-accent/40" />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <Trophy className="w-12 h-12 text-white drop-shadow-lg" />
+                  </div>
+                </div>
+
+                <h3 className="font-poppins text-lg font-bold mb-4">Competition Stats</h3>
+                
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-background/50">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center">
+                        <span className="text-xl">🏆</span>
+                      </div>
+                      <div>
+                        <div className="font-bold">Total Prize Pool</div>
+                        <div className="text-xs text-muted-foreground">₹32,000</div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="flex gap-3">
+                    <div className="flex-1 p-3 rounded-lg bg-background/50 text-center">
+                      <div className="text-2xl font-bold text-primary">10K</div>
+                      <div className="text-xs text-muted-foreground">1st Place</div>
+                    </div>
+                    <div className="flex-1 p-3 rounded-lg bg-background/50 text-center">
+                      <div className="text-2xl font-bold text-secondary">5K</div>
+                      <div className="text-xs text-muted-foreground">2nd Place</div>
+                    </div>
+                    <div className="flex-1 p-3 rounded-lg bg-background/50 text-center">
+                      <div className="text-2xl font-bold text-accent">3K</div>
+                      <div className="text-xs text-muted-foreground">3rd Place</div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Impact & Innovation Cards */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                className="relative h-48 rounded-2xl overflow-hidden mb-6 md:hidden"
+                transition={{ duration: 0.6, delay: 0.6 }}
+                className="grid grid-cols-2 gap-4"
               >
-                <img 
-                  src="/assets/images/vibeathon/team-coding.jpg" 
-                  alt="Vibeathon team collaboration"
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/40 to-secondary/40" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center">
-                    <Users className="w-12 h-12 text-white mx-auto mb-2" />
-                    <span className="text-white font-poppins font-bold">3-4 Members</span>
-                  </div>
+                <div className="p-4 rounded-xl bg-card/50 border border-border hover:border-primary/50 transition-all duration-300 group hover:-translate-y-1">
+                  <Rocket className="w-8 h-8 text-primary mb-3 group-hover:scale-110 transition-transform" />
+                  <div className="font-bold mb-1">Impact</div>
+                  <div className="text-xs text-muted-foreground">High Priority</div>
                 </div>
-              </motion.div>
-
-              <GlowCard glowColor="secondary">
-                <div className="flex items-center gap-3 mb-6">
-                  <Target className="w-6 h-6 text-secondary" />
-                  <h3 className="font-mono text-xl font-bold text-secondary">
-                    Deliverables
-                  </h3>
-                </div>
-                <ul className="space-y-4">
-                  {[
-                    "Develop a functional prototype",
-                    "Generate executive summary",
-                    "Final deployment & demo",
-                  ].map((item, i) => (
-                    <motion.li
-                      key={i}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={isInView ? { opacity: 1, x: 0 } : {}}
-                      transition={{ delay: 0.6 + i * 0.1 }}
-                      className="flex items-center gap-4 p-3 rounded-lg hover:bg-white/5 transition-colors border border-transparent hover:border-white/10"
-                    >
-                      <div className="w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center shrink-0">
-                        <span className="font-mono text-sm font-bold text-secondary">
-                          0{i + 1}
-                        </span>
-                      </div>
-                      <span className="text-foreground/90">{item}</span>
-                    </motion.li>
-                  ))}
-                </ul>
-              </GlowCard>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div className="p-4 rounded-xl bg-card border border-border hover:border-primary/50 transition-colors group">
-                  <Rocket className="w-6 h-6 text-primary mb-2 group-hover:scale-110 transition-transform" />
-                  <div className="font-bold text-sm">Impact</div>
-                  <div className="text-xs text-muted-foreground">
-                    High Priority
-                  </div>
-                </div>
-                <div className="p-4 rounded-xl bg-card border border-border hover:border-secondary/50 transition-colors group">
-                  <Lightbulb className="w-6 h-6 text-secondary mb-2 group-hover:scale-110 transition-transform" />
-                  <div className="font-bold text-sm">Innovation</div>
+                <div className="p-4 rounded-xl bg-card/50 border border-border hover:border-secondary/50 transition-all duration-300 group hover:-translate-y-1">
+                  <Lightbulb className="w-8 h-8 text-secondary mb-3 group-hover:scale-110 transition-transform" />
+                  <div className="font-bold mb-1">Innovation</div>
                   <div className="text-xs text-muted-foreground">Critical</div>
                 </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            </div>
           </div>
+
+          {/* Bottom Image Gallery */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.7 }}
+            className="mt-12"
+          >
+            <div className="bg-card/30 border border-white/10 rounded-3xl p-6 overflow-hidden">
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="font-poppins text-lg font-bold flex items-center gap-2">
+                  <Users className="w-5 h-5 text-primary" />
+                  Last Edition Highlights
+                </h3>
+                <span className="text-xs text-muted-foreground">2024 VIBEATHON</span>
+              </div>
+              
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {[
+                  { src: "/assets/images/vibeathon/team-coding.jpg", label: "Team Work" },
+                  { src: "/assets/images/vibeathon/team-working.jpg", label: "Coding" },
+                  { src: "/assets/images/vibeathon/collaboration.jpg", label: "Strategy" },
+                  { src: "/assets/images/vibeathon/hackathon.jpg", label: "Innovation" },
+                ].map((img, i) => (
+                  <motion.div
+                    key={i}
+                    whileHover={{ scale: 1.02, y: -4 }}
+                    className="relative h-32 rounded-xl overflow-hidden cursor-pointer group"
+                  >
+                    <img
+                      src={img.src}
+                      alt={img.label}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
+                    <div className="absolute bottom-3 left-3">
+                      <span className="text-white font-medium text-sm">{img.label}</span>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
