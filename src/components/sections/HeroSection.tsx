@@ -79,8 +79,12 @@ const HeroSection = () => {
             transition={{ duration: 0.6, type: "spring" }}
             className="inline-block mb-6 md:mb-8"
           >
-            <span className="section-tag px-3 py-1.5 md:px-6 md:py-2 text-[9px] sm:text-[10px] md:text-sm rounded-full bg-primary/10 border border-primary/30 whitespace-normal tracking-normal md:tracking-widest backdrop-blur-md">
-              Flagship IEEE Technical & Innovation Event
+            <span
+              className="section-tag px-3 py-1.5 md:px-6 md:py-2 text-[9px] sm:text-[10px] md:text-sm rounded-full bg-primary/10 border border-primary/30 whitespace-normal tracking-normal md:tracking-widest backdrop-blur-md"
+              title="Powered by IEEE Student and Young Professionals"
+              aria-label="Powered by IEEE Student and Young Professionals"
+            >
+              Powered by <span className="font-bold">IEEE CS SYP</span>
             </span>
           </motion.div>
 
@@ -90,7 +94,11 @@ const HeroSection = () => {
               className="text-white inline-block drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]"
               initial={{ y: 50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.2, ease: [0.215, 0.61, 0.355, 1] }}
+              transition={{
+                duration: 0.8,
+                delay: 0.2,
+                ease: [0.215, 0.61, 0.355, 1],
+              }}
             >
               Tech
             </motion.span>
@@ -98,10 +106,16 @@ const HeroSection = () => {
               className="text-primary inline-block relative"
               initial={{ y: 50, opacity: 0, scale: 0.8 }}
               animate={{ y: 0, opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.35, ease: [0.215, 0.61, 0.355, 1] }}
+              transition={{
+                duration: 0.8,
+                delay: 0.35,
+                ease: [0.215, 0.61, 0.355, 1],
+              }}
             >
-              <span className="relative z-10 drop-shadow-[0_0_20px_rgba(168,85,247,0.5)]">X</span>
-              <motion.span 
+              <span className="relative z-10 drop-shadow-[0_0_20px_rgba(168,85,247,0.5)]">
+                X
+              </span>
+              <motion.span
                 className="absolute inset-0 bg-primary/20 blur-2xl -z-10"
                 animate={{ opacity: [0.3, 0.6, 0.3] }}
                 transition={{ duration: 2, repeat: Infinity }}
@@ -112,7 +126,11 @@ const HeroSection = () => {
               className="text-white/90 inline-block uppercase text-3xl sm:text-4xl md:text-5xl lg:text-6xl mt-2 block sm:inline-block sm:mt-0"
               initial={{ y: 50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.5, ease: [0.215, 0.61, 0.355, 1] }}
+              transition={{
+                duration: 0.8,
+                delay: 0.5,
+                ease: [0.215, 0.61, 0.355, 1],
+              }}
             >
               Bangalore
             </motion.span>
@@ -175,11 +193,9 @@ const HeroSection = () => {
               variant="hero"
               size="xl"
               className="group w-full sm:w-auto"
-              asChild
+              disabled
             >
-              <a href="#registration">
-                <span className="relative z-10">Register Now</span>
-              </a>
+              <span className="relative z-10">Registrations Opening Soon</span>
             </Button>
             <Button
               variant="heroOutline"

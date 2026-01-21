@@ -3,10 +3,38 @@ import { useInView } from "framer-motion";
 import { useRef } from "react";
 
 const collaborators = [
-  { name: "IEEE Computer Society", logo: "/assets/images/ieee_computer_societ.png", h: "h-16 md:h-20" },
+  {
+    name: "IEEE Computer Society",
+    logo: "/assets/images/ieee_computer_societ.png",
+    h: "h-16 md:h-20",
+  },
   { name: "IEEE", logo: "/assets/images/ieee_logo.png", h: "h-12 md:h-16" },
-  { name: "IEEE CS CU", logo: "/assets/images/ieee_cs_cu.png", h: "h-20 md:h-24" },
-  { name: "IEEE SYP Activities", logo: "/assets/images/ieee_syp_activites.png", h: "h-14 md:h-18" },
+  {
+    name: "IEEE CS CU",
+    logo: "/assets/images/ieee_cs_cu.png",
+    h: "h-20 md:h-24",
+  },
+  {
+    name: "IEEE SYP Activities",
+    logo: "/assets/images/ieee_syp_activites.png",
+    h: "h-14 md:h-18",
+  },
+  {
+    name: "IEEE Computer Society",
+    logo: "/assets/images/ieee_computer_societ.png",
+    h: "h-16 md:h-20",
+  },
+  { name: "IEEE", logo: "/assets/images/ieee_logo.png", h: "h-12 md:h-16" },
+  {
+    name: "IEEE CS CU",
+    logo: "/assets/images/ieee_cs_cu.png",
+    h: "h-20 md:h-24",
+  },
+  {
+    name: "IEEE SYP Activities",
+    logo: "/assets/images/ieee_syp_activites.png",
+    h: "h-14 md:h-18",
+  },
 ];
 
 const CollaboratorsSection = () => {
@@ -14,7 +42,10 @@ const CollaboratorsSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="collaborators" className="py-20 relative overflow-hidden bg-background/50 border-t border-white/5">
+    <section
+      id="collaborators"
+      className="py-20 relative overflow-hidden bg-background/50 border-t border-white/5"
+    >
       <div className="container relative z-10 mb-10">
         <div className="text-center" ref={ref}>
           <motion.p
@@ -42,23 +73,25 @@ const CollaboratorsSection = () => {
             x: {
               repeat: Infinity,
               repeatType: "loop",
-              duration: 15,
+              duration: 5,
               ease: "linear",
             },
           }}
         >
-          {[...collaborators, ...collaborators, ...collaborators].map((collab, index) => (
-            <div
-              key={`${collab.name}-${index}`}
-              className="flex-shrink-0 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-500 opacity-60 hover:opacity-100 filter"
-            >
-              <img 
-                src={collab.logo} 
-                alt={collab.name} 
-                className={`${collab.h} w-auto object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]`}
-              />
-            </div>
-          ))}
+          {[...collaborators, ...collaborators, ...collaborators].map(
+            (collab, index) => (
+              <div
+                key={`${collab.name}-${index}`}
+                className="flex-shrink-0 flex items-center justify-center transition-all duration-500 opacity-80 hover:opacity-100 filter"
+              >
+                <img
+                  src={collab.logo}
+                  alt={collab.name}
+                  className={`${collab.h} w-auto object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]`}
+                />
+              </div>
+            ),
+          )}
         </motion.div>
       </div>
     </section>

@@ -138,9 +138,9 @@ const Navigation = () => {
               variant="default"
               size="sm"
               className="rounded-full px-6 shadow-[0_0_15px_hsl(270_100%_65%/0.4)] hover:shadow-[0_0_25px_hsl(270_100%_65%/0.6)]"
-              asChild
+              disabled
             >
-              <a href="#registration">Register</a>
+              Registrations Opening Soon
             </Button>
           </div>
 
@@ -183,13 +183,8 @@ const Navigation = () => {
                 </a>
               ))}
               <div className="h-px bg-white/10 my-2" />
-              <Button variant="hero" size="lg" className="w-full" asChild>
-                <a
-                  href="#registration"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Register Now
-                </a>
+              <Button variant="hero" size="lg" className="w-full" disabled>
+                Registrations Opening Soon
               </Button>
             </div>
           </motion.div>

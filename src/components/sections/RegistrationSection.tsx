@@ -1,9 +1,8 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useState, useRef } from "react";
-import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Check, QrCode, Ticket, Users, Calendar } from "lucide-react";
+import { Check, QrCode, Ticket, Users } from "lucide-react";
 
 const pricingTiers = [
   {
@@ -139,10 +138,8 @@ const RegistrationSection = () => {
                 </span>
               </motion.div>
             ))}
-            <Button className="w-full mt-2" size="lg" asChild>
-              <Link to={`/register?category=${selectedTier.id}`}>
-                Register Now
-              </Link>
+            <Button className="w-full mt-2" size="lg" disabled>
+              Registrations Opening Soon
             </Button>
           </motion.div>
 
