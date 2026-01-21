@@ -8,7 +8,7 @@ import ScheduleSection from "@/components/sections/ScheduleSection";
 import VibeathonSection from "@/components/sections/VibeathonSection";
 import PrizesSection from "@/components/sections/PrizesSection";
 import RegistrationSection from "@/components/sections/RegistrationSection";
-import SponsorsSection from "@/components/sections/SponsorsSection";
+import CollaboratorsSection from "@/components/sections/CollaboratorsSection";
 import Footer from "@/components/sections/Footer";
 import FloatingParticles from "@/components/ui/FloatingParticles";
 import ScrollProgress from "@/components/ui/ScrollProgress";
@@ -31,6 +31,7 @@ const Index = () => {
         <Navigation />
         <main>
           <HeroSection />
+          <CollaboratorsSection />
           <PreviousEventSection />
           <AboutSection />
           <JourneySection />
@@ -38,7 +39,6 @@ const Index = () => {
           <VibeathonSection />
           <PrizesSection />
           <RegistrationSection />
-          {/* <SponsorsSection /> */}
           <OrganizersSection />
         </main>
         <Footer />
