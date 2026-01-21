@@ -47,11 +47,11 @@ const HeroSection = () => {
       {/* Gradient orbs with parallax */}
       <motion.div
         style={{ y: y2, x: useTransform(scrollYProgress, [0, 1], [0, -50]) }}
-        className="absolute top-1/4 left-1/4 w-64 h-64 md:w-96 md:h-96 bg-primary/20 rounded-full blur-[80px] md:blur-[120px] animate-float"
+        className="absolute top-1/4 left-1/4 w-64 h-64 md:w-96 md:h-96 bg-primary/20 rounded-full blur-[60px] md:blur-[80px] will-change-transform"
       />
       <motion.div
         style={{ y: y3, x: useTransform(scrollYProgress, [0, 1], [0, 80]) }}
-        className="absolute bottom-1/4 right-1/4 w-56 h-56 md:w-80 md:h-80 bg-secondary/15 rounded-full blur-[60px] md:blur-[100px] animate-float"
+        className="absolute bottom-1/4 right-1/4 w-56 h-56 md:w-80 md:h-80 bg-secondary/15 rounded-full blur-[40px] md:blur-[60px] will-change-transform"
       />
 
       {/* Animated hexagon decorations (Hidden on mobile to reduce clutter) */}

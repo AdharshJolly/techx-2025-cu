@@ -72,7 +72,7 @@ const PreviousEventSection = () => {
             <CarouselContent className="-ml-4">
               {images.map((image, index) => (
                 <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/2 pl-4 py-4">
-                  <div className="group relative h-full">
+                  <div className="group relative h-full will-change-transform">
                     {/* Main HUD Container with Clip Path */}
                     <div 
                       className="relative h-full overflow-hidden bg-black/80 border border-white/10 transition-all duration-300 group-hover:border-neon-cyan/50"
@@ -86,6 +86,7 @@ const PreviousEventSection = () => {
                         <img 
                           src={image.src} 
                           alt={image.alt} 
+                          loading="lazy"
                           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 saturate-50 group-hover:saturate-100 brightness-75 group-hover:brightness-100"
                         />
 
