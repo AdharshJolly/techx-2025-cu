@@ -14,7 +14,7 @@ const NeuralBackground = () => {
     let height = (canvas.height = window.innerHeight);
 
     const particles: Particle[] = [];
-    const particleCount = Math.min(Math.floor((width * height) / 15000), 100); // Responsive count
+    const particleCount = Math.min(Math.floor((width * height) / 25000), 50); // Responsive count optimized
     const connectionDistance = 150;
     const mouseDistance = 200;
 

@@ -39,20 +39,6 @@ const Navigation = () => {
           }
           
           setLastScrollY(currentScrollY);
-          
-          // Update active section
-          const sections = navLinks.map(link => link.href.slice(1));
-          for (const sectionId of sections) {
-            const element = document.getElementById(sectionId);
-            if (element) {
-              const rect = element.getBoundingClientRect();
-              if (rect.top <= 150 && rect.bottom >= 150) {
-                setActiveSection(sectionId);
-                break;
-              }
-            }
-          }
-          
           ticking = false;
         });
         ticking = true;
@@ -62,6 +48,32 @@ const Navigation = () => {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
+
+  // Use IntersectionObserver for active section detection
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: "-20% 0px -50% 0px", // Trigger when section is near top/center
+      threshold: 0.1
+    };
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    
+    navLinks.forEach((link) => {
+      const element = document.getElementById(link.href.slice(1));
+      if (element) observer.observe(element);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <>

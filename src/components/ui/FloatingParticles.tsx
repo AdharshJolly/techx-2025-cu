@@ -52,7 +52,7 @@ const FloatingParticles = () => {
   const { scrollYProgress } = useScroll();
   
   const particles = useMemo<Particle[]>(() => {
-    return Array.from({ length: 20 }, (_, i) => ({
+    return Array.from({ length: 12 }, (_, i) => ({
       id: i,
       symbol: codeSymbols[Math.floor(Math.random() * codeSymbols.length)],
       x: Math.random() * 100,
