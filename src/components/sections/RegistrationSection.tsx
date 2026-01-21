@@ -31,7 +31,7 @@ const benefits = [
   "Workshops & Challenges",
   "VIBEATHON Eligibility",
   "Official Certificate",
-  "Refreshments Included",
+  "Networking Lunch Included",
 ];
 
 const RegistrationSection = () => {
