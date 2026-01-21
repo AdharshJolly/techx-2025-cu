@@ -63,8 +63,11 @@ const formSchema = z
     phone: z.string().regex(/^\d{10}$/, "Phone number must be 10 digits"),
     category: z.enum(["ieee-cs", "ieee", "non-ieee"]),
     ieeeId: z.string().optional(),
-    day2Preference: z.enum(["Debate", "Prompt Engineering"], {
-      required_error: "Please select a preference for Day 2",
+    preference1: z.enum(["Debate", "Prompt Engineering"], {
+      required_error: "Please select your first preference",
+    }),
+    preference2: z.enum(["Debate", "Prompt Engineering"], {
+      required_error: "Please select your second preference",
     }),
   })
   .refine(
@@ -112,11 +115,13 @@ const Registration = () => {
       phone: "",
       category: defaultCategory,
       ieeeId: "",
-      day2Preference: undefined,
+      preference1: undefined,
+      preference2: undefined,
     },
   });
 
   const category = form.watch("category");
+  const preference1 = form.watch("preference1");
 
   // Load saved data from localStorage on mount
   useEffect(() => {
@@ -219,7 +224,8 @@ const Registration = () => {
       googleFormData.append("entry.353806949", formData.course);
       googleFormData.append("entry.2110524232", formData.year);
       googleFormData.append("entry.1586340470", formData.phone);
-      googleFormData.append("entry.551794449", formData.day2Preference);
+      googleFormData.append("entry.551794449", formData.preference1);
+      googleFormData.append("entry.1741232484", formData.preference2);
       googleFormData.append("entry.1693092735", imageUrl);
 
       if (formData.ieeeId) {
@@ -546,47 +552,59 @@ const Registration = () => {
 
                         <div className="space-y-4 pt-4 border-t border-white/10">
                           <h3 className="font-semibold text-lg">
-                            Day 2 Preference
+                            Event Preferences
                           </h3>
-                          <FormField
-                            control={form.control}
-                            name="day2Preference"
-                            render={({ field }) => (
-                              <FormItem className="space-y-3">
-                                <FormControl>
-                                  <RadioGroup
+                          <div className="grid md:grid-cols-2 gap-6">
+                            <FormField
+                              control={form.control}
+                              name="preference1"
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel>Preference 1</FormLabel>
+                                  <Select
                                     onValueChange={field.onChange}
                                     defaultValue={field.value}
-                                    className="flex flex-col md:flex-row gap-4"
                                   >
-                                    <FormItem className="flex items-center space-x-3 space-y-0 border border-white/10 p-4 rounded-lg flex-1 hover:bg-white/5 transition-colors cursor-pointer">
-                                      <FormControl>
-                                        <RadioGroupItem value="Debate" />
-                                      </FormControl>
-                                      <FormLabel className="font-normal cursor-pointer w-full">
-                                        Tech Debate
-                                        <span className="block text-xs text-muted-foreground mt-1">
-                                          Debate on emerging tech trends
-                                        </span>
-                                      </FormLabel>
-                                    </FormItem>
-                                    <FormItem className="flex items-center space-x-3 space-y-0 border border-white/10 p-4 rounded-lg flex-1 hover:bg-white/5 transition-colors cursor-pointer">
-                                      <FormControl>
-                                        <RadioGroupItem value="Prompt Engineering" />
-                                      </FormControl>
-                                      <FormLabel className="font-normal cursor-pointer w-full">
-                                        Prompt Engineering
-                                        <span className="block text-xs text-muted-foreground mt-1">
-                                          Master the art of AI prompting
-                                        </span>
-                                      </FormLabel>
-                                    </FormItem>
-                                  </RadioGroup>
-                                </FormControl>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
+                                    <FormControl>
+                                      <SelectTrigger className="bg-white/5 border-white/10">
+                                        <SelectValue placeholder="Select First Preference" />
+                                      </SelectTrigger>
+                                    </FormControl>
+                                    <SelectContent className="bg-black/90 backdrop-blur-xl border-white/10">
+                                      <SelectItem value="Debate">Tech Debate</SelectItem>
+                                      <SelectItem value="Prompt Engineering">Prompt Engineering</SelectItem>
+                                    </SelectContent>
+                                  </Select>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+
+                            <FormField
+                              control={form.control}
+                              name="preference2"
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel>Preference 2</FormLabel>
+                                  <Select
+                                    onValueChange={field.onChange}
+                                    defaultValue={field.value}
+                                  >
+                                    <FormControl>
+                                      <SelectTrigger className="bg-white/5 border-white/10">
+                                        <SelectValue placeholder="Select Second Preference" />
+                                      </SelectTrigger>
+                                    </FormControl>
+                                    <SelectContent className="bg-black/90 backdrop-blur-xl border-white/10">
+                                      <SelectItem value="Debate" disabled={preference1 === "Debate"}>Tech Debate</SelectItem>
+                                      <SelectItem value="Prompt Engineering" disabled={preference1 === "Prompt Engineering"}>Prompt Engineering</SelectItem>
+                                    </SelectContent>
+                                  </Select>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+                          </div>
                         </div>
 
                         <Button
