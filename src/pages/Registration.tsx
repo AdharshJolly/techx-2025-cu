@@ -343,7 +343,7 @@ const Registration = () => {
                                 <FormLabel>Full Name</FormLabel>
                                 <FormControl>
                                   <Input
-                                    className="bg-white/5 border-white/10 focus:border-primary/50 transition-colors"
+                                    className="bg-white/10 border-white/20 focus:border-primary/50 transition-all text-white placeholder:text-white/30"
                                     placeholder="John Doe"
                                     {...field}
                                   />
@@ -361,7 +361,7 @@ const Registration = () => {
                                 <FormLabel>Email Address</FormLabel>
                                 <FormControl>
                                   <Input
-                                    className="bg-white/5 border-white/10 focus:border-primary/50 transition-colors"
+                                    className="bg-white/10 border-white/20 focus:border-primary/50 transition-all text-white placeholder:text-white/30"
                                     placeholder="john@example.com"
                                     {...field}
                                   />
@@ -381,7 +381,7 @@ const Registration = () => {
                                 <FormLabel>Phone (WhatsApp)</FormLabel>
                                 <FormControl>
                                   <Input
-                                    className="bg-white/5 border-white/10 focus:border-primary/50 transition-colors"
+                                    className="bg-white/10 border-white/20 focus:border-primary/50 transition-all text-white placeholder:text-white/30"
                                     placeholder="9876543210"
                                     {...field}
                                     maxLength={10}
@@ -400,7 +400,7 @@ const Registration = () => {
                                 <FormLabel>Reg No / Unique ID</FormLabel>
                                 <FormControl>
                                   <Input
-                                    className="bg-white/5 border-white/10 focus:border-primary/50 transition-colors"
+                                    className="bg-white/10 border-white/20 focus:border-primary/50 transition-all text-white placeholder:text-white/30"
                                     placeholder="e.g. 2347111"
                                     {...field}
                                   />
@@ -419,7 +419,7 @@ const Registration = () => {
                               <FormLabel>University / College</FormLabel>
                               <FormControl>
                                 <Input
-                                  className="bg-white/5 border-white/10 focus:border-primary/50 transition-colors"
+                                  className="bg-white/10 border-white/20 focus:border-primary/50 transition-all text-white placeholder:text-white/30"
                                   placeholder="CHRIST (Deemed to be University)"
                                   {...field}
                                 />
@@ -438,7 +438,7 @@ const Registration = () => {
                                 <FormLabel>Course / Branch</FormLabel>
                                 <FormControl>
                                   <Input
-                                    className="bg-white/5 border-white/10 focus:border-primary/50 transition-colors"
+                                    className="bg-white/10 border-white/20 focus:border-primary/50 transition-all text-white placeholder:text-white/30"
                                     placeholder="e.g. B.Tech CSE"
                                     {...field}
                                   />
@@ -459,15 +459,15 @@ const Registration = () => {
                                   defaultValue={field.value}
                                 >
                                   <FormControl>
-                                    <SelectTrigger className="bg-white/5 border-white/10">
+                                    <SelectTrigger className="bg-white/10 border-white/20 focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-all text-white">
                                       <SelectValue placeholder="Select Year" />
                                     </SelectTrigger>
                                   </FormControl>
-                                  <SelectContent className="bg-black/90 backdrop-blur-xl border-white/10">
-                                    <SelectItem value="1">1st Year</SelectItem>
-                                    <SelectItem value="2">2nd Year</SelectItem>
-                                    <SelectItem value="3">3rd Year</SelectItem>
-                                    <SelectItem value="4">4th Year</SelectItem>
+                                  <SelectContent className="bg-zinc-950 border-white/20 backdrop-blur-2xl shadow-2xl">
+                                    <SelectItem value="1" className="focus:bg-primary/20 focus:text-white cursor-pointer py-4 text-base">1st Year</SelectItem>
+                                    <SelectItem value="2" className="focus:bg-primary/20 focus:text-white cursor-pointer py-4 text-base">2nd Year</SelectItem>
+                                    <SelectItem value="3" className="focus:bg-primary/20 focus:text-white cursor-pointer py-4 text-base">3rd Year</SelectItem>
+                                    <SelectItem value="4" className="focus:bg-primary/20 focus:text-white cursor-pointer py-4 text-base">4th Year</SelectItem>
                                   </SelectContent>
                                 </Select>
                                 <FormMessage />
@@ -490,30 +490,30 @@ const Registration = () => {
                                   <RadioGroup
                                     onValueChange={field.onChange}
                                     defaultValue={field.value}
-                                    className="flex flex-col space-y-1"
+                                    className="grid grid-cols-1 md:grid-cols-3 gap-4"
                                   >
-                                    <FormItem className="flex items-center space-x-3 space-y-0">
+                                    <FormItem className="flex items-center space-x-3 space-y-0 border border-white/10 p-4 rounded-xl hover:bg-white/5 transition-all cursor-pointer bg-white/5">
                                       <FormControl>
                                         <RadioGroupItem value="ieee-cs" />
                                       </FormControl>
-                                      <FormLabel className="font-normal cursor-pointer">
+                                      <FormLabel className="font-medium cursor-pointer text-white/90">
                                         IEEE CS Member
                                       </FormLabel>
                                     </FormItem>
-                                    <FormItem className="flex items-center space-x-3 space-y-0">
+                                    <FormItem className="flex items-center space-x-3 space-y-0 border border-white/10 p-4 rounded-xl hover:bg-white/5 transition-all cursor-pointer bg-white/5">
                                       <FormControl>
                                         <RadioGroupItem value="ieee" />
                                       </FormControl>
-                                      <FormLabel className="font-normal cursor-pointer">
+                                      <FormLabel className="font-medium cursor-pointer text-white/90">
                                         IEEE Member
                                       </FormLabel>
                                     </FormItem>
-                                    <FormItem className="flex items-center space-x-3 space-y-0">
+                                    <FormItem className="flex items-center space-x-3 space-y-0 border border-white/10 p-4 rounded-xl hover:bg-white/5 transition-all cursor-pointer bg-white/5">
                                       <FormControl>
                                         <RadioGroupItem value="non-ieee" />
                                       </FormControl>
-                                      <FormLabel className="font-normal cursor-pointer">
-                                        Non-IEEE Member
+                                      <FormLabel className="font-medium cursor-pointer text-white/90">
+                                        Non-IEEE
                                       </FormLabel>
                                     </FormItem>
                                   </RadioGroup>
@@ -537,7 +537,7 @@ const Registration = () => {
                                     <FormLabel>IEEE Membership ID</FormLabel>
                                     <FormControl>
                                       <Input
-                                        className="bg-white/5 border-white/10 focus:border-primary/50 transition-colors"
+                                        className="bg-white/10 border-white/20 focus:border-primary/50 transition-all text-white placeholder:text-white/30"
                                         placeholder="Enter your IEEE ID"
                                         {...field}
                                       />
@@ -566,13 +566,13 @@ const Registration = () => {
                                     defaultValue={field.value}
                                   >
                                     <FormControl>
-                                      <SelectTrigger className="bg-white/5 border-white/10">
+                                      <SelectTrigger className="bg-white/10 border-white/20 focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-all text-white">
                                         <SelectValue placeholder="Select First Preference" />
                                       </SelectTrigger>
                                     </FormControl>
-                                    <SelectContent className="bg-black/90 backdrop-blur-xl border-white/10">
-                                      <SelectItem value="Debate">Tech Debate</SelectItem>
-                                      <SelectItem value="Prompt Engineering">Prompt Engineering</SelectItem>
+                                    <SelectContent className="bg-zinc-950 border-white/20 backdrop-blur-2xl shadow-2xl">
+                                      <SelectItem value="Debate" className="focus:bg-primary/20 focus:text-white cursor-pointer py-4 text-base">Tech Debate</SelectItem>
+                                      <SelectItem value="Prompt Engineering" className="focus:bg-primary/20 focus:text-white cursor-pointer py-4 text-base">Prompt Engineering</SelectItem>
                                     </SelectContent>
                                   </Select>
                                   <FormMessage />
@@ -591,13 +591,13 @@ const Registration = () => {
                                     defaultValue={field.value}
                                   >
                                     <FormControl>
-                                      <SelectTrigger className="bg-white/5 border-white/10">
+                                      <SelectTrigger className="bg-white/10 border-white/20 focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-all text-white">
                                         <SelectValue placeholder="Select Second Preference" />
                                       </SelectTrigger>
                                     </FormControl>
-                                    <SelectContent className="bg-black/90 backdrop-blur-xl border-white/10">
-                                      <SelectItem value="Debate" disabled={preference1 === "Debate"}>Tech Debate</SelectItem>
-                                      <SelectItem value="Prompt Engineering" disabled={preference1 === "Prompt Engineering"}>Prompt Engineering</SelectItem>
+                                    <SelectContent className="bg-zinc-950 border-white/20 backdrop-blur-2xl shadow-2xl">
+                                      <SelectItem value="Debate" disabled={preference1 === "Debate"} className="focus:bg-primary/20 focus:text-white cursor-pointer py-4 text-base">Tech Debate</SelectItem>
+                                      <SelectItem value="Prompt Engineering" disabled={preference1 === "Prompt Engineering"} className="focus:bg-primary/20 focus:text-white cursor-pointer py-4 text-base">Prompt Engineering</SelectItem>
                                     </SelectContent>
                                   </Select>
                                   <FormMessage />
