@@ -130,7 +130,7 @@ const PageLoader = ({ onLoadComplete }: PageLoaderProps) => {
                 animate={{ width: `${Math.min(progress, 100)}%` }}
                 className="h-full bg-gradient-to-r from-primary to-secondary rounded-full"
                 style={{ 
-                  boxShadow: "0 0 20px hsl(270 100% 65% / 0.5)"
+                  boxShadow: "0 0 20px hsl(287 80% 65% / 0.5)"
                 }}
               />
             </motion.div>

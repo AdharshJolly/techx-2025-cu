@@ -17,7 +17,7 @@ const days = [
     title: "Foundation & Engagement",
     icon: Flag,
     color: "primary" as const,
-    hex: "hsl(270, 100%, 65%)",
+    hex: "hsl(287, 80%, 65%)",
     image: "/assets/images/journey/keynote.jpg",
     accentIcon: Mic,
     items: [

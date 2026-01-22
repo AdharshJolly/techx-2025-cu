@@ -22,7 +22,7 @@ const AchievementBadge = ({ icon: Icon, label, unlocked = true, delay = 0 }: Ach
       whileHover={{ 
         scale: 1.1, 
         rotateY: 10,
-        boxShadow: "0 0 30px hsl(270 100% 65% / 0.5)"
+        boxShadow: "0 0 30px hsl(287 80% 65% / 0.5)"
       }}
       className={`
         relative flex items-center gap-2 px-4 py-2 rounded-full backdrop-blur-sm cursor-default

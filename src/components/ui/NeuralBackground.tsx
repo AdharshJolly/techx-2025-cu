@@ -64,7 +64,7 @@ const NeuralBackground = () => {
         if (!ctx) return;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = "hsla(285, 100%, 75%, 0.7)"; // Ultra Vivid Purple
+        ctx.fillStyle = "hsla(287, 100%, 85%, 0.9)"; // High brightness neon purple
         ctx.fill();
       }
     }
@@ -91,7 +91,7 @@ const NeuralBackground = () => {
 
           if (distance < connectionDistance) {
             ctx.beginPath();
-            ctx.strokeStyle = `hsla(285, 100%, 75%, ${0.25 - distance / connectionDistance * 0.25})`;
+            ctx.strokeStyle = `hsla(287, 100%, 85%, ${0.5 - distance / connectionDistance * 0.5})`;
             ctx.lineWidth = 1.5;
             ctx.moveTo(particle.x, particle.y);
             ctx.lineTo(particles[j].x, particles[j].y);

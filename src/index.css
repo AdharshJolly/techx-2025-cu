@@ -16,8 +16,8 @@
     --popover: 280 40% 4%;
     --popover-foreground: 280 20% 99%;
 
-    /* Primary: Ultra Vivid Neon Purple */
-    --primary: 285 100% 75%;
+    /* Primary: #77258E (Deep Purple) */
+    --primary: 287 59% 35%;
     --primary-foreground: 280 20% 99%;
 
     /* Secondary: Ultra Vibrant Electric Indigo */
@@ -36,17 +36,17 @@
 
     --border: 280 30% 15%;
     --input: 280 30% 8%;
-    --ring: 285 100% 75%;
+    --ring: 287 59% 35%;
 
     --radius: 0.75rem;
 
-    /* Custom neon variables */
-    --neon-violet: 285 100% 75%;
+    /* Custom neon variables - Lighter version of primary for glow */
+    --neon-violet: 287 80% 65%;
     --neon-indigo: 260 100% 80%;
-    --neon-glow: 280 100% 90%;
+    --neon-glow: 287 100% 90%;
     
     /* Extreme Shadows */
-    --shadow-neon: 0 0 50px hsl(285 100% 75% / 0.6), 0 0 100px hsl(285 100% 75% / 0.3);
+    --shadow-neon: 0 0 50px hsl(287 80% 65% / 0.6), 0 0 100px hsl(287 80% 65% / 0.3);
     --shadow-indigo: 0 0 50px hsl(260 100% 80% / 0.5), 0 0 100px hsl(260 100% 80% / 0.2);
     --shadow-card: 0 15px 50px hsl(280 50% 0% / 0.9);
   }
@@ -77,7 +77,7 @@
     line-height: 1.7;
     /* Clean Neon Background Glows (No more cloudy look) */
     background-image: 
-      radial-gradient(ellipse 60% 40% at 50% -10%, hsl(285 100% 75% / 0.15), transparent),
+      radial-gradient(ellipse 60% 40% at 50% -10%, hsl(287 80% 65% / 0.15), transparent),
       radial-gradient(ellipse 40% 30% at 80% 60%, hsl(260 100% 80% / 0.1), transparent);
     background-attachment: fixed;
   }
@@ -94,37 +94,37 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, hsl(285 100% 75%), hsl(260 100% 80%));
+    background: linear-gradient(180deg, hsl(287 59% 35%), hsl(260 100% 80%));
     border-radius: 6px;
     border: 2px solid hsl(280 50% 2%);
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, hsl(285 100% 80%), hsl(260 100% 85%));
-    box-shadow: 0 0 10px hsl(285 100% 75% / 0.5);
+    background: linear-gradient(180deg, hsl(287 59% 45%), hsl(260 100% 85%));
+    box-shadow: 0 0 10px hsl(287 80% 65% / 0.5);
   }
 
   ::-webkit-scrollbar-thumb:active {
-    background: linear-gradient(180deg, hsl(285 100% 70%), hsl(260 100% 75%));
+    background: linear-gradient(180deg, hsl(287 59% 30%), hsl(260 100% 75%));
   }
 
   /* Firefox Scrollbar */
   * {
     scrollbar-width: thin;
-    scrollbar-color: hsl(285 100% 75%) hsl(280 50% 2%);
+    scrollbar-color: hsl(287 59% 35%) hsl(280 50% 2%);
   }
 
   /* Text Selection */
   ::selection {
-    background: hsl(285 100% 75% / 0.3);
+    background: hsl(287 80% 65% / 0.3);
     color: hsl(280 20% 99%);
-    text-shadow: 0 0 8px hsl(285 100% 75% / 0.5);
+    text-shadow: 0 0 8px hsl(287 80% 65% / 0.5);
   }
 
   ::-moz-selection {
-    background: hsl(285 100% 75% / 0.3);
+    background: hsl(287 80% 65% / 0.3);
     color: hsl(280 20% 99%);
-    text-shadow: 0 0 8px hsl(285 100% 75% / 0.5);
+    text-shadow: 0 0 8px hsl(287 80% 65% / 0.5);
   }
 
   /* Input Placeholder Styling */
@@ -156,7 +156,7 @@
     -webkit-box-shadow: 0 0 0px 1000px hsl(280 40% 4%) inset;
     box-shadow: 0 0 0px 1000px hsl(280 40% 4%) inset;
     transition: background-color 5000s ease-in-out 0s;
-    border: 1px solid hsl(285 100% 75% / 0.3);
+    border: 1px solid hsl(287 80% 65% / 0.3);
   }
 
   p {
@@ -176,7 +176,7 @@
   .font-mono-tech { font-family: 'IBM Plex Mono', monospace; }
 
   .text-gradient {
-    background: linear-gradient(135deg, hsl(285 100% 75%), hsl(260 100% 80%));
+    background: linear-gradient(135deg, hsl(287 80% 65%), hsl(260 100% 80%));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -192,8 +192,8 @@
 
   .grid-bg {
     background-image: 
-      linear-gradient(hsl(285 100% 75% / 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, hsl(285 100% 75% / 0.05) 1px, transparent 1px);
+      linear-gradient(hsl(287 80% 65% / 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(287 80% 65% / 0.05) 1px, transparent 1px);
     background-size: 60px 60px;
   }
 
@@ -260,7 +260,7 @@
 
   /* Enhanced focus outline for better visibility */
   :focus-visible {
-    outline: 2px solid hsl(285 100% 75%);
+    outline: 2px solid hsl(287 80% 65%);
     outline-offset: 2px;
   }
 }
