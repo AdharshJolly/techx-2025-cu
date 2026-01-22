@@ -313,10 +313,10 @@ const Registration = () => {
                 {/* Step Indicator */}
                 <div className="flex items-center justify-center gap-2 mt-6">
                   <div
-                    className={`h-2 w-12 rounded-full transition-colors ${step === 1 ? "bg-primary shadow-[0_0_10px_rgba(168,85,247,0.5)]" : "bg-primary/20"}`}
+                    className={`h-2 w-12 rounded-full transition-colors ${step === 1 ? "bg-primary shadow-[0_0_10px_rgba(119,37,131,0.5)]" : "bg-primary/20"}`}
                   />
                   <div
-                    className={`h-2 w-12 rounded-full transition-colors ${step === 2 ? "bg-primary shadow-[0_0_10px_rgba(168,85,247,0.5)]" : "bg-primary/20"}`}
+                    className={`h-2 w-12 rounded-full transition-colors ${step === 2 ? "bg-primary shadow-[0_0_10px_rgba(119,37,131,0.5)]" : "bg-primary/20"}`}
                   />
                 </div>
               </div>
@@ -464,10 +464,30 @@ const Registration = () => {
                                     </SelectTrigger>
                                   </FormControl>
                                   <SelectContent className="bg-zinc-950 border-white/20 backdrop-blur-2xl shadow-2xl">
-                                    <SelectItem value="1" className="focus:bg-primary/20 focus:text-white cursor-pointer py-4 text-base">1st Year</SelectItem>
-                                    <SelectItem value="2" className="focus:bg-primary/20 focus:text-white cursor-pointer py-4 text-base">2nd Year</SelectItem>
-                                    <SelectItem value="3" className="focus:bg-primary/20 focus:text-white cursor-pointer py-4 text-base">3rd Year</SelectItem>
-                                    <SelectItem value="4" className="focus:bg-primary/20 focus:text-white cursor-pointer py-4 text-base">4th Year</SelectItem>
+                                    <SelectItem
+                                      value="1"
+                                      className="focus:bg-primary/20 focus:text-white cursor-pointer py-4 text-base"
+                                    >
+                                      1st Year
+                                    </SelectItem>
+                                    <SelectItem
+                                      value="2"
+                                      className="focus:bg-primary/20 focus:text-white cursor-pointer py-4 text-base"
+                                    >
+                                      2nd Year
+                                    </SelectItem>
+                                    <SelectItem
+                                      value="3"
+                                      className="focus:bg-primary/20 focus:text-white cursor-pointer py-4 text-base"
+                                    >
+                                      3rd Year
+                                    </SelectItem>
+                                    <SelectItem
+                                      value="4"
+                                      className="focus:bg-primary/20 focus:text-white cursor-pointer py-4 text-base"
+                                    >
+                                      4th Year
+                                    </SelectItem>
                                   </SelectContent>
                                 </Select>
                                 <FormMessage />
@@ -571,8 +591,18 @@ const Registration = () => {
                                       </SelectTrigger>
                                     </FormControl>
                                     <SelectContent className="bg-zinc-950 border-white/20 backdrop-blur-2xl shadow-2xl">
-                                      <SelectItem value="Debate" className="focus:bg-primary/20 focus:text-white cursor-pointer py-4 text-base">Tech Debate</SelectItem>
-                                      <SelectItem value="Prompt Engineering" className="focus:bg-primary/20 focus:text-white cursor-pointer py-4 text-base">Prompt Engineering</SelectItem>
+                                      <SelectItem
+                                        value="Debate"
+                                        className="focus:bg-primary/20 focus:text-white cursor-pointer py-4 text-base"
+                                      >
+                                        Tech Debate
+                                      </SelectItem>
+                                      <SelectItem
+                                        value="Prompt Engineering"
+                                        className="focus:bg-primary/20 focus:text-white cursor-pointer py-4 text-base"
+                                      >
+                                        Prompt Engineering
+                                      </SelectItem>
                                     </SelectContent>
                                   </Select>
                                   <FormMessage />
@@ -596,8 +626,22 @@ const Registration = () => {
                                       </SelectTrigger>
                                     </FormControl>
                                     <SelectContent className="bg-zinc-950 border-white/20 backdrop-blur-2xl shadow-2xl">
-                                      <SelectItem value="Debate" disabled={preference1 === "Debate"} className="focus:bg-primary/20 focus:text-white cursor-pointer py-4 text-base">Tech Debate</SelectItem>
-                                      <SelectItem value="Prompt Engineering" disabled={preference1 === "Prompt Engineering"} className="focus:bg-primary/20 focus:text-white cursor-pointer py-4 text-base">Prompt Engineering</SelectItem>
+                                      <SelectItem
+                                        value="Debate"
+                                        disabled={preference1 === "Debate"}
+                                        className="focus:bg-primary/20 focus:text-white cursor-pointer py-4 text-base"
+                                      >
+                                        Tech Debate
+                                      </SelectItem>
+                                      <SelectItem
+                                        value="Prompt Engineering"
+                                        disabled={
+                                          preference1 === "Prompt Engineering"
+                                        }
+                                        className="focus:bg-primary/20 focus:text-white cursor-pointer py-4 text-base"
+                                      >
+                                        Prompt Engineering
+                                      </SelectItem>
                                     </SelectContent>
                                   </Select>
                                   <FormMessage />
@@ -609,7 +653,7 @@ const Registration = () => {
 
                         <Button
                           type="submit"
-                          className="w-full text-lg py-6 mt-6 bg-primary hover:bg-primary/90 shadow-[0_0_20px_rgba(168,85,247,0.3)] transition-all hover:shadow-[0_0_30px_rgba(168,85,247,0.5)]"
+                          className="w-full text-lg py-6 mt-6 bg-primary hover:bg-primary/90 shadow-[0_0_20px_rgba(119,37,131,0.3)] transition-all hover:shadow-[0_0_30px_rgba(119,37,131,0.5)]"
                           size="lg"
                         >
                           Continue to Payment
@@ -714,7 +758,7 @@ const Registration = () => {
                       <div
                         className={`
                           border-2 border-dashed rounded-xl p-8 text-center transition-all cursor-pointer backdrop-blur-sm
-                          ${receiptFile ? "border-primary bg-primary/5 shadow-[0_0_20px_rgba(168,85,247,0.1)]" : "border-white/20 hover:border-primary/50 hover:bg-white/5"}
+                          ${receiptFile ? "border-primary bg-primary/5 shadow-[0_0_20px_rgba(119,37,131,0.1)]" : "border-white/20 hover:border-primary/50 hover:bg-white/5"}
                         `}
                         onClick={() => fileInputRef.current?.click()}
                       >
@@ -750,7 +794,7 @@ const Registration = () => {
 
                     <Button
                       onClick={handleFinalSubmit}
-                      className="w-full text-lg py-6 bg-primary hover:bg-primary/90 shadow-[0_0_20px_rgba(168,85,247,0.3)] transition-all hover:shadow-[0_0_30px_rgba(168,85,247,0.5)]"
+                      className="w-full text-lg py-6 bg-primary hover:bg-primary/90 shadow-[0_0_20px_rgba(119,37,131,0.3)] transition-all hover:shadow-[0_0_30px_rgba(119,37,131,0.5)]"
                       size="lg"
                       disabled={isSubmitting || !receiptFile}
                     >

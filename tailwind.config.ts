@@ -2,7 +2,12 @@ import type { Config } from "tailwindcss";
 
 export default {
   darkMode: ["class"],
-  content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
+  content: [
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
   prefix: "",
   theme: {
     container: {
@@ -14,9 +19,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        poppins: ['Poppins', 'sans-serif'],
-        inter: ['Inter', 'sans-serif'],
-        mono: ['IBM Plex Mono', 'monospace'],
+        poppins: ["Poppins", "sans-serif"],
+        inter: ["Inter", "sans-serif"],
+        mono: ["IBM Plex Mono", "monospace"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -56,9 +61,9 @@ export default {
           violet: "hsl(var(--neon-violet))",
           indigo: "hsl(var(--neon-indigo))",
           glow: "hsl(var(--neon-glow))",
-          cyan: "hsl(180 100% 70%)",
-          pink: "hsl(320 100% 70%)",
-          green: "hsl(150 100% 60%)",
+          cyan: "hsl(291 30% 61%)",
+          pink: "hsl(291 38% 47%)",
+          green: "hsl(291 20% 85%)",
         },
         surface: {
           DEFAULT: "hsl(var(--surface))",
@@ -80,18 +85,20 @@ export default {
           to: { height: "0" },
         },
         "pulse-glow": {
-          "0%, 100%": { 
-            boxShadow: "0 0 20px hsl(287 80% 65% / 0.4), 0 0 40px hsl(287 80% 65% / 0.2)" 
+          "0%, 100%": {
+            boxShadow:
+              "0 0 20px hsl(291 56% 33% / 0.4), 0 0 40px hsl(291 56% 33% / 0.2)",
           },
-          "50%": { 
-            boxShadow: "0 0 30px hsl(287 80% 65% / 0.6), 0 0 60px hsl(287 80% 65% / 0.3)" 
+          "50%": {
+            boxShadow:
+              "0 0 30px hsl(291 56% 33% / 0.6), 0 0 60px hsl(291 56% 33% / 0.3)",
           },
         },
-        "float": {
+        float: {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-10px)" },
         },
-        "shimmer": {
+        shimmer: {
           "0%": { backgroundPosition: "-200% 0" },
           "100%": { backgroundPosition: "200% 0" },
         },
@@ -116,8 +123,8 @@ export default {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "pulse-glow": "pulse-glow 2s ease-in-out infinite",
-        "float": "float 6s ease-in-out infinite",
-        "shimmer": "shimmer 3s linear infinite",
+        float: "float 6s ease-in-out infinite",
+        shimmer: "shimmer 3s linear infinite",
         "fade-in-up": "fade-in-up 0.5s ease-out",
         "fade-in": "fade-in 0.4s ease-out",
         "scale-in": "scale-in 0.3s ease-out",

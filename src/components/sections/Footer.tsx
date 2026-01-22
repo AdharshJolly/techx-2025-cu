@@ -120,7 +120,7 @@ const Footer = () => {
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
                   whileHover={{ y: -8, scale: 1.1 }}
-                  className="w-10 h-10 rounded-lg bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-all duration-300 shadow-sm hover:shadow-[0_0_20px_hsl(270_100%_65%/0.4)] cursor-pointer will-change-transform"
+                  className="w-10 h-10 rounded-lg bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-all duration-300 shadow-sm hover:shadow-[0_0_20px_hsl(291_56%_33%/0.4)] cursor-pointer will-change-transform"
                   aria-label={social.label}
                 >
                   <motion.div

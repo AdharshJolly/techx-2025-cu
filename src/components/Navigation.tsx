@@ -20,15 +20,15 @@ const Navigation = () => {
 
   useEffect(() => {
     let ticking = false;
-    
+
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
           const currentScrollY = window.scrollY;
-          
+
           // Update scrolled state
           setIsScrolled(currentScrollY > 20);
-          
+
           // Show/hide nav based on scroll direction
           if (currentScrollY > lastScrollY && currentScrollY > 100) {
             // Scrolling down
@@ -37,7 +37,7 @@ const Navigation = () => {
             // Scrolling up
             setIsVisible(true);
           }
-          
+
           setLastScrollY(currentScrollY);
           ticking = false;
         });
@@ -54,7 +54,7 @@ const Navigation = () => {
     const observerOptions = {
       root: null,
       rootMargin: "-20% 0px -50% 0px", // Trigger when section is near top/center
-      threshold: 0.1
+      threshold: 0.1,
     };
 
     const observerCallback = (entries: IntersectionObserverEntry[]) => {
@@ -65,8 +65,11 @@ const Navigation = () => {
       });
     };
 
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
-    
+    const observer = new IntersectionObserver(
+      observerCallback,
+      observerOptions,
+    );
+
     navLinks.forEach((link) => {
       const element = document.getElementById(link.href.slice(1));
       if (element) observer.observe(element);
@@ -79,9 +82,9 @@ const Navigation = () => {
     <>
       <motion.div
         initial={{ y: -100 }}
-        animate={{ 
+        animate={{
           y: isVisible ? 0 : -100,
-          opacity: isVisible ? 1 : 0
+          opacity: isVisible ? 1 : 0,
         }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
         className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4"
@@ -98,9 +101,9 @@ const Navigation = () => {
         >
           {/* Logo */}
           <a href="#" className="flex items-center gap-2 group cursor-pointer">
-            <img 
-              src="/assets/images/techx_logo.png" 
-              alt="TechX Logo" 
+            <img
+              src="/assets/images/techx_logo.png"
+              alt="TechX Logo"
               className="h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
             />
           </a>
@@ -115,9 +118,10 @@ const Navigation = () => {
                     key={link.href}
                     href={link.href}
                     className={`relative px-4 py-1.5 text-sm font-medium transition-all duration-300 rounded-full cursor-pointer
-                      ${isActive 
-                        ? "text-white bg-primary/20 shadow-[0_0_15px_hsl(270_100%_65%/0.3)]" 
-                        : "text-muted-foreground hover:text-white hover:bg-white/10"
+                      ${
+                        isActive
+                          ? "text-white bg-primary/20 shadow-[0_0_15px_hsl(291_56%_33%/0.3)]"
+                          : "text-muted-foreground hover:text-white hover:bg-white/10"
                       }
                     `}
                   >
@@ -127,7 +131,11 @@ const Navigation = () => {
                         layoutId="activeSection"
                         className="absolute inset-0 bg-primary/10 rounded-full -z-10"
                         initial={false}
-                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                        transition={{
+                          type: "spring",
+                          stiffness: 380,
+                          damping: 30,
+                        }}
                       />
                     )}
                   </a>
@@ -137,7 +145,7 @@ const Navigation = () => {
             <Button
               variant="default"
               size="sm"
-              className="rounded-full px-6 shadow-[0_0_15px_hsl(270_100%_65%/0.4)] hover:shadow-[0_0_25px_hsl(270_100%_65%/0.6)]"
+              className="rounded-full px-6 shadow-[0_0_15px_hsl(291_56%_33%/0.4)] hover:shadow-[0_0_25px_hsl(291_56%_33%/0.6)]"
               disabled
             >
               Registrations Opening Soon

@@ -17,7 +17,7 @@ const days = [
     title: "Foundation & Engagement",
     icon: Flag,
     color: "primary" as const,
-    hex: "hsl(287, 80%, 65%)",
+    hex: "hsl(291, 56%, 33%)",
     image: "/assets/images/journey/keynote.jpg",
     accentIcon: Mic,
     items: [
@@ -32,7 +32,7 @@ const days = [
     title: "Skill & Strategy",
     icon: Lightbulb,
     color: "secondary" as const,
-    hex: "hsl(320, 100%, 60%)",
+    hex: "hsl(291, 38%, 47%)",
     image: "/assets/images/journey/workshop.jpg",
     accentIcon: Zap,
     items: [
@@ -47,7 +47,7 @@ const days = [
     title: "Innovation & Awards",
     icon: Trophy,
     color: "accent" as const,
-    hex: "hsl(280, 100%, 70%)",
+    hex: "hsl(291, 30%, 61%)",
     image: "/assets/images/journey/activities.jpg",
     accentIcon: Calendar,
     items: [
@@ -180,7 +180,13 @@ const JourneySection = () => {
                         className="w-full h-full object-cover"
                       />
                       <div
-                        className={`absolute inset-0 bg-gradient-to-b from-transparent via-${day.color}/20 to-${day.color}/80`}
+                        className={`absolute inset-0 bg-gradient-to-b from-transparent ${
+                          day.color === "primary"
+                            ? "via-primary/20 to-primary/80"
+                            : day.color === "secondary"
+                              ? "via-secondary/20 to-secondary/80"
+                              : "via-accent/20 to-accent/80"
+                        }`}
                       />
                       <div className="absolute bottom-4 left-4 flex items-center gap-2">
                         <day.accentIcon className="w-5 h-5 text-white" />

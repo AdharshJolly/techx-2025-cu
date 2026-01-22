@@ -221,7 +221,7 @@ const RegistrationSection = () => {
                     {benefits.map((benefit, i) => (
                       <div
                         key={i}
-                        className="flex items-center gap-3 text-sm text-gray-300"
+                        className="flex items-center gap-3 text-sm text-muted-foreground"
                       >
                         <Check
                           className={`w-4 h-4 

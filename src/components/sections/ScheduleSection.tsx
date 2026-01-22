@@ -1,20 +1,20 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
-import { 
-  Clock, 
-  Code, 
-  Cpu, 
-  MessageSquare, 
-  Mic, 
-  Zap, 
-  Coffee, 
-  Utensils, 
-  Users, 
+import {
+  Clock,
+  Code,
+  Cpu,
+  MessageSquare,
+  Mic,
+  Zap,
+  Coffee,
+  Utensils,
+  Users,
   Trophy,
   Flag,
   Sparkles,
-  Rocket
+  Rocket,
 } from "lucide-react";
 import GlowCard from "@/components/ui/GlowCard";
 
@@ -26,28 +26,31 @@ const scheduleData = {
       id: "d1-1",
       time: "09:30 AM - 10:30 AM",
       title: "Inauguration & Keynote Address",
-      description: "Opening ceremony kicking off TechX 2025 with visionary talks.",
+      description:
+        "Opening ceremony kicking off TechX 2025 with visionary talks.",
       icon: Mic,
       category: "General",
-      color: "primary"
+      color: "primary",
     },
     {
       id: "d1-2",
       time: "10:30 AM - 11:30 AM",
       title: "Technical Workshops – Session 1",
-      description: "Deep dive into AI-assisted development and modern tech stacks.",
+      description:
+        "Deep dive into AI-assisted development and modern tech stacks.",
       icon: Code,
       category: "Workshop",
-      color: "blue"
+      color: "blue",
     },
     {
       id: "d1-3",
       time: "11:30 AM - 11:45 AM",
       title: "Hi-Tea & Networking",
-      description: "Refreshments and networking opportunity with peers and mentors.",
+      description:
+        "Refreshments and networking opportunity with peers and mentors.",
       icon: Coffee,
       category: "Break",
-      color: "green"
+      color: "green",
     },
     {
       id: "d1-4",
@@ -56,7 +59,7 @@ const scheduleData = {
       description: "Advanced concepts and hands-on practice.",
       icon: Code,
       category: "Workshop",
-      color: "blue"
+      color: "blue",
     },
     {
       id: "d1-5",
@@ -65,7 +68,7 @@ const scheduleData = {
       description: "Refuel for the afternoon sessions.",
       icon: Utensils,
       category: "Break",
-      color: "green"
+      color: "green",
     },
     {
       id: "d1-6",
@@ -74,36 +77,39 @@ const scheduleData = {
       description: "Final technical session wrapping up core concepts.",
       icon: Code,
       category: "Workshop",
-      color: "blue"
+      color: "blue",
     },
     {
       id: "d1-7",
       time: "03:00 PM - 04:30 PM",
       title: "Ice-Breaking & Engagement",
-      description: "Team engagement activities and Nano-Mentoring for interactive students.",
+      description:
+        "Team engagement activities and Nano-Mentoring for interactive students.",
       icon: Users,
       category: "Activity",
-      color: "purple"
-    }
+      color: "purple",
+    },
   ],
   day2: [
     {
       id: "d2-1",
       time: "09:30 AM - 12:00 PM",
       title: "Prompt Engineering Battle",
-      description: "Live timed challenges to generate the best outputs using AI models.",
+      description:
+        "Live timed challenges to generate the best outputs using AI models.",
       icon: Zap,
       category: "Competition",
-      color: "orange"
+      color: "orange",
     },
     {
       id: "d2-2",
       time: "09:30 AM - 12:00 PM",
       title: "Sector-Wise Idea Debate",
-      description: "Teams defend innovative ideas in Education, Healthcare, Finance, and Sustainability.",
+      description:
+        "Teams defend innovative ideas in Education, Healthcare, Finance, and Sustainability.",
       icon: MessageSquare,
       category: "Competition",
-      color: "orange"
+      color: "orange",
     },
     {
       id: "d2-3",
@@ -112,7 +118,7 @@ const scheduleData = {
       description: "Mid-day break.",
       icon: Utensils,
       category: "Break",
-      color: "green"
+      color: "green",
     },
     {
       id: "d2-4",
@@ -121,27 +127,29 @@ const scheduleData = {
       description: "Interactive sessions and mentorship opportunities.",
       icon: Sparkles,
       category: "Activity",
-      color: "purple"
-    }
+      color: "purple",
+    },
   ],
   day3: [
     {
       id: "d3-1",
       time: "09:30 AM - 10:00 AM",
       title: "Problem Statement Finalization",
-      description: "Teams finalize their approach for the main hackathon event.",
+      description:
+        "Teams finalize their approach for the main hackathon event.",
       icon: Flag,
       category: "Vibeathon",
-      color: "pink"
+      color: "pink",
     },
     {
       id: "d3-2",
       time: "10:00 AM - 03:00 PM",
       title: "VIBEATHON Build Phase",
-      description: "6-hour innovation sprint. Build, execute, and showcase solutions.",
+      description:
+        "6-hour innovation sprint. Build, execute, and showcase solutions.",
       icon: Cpu,
       category: "Vibeathon",
-      color: "pink"
+      color: "pink",
     },
     {
       id: "d3-3",
@@ -150,7 +158,7 @@ const scheduleData = {
       description: "Presentation of working prototypes to judges.",
       icon: Rocket,
       category: "Vibeathon",
-      color: "pink"
+      color: "pink",
     },
     {
       id: "d3-4",
@@ -159,9 +167,9 @@ const scheduleData = {
       description: "Celebrating winners and closing remarks.",
       icon: Trophy,
       category: "Ceremony",
-      color: "primary"
-    }
-  ]
+      color: "primary",
+    },
+  ],
 };
 
 const getColorStyles = (color: string) => {
@@ -172,7 +180,7 @@ const getColorStyles = (color: string) => {
         iconColor: "text-blue-400",
         badge: "bg-blue-500/5 border-blue-500/20 text-blue-400",
         titleHover: "group-hover:text-blue-400",
-        glow: "secondary" as const
+        glow: "secondary" as const,
       };
     case "green":
       return {
@@ -180,7 +188,7 @@ const getColorStyles = (color: string) => {
         iconColor: "text-green-400",
         badge: "bg-green-500/5 border-green-500/20 text-green-400",
         titleHover: "group-hover:text-green-400",
-        glow: "accent" as const
+        glow: "accent" as const,
       };
     case "orange":
       return {
@@ -188,7 +196,7 @@ const getColorStyles = (color: string) => {
         iconColor: "text-orange-400",
         badge: "bg-orange-500/5 border-orange-500/20 text-orange-400",
         titleHover: "group-hover:text-orange-400",
-        glow: "secondary" as const
+        glow: "secondary" as const,
       };
     case "pink":
       return {
@@ -196,7 +204,7 @@ const getColorStyles = (color: string) => {
         iconColor: "text-pink-400",
         badge: "bg-pink-500/5 border-pink-500/20 text-pink-400",
         titleHover: "group-hover:text-pink-400",
-        glow: "accent" as const
+        glow: "accent" as const,
       };
     case "purple":
       return {
@@ -204,7 +212,7 @@ const getColorStyles = (color: string) => {
         iconColor: "text-purple-400",
         badge: "bg-purple-500/5 border-purple-500/20 text-purple-400",
         titleHover: "group-hover:text-purple-400",
-        glow: "primary" as const
+        glow: "primary" as const,
       };
     default: // primary
       return {
@@ -212,7 +220,7 @@ const getColorStyles = (color: string) => {
         iconColor: "text-primary",
         badge: "bg-primary/5 border-primary/20 text-primary",
         titleHover: "group-hover:text-primary",
-        glow: "primary" as const
+        glow: "primary" as const,
       };
   }
 };
@@ -221,10 +229,13 @@ const ScheduleSection = () => {
   const [activeDay, setActiveDay] = useState<DayType>("day1");
 
   const getDayLabel = (day: DayType) => {
-    switch(day) {
-      case "day1": return "Day 1";
-      case "day2": return "Day 2";
-      case "day3": return "Day 3";
+    switch (day) {
+      case "day1":
+        return "Day 1";
+      case "day2":
+        return "Day 2";
+      case "day3":
+        return "Day 3";
     }
   };
 
@@ -253,13 +264,23 @@ const ScheduleSection = () => {
           {/* Day Switcher */}
           <div className="flex justify-center mb-12">
             <div className="p-1 rounded-full bg-muted/50 border border-border/50 backdrop-blur-sm relative flex">
-              <div 
+              <div
                 className="absolute inset-y-1 rounded-full bg-primary/20 transition-all duration-300 ease-in-out border border-primary/50"
-                style={{ 
-                  left: activeDay === "day1" ? "4px" : activeDay === "day2" ? "33.33%" : "66.66%",
+                style={{
+                  left:
+                    activeDay === "day1"
+                      ? "4px"
+                      : activeDay === "day2"
+                        ? "33.33%"
+                        : "66.66%",
                   width: "calc(33.33% - 4px)",
-                  transform: activeDay === "day2" ? "translateX(-2px)" : activeDay === "day3" ? "translateX(-4px)" : "none"
-                }} 
+                  transform:
+                    activeDay === "day2"
+                      ? "translateX(-2px)"
+                      : activeDay === "day3"
+                        ? "translateX(-4px)"
+                        : "none",
+                }}
               />
               {(["day1", "day2", "day3"] as DayType[]).map((day) => (
                 <button
@@ -290,13 +311,15 @@ const ScheduleSection = () => {
               {scheduleData[activeDay].map((item, index) => {
                 const styles = getColorStyles(item.color);
                 return (
-                  <GlowCard 
-                    key={item.id} 
-                    glowColor={styles.glow} 
+                  <GlowCard
+                    key={item.id}
+                    glowColor={styles.glow}
                     className="flex flex-col md:flex-row items-start gap-6 group"
                     delay={index * 0.1}
                   >
-                    <div className={`shrink-0 w-16 h-16 rounded-xl ${styles.iconBg} flex items-center justify-center ${styles.iconColor} group-hover:scale-110 transition-transform duration-300`}>
+                    <div
+                      className={`shrink-0 w-16 h-16 rounded-xl ${styles.iconBg} flex items-center justify-center ${styles.iconColor} group-hover:scale-110 transition-transform duration-300`}
+                    >
                       <item.icon className="w-8 h-8" />
                     </div>
                     <div className="flex-1 space-y-3">
@@ -309,7 +332,9 @@ const ScheduleSection = () => {
                           {item.time}
                         </div>
                       </div>
-                      <h3 className={`text-xl font-bold font-poppins ${styles.titleHover} transition-colors`}>
+                      <h3
+                        className={`text-xl font-bold font-poppins ${styles.titleHover} transition-colors`}
+                      >
                         {item.title}
                       </h3>
                       <p className="text-muted-foreground text-sm leading-relaxed">

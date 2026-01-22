@@ -57,7 +57,7 @@ const PrizesSection = () => {
     >
       {/* Section separator gradient */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
-      
+
       {/* Background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px]" />
 
@@ -99,7 +99,7 @@ const PrizesSection = () => {
                     <Trophy className="w-20 h-20 text-white drop-shadow-2xl" />
                   </div>
                 </div>
-                
+
                 {/* Content Side */}
                 <div className="p-8 flex flex-col justify-center">
                   <div className="flex items-center gap-4 mb-4">
@@ -107,31 +107,54 @@ const PrizesSection = () => {
                       <PieChart className="w-8 h-8 text-primary" />
                     </div>
                     <div>
-                      <div className="text-sm text-muted-foreground uppercase tracking-wider">Total Prize Pool</div>
+                      <div className="text-sm text-muted-foreground uppercase tracking-wider">
+                        Total Prize Pool
+                      </div>
                       <div className="font-poppins font-bold text-4xl text-foreground">
                         <span className="text-primary">₹</span>
                         <AnimatedCounter value={32000} />
                       </div>
                     </div>
                   </div>
-                  
+
                   {/* Distribution Bar */}
                   <div className="h-4 flex rounded-full overflow-hidden mt-4">
-                    <div className="h-full bg-primary/80" style={{ width: "31%" }} />
-                    <div className="h-full bg-secondary/80" style={{ width: "15%" }} />
-                    <div className="h-full bg-accent/80" style={{ width: "9%" }} />
-                    <div className="h-full bg-orange-500/80" style={{ width: "22%" }} />
-                    <div className="h-full bg-blue-500/80" style={{ width: "23%" }} />
+                    <div
+                      className="h-full bg-primary/80"
+                      style={{ width: "31%" }}
+                    />
+                    <div
+                      className="h-full bg-secondary/80"
+                      style={{ width: "15%" }}
+                    />
+                    <div
+                      className="h-full bg-accent/80"
+                      style={{ width: "9%" }}
+                    />
+                    <div
+                      className="h-full bg-secondary/80"
+                      style={{ width: "22%" }}
+                    />
+                    <div
+                      className="h-full bg-accent/80"
+                      style={{ width: "23%" }}
+                    />
                   </div>
-                  
+
                   <div className="flex flex-wrap gap-3 mt-4">
-                    <span className="text-xs text-muted-foreground">VIBEATHON:</span>
-                    <span className="text-xs font-medium text-primary">10K</span>
-                    <span className="text-xs font-medium text-secondary">5K</span>
+                    <span className="text-xs text-muted-foreground">
+                      VIBEATHON:
+                    </span>
+                    <span className="text-xs font-medium text-primary">
+                      10K
+                    </span>
+                    <span className="text-xs font-medium text-secondary">
+                      5K
+                    </span>
                     <span className="text-xs font-medium text-accent">3K</span>
                     <span className="text-xs text-muted-foreground">|</span>
-                    <span className="text-xs text-orange-500">Prompt: 7K</span>
-                    <span className="text-xs text-blue-500">Debate: 7K</span>
+                    <span className="text-xs text-secondary">Prompt: 7K</span>
+                    <span className="text-xs text-accent">Debate: 7K</span>
                   </div>
                 </div>
               </div>
@@ -150,9 +173,11 @@ const PrizesSection = () => {
                 <div className="bg-card/50 border border-white/10 rounded-3xl p-6 md:p-8 h-full">
                   <div className="flex items-center gap-3 mb-8">
                     <Trophy className="w-6 h-6 text-primary" />
-                    <h3 className="font-poppins text-xl font-bold">VIBEATHON Winners</h3>
+                    <h3 className="font-poppins text-xl font-bold">
+                      VIBEATHON Winners
+                    </h3>
                   </div>
-                  
+
                   {/* Podium */}
                   <div className="flex flex-row items-end justify-center gap-2 md:gap-6 min-h-[280px]">
                     {vibeathonWinners.map((winner, index) => (
@@ -160,13 +185,16 @@ const PrizesSection = () => {
                         key={winner.rank}
                         initial={{ opacity: 0, y: 50 }}
                         animate={isInView ? { opacity: 1, y: 0 } : {}}
-                        transition={{ delay: 0.3 + index * 0.1, type: "spring" }}
+                        transition={{
+                          delay: 0.3 + index * 0.1,
+                          type: "spring",
+                        }}
                         className={`w-1/3 relative ${
                           winner.rank === 1
                             ? "order-2 z-10"
                             : winner.rank === 2
-                            ? "order-1"
-                            : "order-3"
+                              ? "order-1"
+                              : "order-3"
                         }`}
                       >
                         <div
@@ -176,8 +204,8 @@ const PrizesSection = () => {
                               winner.rank === 1
                                 ? "h-52 md:h-64 bg-primary/10 border-primary/50"
                                 : winner.rank === 2
-                                ? "h-36 md:h-44 bg-secondary/10 border-secondary/50"
-                                : "h-28 md:h-36 bg-accent/10 border-accent/50"
+                                  ? "h-36 md:h-44 bg-secondary/10 border-secondary/50"
+                                  : "h-28 md:h-36 bg-accent/10 border-accent/50"
                             }
                           `}
                         >
@@ -185,10 +213,10 @@ const PrizesSection = () => {
                             <winner.icon
                               className={`w-8 h-8 md:w-12 md:h-12 ${
                                 winner.rank === 1
-                                  ? "text-primary drop-shadow-[0_0_10px_rgba(168,85,247,0.5)]"
+                                  ? "text-primary drop-shadow-[0_0_10px_rgba(119,37,131,0.5)]"
                                   : winner.rank === 2
-                                  ? "text-secondary"
-                                  : "text-accent"
+                                    ? "text-secondary"
+                                    : "text-accent"
                               }`}
                             />
                           </div>
@@ -207,8 +235,8 @@ const PrizesSection = () => {
                             winner.rank === 1
                               ? "bg-primary"
                               : winner.rank === 2
-                              ? "bg-secondary"
-                              : "bg-accent"
+                                ? "bg-secondary"
+                                : "bg-accent"
                           }`}
                         />
                       </motion.div>
@@ -236,17 +264,19 @@ const PrizesSection = () => {
                       <div
                         className={`p-4 rounded-xl shrink-0 ${
                           index === 0
-                            ? "bg-orange-500/10 text-orange-500"
-                            : "bg-blue-500/10 text-blue-500"
+                            ? "bg-secondary/10 text-secondary"
+                            : "bg-accent/10 text-accent"
                         }`}
                       >
                         <prize.icon className="w-7 h-7" />
                       </div>
-                      
+
                       {/* Content */}
                       <div className="flex-1">
                         <div className="flex items-center justify-between mb-2">
-                          <h4 className="font-poppins font-bold text-lg">{prize.label}</h4>
+                          <h4 className="font-poppins font-bold text-lg">
+                            {prize.label}
+                          </h4>
                           <span className="font-mono font-bold text-2xl">
                             ₹<AnimatedCounter value={prize.amount} />
                           </span>
@@ -259,7 +289,7 @@ const PrizesSection = () => {
                   </GlowCard>
                 </motion.div>
               ))}
-              
+
               {/* Secondary Image Card */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -275,7 +305,10 @@ const PrizesSection = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-accent/60 to-primary/60" />
                 <div className="absolute inset-0 flex items-center justify-center">
                   <Crown className="w-10 h-10 text-white mr-3" />
-                  <span className="text-white font-poppins font-bold text-lg"> Glory Awaits!</span>
+                  <span className="text-white font-poppins font-bold text-lg">
+                    {" "}
+                    Glory Awaits!
+                  </span>
                 </div>
               </motion.div>
             </div>

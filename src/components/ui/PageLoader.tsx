@@ -45,17 +45,17 @@ const PageLoader = ({ onLoadComplete }: PageLoaderProps) => {
           {/* Background glow */}
           <div className="absolute inset-0 overflow-hidden">
             <motion.div
-              animate={{ 
+              animate={{
                 scale: [1, 1.2, 1],
-                opacity: [0.1, 0.2, 0.1]
+                opacity: [0.1, 0.2, 0.1],
               }}
               transition={{ duration: 2, repeat: Infinity }}
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[150px]"
             />
             <motion.div
-              animate={{ 
+              animate={{
                 scale: [1.2, 1, 1.2],
-                opacity: [0.1, 0.15, 0.1]
+                opacity: [0.1, 0.15, 0.1],
               }}
               transition={{ duration: 2.5, repeat: Infinity }}
               className="absolute top-1/3 right-1/3 w-[400px] h-[400px] bg-secondary/15 rounded-full blur-[120px]"
@@ -97,12 +97,12 @@ const PageLoader = ({ onLoadComplete }: PageLoaderProps) => {
                 src="/assets/images/techx_logo.png"
                 alt="TechX Logo"
                 className="h-16 md:h-24 w-auto object-contain"
-                animate={{ 
+                animate={{
                   filter: [
                     "drop-shadow(0 0 20px rgba(168, 85, 247, 0.3))",
                     "drop-shadow(0 0 40px rgba(168, 85, 247, 0.6))",
-                    "drop-shadow(0 0 20px rgba(168, 85, 247, 0.3))"
-                  ]
+                    "drop-shadow(0 0 20px rgba(168, 85, 247, 0.3))",
+                  ],
                 }}
                 transition={{ duration: 1.5, repeat: Infinity }}
               />
@@ -129,8 +129,8 @@ const PageLoader = ({ onLoadComplete }: PageLoaderProps) => {
                 initial={{ width: 0 }}
                 animate={{ width: `${Math.min(progress, 100)}%` }}
                 className="h-full bg-gradient-to-r from-primary to-secondary rounded-full"
-                style={{ 
-                  boxShadow: "0 0 20px hsl(287 80% 65% / 0.5)"
+                style={{
+                  boxShadow: "0 0 20px hsl(291 56% 33% / 0.5)",
                 }}
               />
             </motion.div>
@@ -150,19 +150,19 @@ const PageLoader = ({ onLoadComplete }: PageLoaderProps) => {
           {[...Array(6)].map((_, i) => (
             <motion.div
               key={i}
-              initial={{ 
-                x: Math.random() * window.innerWidth, 
+              initial={{
+                x: Math.random() * window.innerWidth,
                 y: Math.random() * window.innerHeight,
-                opacity: 0 
+                opacity: 0,
               }}
-              animate={{ 
+              animate={{
                 y: [null, Math.random() * -100 - 50],
-                opacity: [0, 0.5, 0]
+                opacity: [0, 0.5, 0],
               }}
-              transition={{ 
+              transition={{
                 duration: 2 + Math.random() * 2,
                 repeat: Infinity,
-                delay: Math.random() * 2
+                delay: Math.random() * 2,
               }}
               className="absolute w-1 h-1 bg-primary rounded-full"
             />

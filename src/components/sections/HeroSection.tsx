@@ -112,7 +112,7 @@ const HeroSection = () => {
                 ease: [0.215, 0.61, 0.355, 1],
               }}
             >
-              <span className="relative z-10 drop-shadow-[0_0_20px_rgba(168,85,247,0.5)]">
+              <span className="relative z-10 drop-shadow-[0_0_20px_rgba(119,37,131,0.5)]">
                 X
               </span>
               <motion.span
