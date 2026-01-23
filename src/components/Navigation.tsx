@@ -2,13 +2,14 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Terminal } from "lucide-react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const navLinks = [
-  { href: "#about", label: "About" },
-  { href: "#journey", label: "Journey" },
-  { href: "#schedule", label: "Schedule" },
-  { href: "#vibeathon", label: "Vibeathon" },
-  { href: "#prizes", label: "Prizes" },
+  { href: "/#about", label: "About" },
+  { href: "/#journey", label: "Journey" },
+  { href: "/#schedule", label: "Schedule" },
+  { href: "/#vibeathon", label: "Vibeathon" },
+  { href: "/#prizes", label: "Prizes" },
 ];
 
 const Navigation = () => {
@@ -17,6 +18,9 @@ const Navigation = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [activeSection, setActiveSection] = useState("");
+  
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     let ticking = false;
@@ -51,6 +55,11 @@ const Navigation = () => {
 
   // Use IntersectionObserver for active section detection
   useEffect(() => {
+    if (location.pathname !== "/") {
+      setActiveSection("");
+      return;
+    }
+
     const observerOptions = {
       root: null,
       rootMargin: "-20% 0px -50% 0px", // Trigger when section is near top/center
@@ -71,12 +80,51 @@ const Navigation = () => {
     );
 
     navLinks.forEach((link) => {
-      const element = document.getElementById(link.href.slice(1));
+      const element = document.getElementById(link.href.slice(2));
       if (element) observer.observe(element);
     });
 
     return () => observer.disconnect();
-  }, []);
+  }, [location.pathname]);
+
+  const handleNavClick = (e: React.MouseEvent, href: string) => {
+    e.preventDefault();
+    
+    if (href.startsWith("/#")) {
+      const targetId = href.replace("/#", "");
+      
+      if (location.pathname === "/") {
+        const element = document.getElementById(targetId);
+        if (element) {
+          const navHeight = 80;
+          const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+          const offsetPosition = elementPosition - navHeight;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+          });
+          // Update URL without navigation
+          window.history.pushState(null, "", href);
+        }
+      } else {
+        navigate(href);
+      }
+    } else {
+      navigate(href);
+    }
+    
+    setIsMobileMenuOpen(false);
+  };
+
+  const handleLogoClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (location.pathname === "/") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      navigate("/");
+    }
+  };
 
   return (
     <>
@@ -100,7 +148,7 @@ const Navigation = () => {
           `}
         >
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2 group cursor-pointer">
+          <a href="/" onClick={handleLogoClick} className="flex items-center gap-2 group cursor-pointer">
             <img
               src="/assets/images/techx_logo.png"
               alt="TechX Logo"
@@ -112,11 +160,12 @@ const Navigation = () => {
           <div className="hidden md:flex items-center gap-1">
             <div className="flex items-center gap-1 mr-4 bg-white/5 rounded-full p-1 border border-white/5">
               {navLinks.map((link) => {
-                const isActive = activeSection === link.href.slice(1);
+                const isActive = activeSection === link.href.slice(2);
                 return (
                   <a
                     key={link.href}
                     href={link.href}
+                    onClick={(e) => handleNavClick(e, link.href)}
                     className={`relative px-4 py-1.5 text-sm font-medium transition-all duration-300 rounded-full cursor-pointer
                       ${
                         isActive
@@ -181,7 +230,7 @@ const Navigation = () => {
                 <a
                   key={link.href}
                   href={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={(e) => handleNavClick(e, link.href)}
                   className="flex items-center justify-between p-3 rounded-xl hover:bg-white/5 transition-colors group"
                 >
                   <span className="font-medium text-lg text-foreground group-hover:text-primary transition-colors">

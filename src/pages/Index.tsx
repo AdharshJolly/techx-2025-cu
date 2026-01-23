@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/sections/HeroSection";
 import OrganizersSection from "@/components/sections/OrganizersSection";
@@ -18,6 +19,26 @@ import PreviousEventSection from "@/components/sections/PreviousEventSection";
 
 const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (isLoaded && location.hash) {
+      const targetId = location.hash.replace("#", "");
+      const element = document.getElementById(targetId);
+      if (element) {
+        setTimeout(() => {
+          const navHeight = 80;
+          const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+          const offsetPosition = elementPosition - navHeight;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+          });
+        }, 100); // Small delay to ensure layout stability
+      }
+    }
+  }, [isLoaded, location.hash]);
 
   return (
     <>

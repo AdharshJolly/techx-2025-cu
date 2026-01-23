@@ -12,6 +12,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
+  FormDescription,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import {
@@ -28,6 +29,7 @@ import {
   UploadCloud,
   CheckCircle2,
   AlertCircle,
+  Info,
 } from "lucide-react";
 import { Toaster } from "@/components/ui/toaster";
 import { useToast } from "@/hooks/use-toast";
@@ -52,36 +54,96 @@ import NeuralBackground from "@/components/ui/NeuralBackground";
 import PageLoader from "@/components/ui/PageLoader";
 
 // Form Validation Schema
-const formSchema = z
-  .object({
-    name: z.string().min(2, "Name must be at least 2 characters"),
-    email: z.string().email("Invalid email address"),
-    university: z.string().min(2, "University name is required"),
-    uniqueId: z.string().min(1, "Registration Number/Unique ID is required"),
-    course: z.string().min(1, "Course is required"),
-    year: z.string().min(1, "Year is required"),
-    phone: z.string().regex(/^\d{10}$/, "Phone number must be 10 digits"),
-    category: z.enum(["ieee-cs", "ieee", "non-ieee"]),
-    ieeeId: z.string().optional(),
-    preference1: z.enum(["Debate", "Prompt Engineering"], {
-      required_error: "Please select your first preference",
-    }),
-    preference2: z.enum(["Debate", "Prompt Engineering"], {
-      required_error: "Please select your second preference",
-    }),
-  })
-  .refine(
-    (data) => {
-      if (data.category === "ieee-cs" || data.category === "ieee") {
-        return !!data.ieeeId && data.ieeeId.trim().length > 0;
+const baseSchema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.string().email("Invalid email address"),
+  phone: z.string().regex(/^\d{10}$/, "Phone number must be 10 digits"),
+  userType: z.enum(["student", "graduate", "professional"], {
+    required_error: "Please select your role",
+  }),
+
+  // Conditional Fields
+  university: z.string().optional(),
+  isChristite: z.string().default("no"),
+  uniqueId: z.string().optional(),
+  className: z.string().optional(),
+  course: z.string().optional(),
+  year: z.string().optional(),
+  organization: z.string().optional(),
+
+  category: z.enum(["ieee-cs", "ieee", "non-ieee"]),
+  ieeeId: z.string().optional(),
+  preference1: z.enum(["Debate", "Prompt Engineering"], {
+    required_error: "Please select your first preference",
+  }),
+  preference2: z.enum(["Debate", "Prompt Engineering"], {
+    required_error: "Please select your second preference",
+  }),
+});
+
+const formSchema = baseSchema.superRefine((data, ctx) => {
+  // User Type Logic
+  if (data.userType === "student") {
+    if (!data.university || data.university.length < 2) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "University name is required",
+        path: ["university"],
+      });
+    }
+    if (!data.course || data.course.length < 1) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Course is required",
+        path: ["course"],
+      });
+    }
+    if (!data.year || data.year.length < 1) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Year is required",
+        path: ["year"],
+      });
+    }
+    // Christite Logic
+    if (data.isChristite === "yes") {
+      if (!data.uniqueId || data.uniqueId.length < 1) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Registration Number is required",
+          path: ["uniqueId"],
+        });
       }
-      return true;
-    },
-    {
-      message: "IEEE Membership ID is required for IEEE members",
-      path: ["ieeeId"],
-    },
-  );
+      if (!data.className || data.className.length < 1) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Class/Section is required",
+          path: ["className"],
+        });
+      }
+    }
+  } else {
+    // Graduate or Professional
+    if (!data.organization || data.organization.length < 2) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Organization / Affiliation is required",
+        path: ["organization"],
+      });
+    }
+  }
+
+  // IEEE Logic
+  if (data.category === "ieee-cs" || data.category === "ieee") {
+    if (!data.ieeeId || data.ieeeId.trim().length === 0) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "IEEE Membership ID is required",
+        path: ["ieeeId"],
+      });
+    }
+  }
+});
 
 type FormValues = z.infer<typeof formSchema>;
 
@@ -108,11 +170,15 @@ const Registration = () => {
     defaultValues: {
       name: "",
       email: "",
+      phone: "",
+      userType: "student",
       university: "",
+      isChristite: "no",
       uniqueId: "",
+      className: "",
       course: "",
       year: "",
-      phone: "",
+      organization: "",
       category: defaultCategory,
       ieeeId: "",
       preference1: undefined,
@@ -121,7 +187,10 @@ const Registration = () => {
   });
 
   const category = form.watch("category");
+  const userType = form.watch("userType");
+  const isChristite = form.watch("isChristite");
   const preference1 = form.watch("preference1");
+  const preference2 = form.watch("preference2");
 
   // Load saved data from localStorage on mount
   useEffect(() => {
@@ -136,13 +205,55 @@ const Registration = () => {
     }
   }, [form]);
 
-  // Clear IEEE ID error when switching categories
+  // Clear errors when switching types
+  useEffect(() => {
+    if (userType !== "student") {
+      form.clearErrors([
+        "university",
+        "course",
+        "year",
+        "uniqueId",
+        "className",
+      ]);
+    } else {
+      form.clearErrors(["organization"]);
+    }
+  }, [userType, form]);
+
+  useEffect(() => {
+    if (isChristite === "no") {
+      form.clearErrors(["uniqueId", "className"]);
+      form.setValue("uniqueId", "");
+      form.setValue("className", "");
+      form.setValue("university", "");
+    } else {
+      form.setValue("university", "CHRIST (Deemed to be University)");
+    }
+  }, [isChristite, form]);
+
   useEffect(() => {
     if (category === "non-ieee") {
       form.clearErrors("ieeeId");
       form.setValue("ieeeId", "");
     }
   }, [category, form]);
+
+  // Bidirectional Preference Logic
+  useEffect(() => {
+    if (preference1 === "Debate" && preference2 !== "Prompt Engineering") {
+      form.setValue("preference2", "Prompt Engineering");
+    } else if (preference1 === "Prompt Engineering" && preference2 !== "Debate") {
+      form.setValue("preference2", "Debate");
+    }
+  }, [preference1, form, preference2]);
+
+  useEffect(() => {
+    if (preference2 === "Debate" && preference1 !== "Prompt Engineering") {
+      form.setValue("preference1", "Prompt Engineering");
+    } else if (preference2 === "Prompt Engineering" && preference1 !== "Debate") {
+      form.setValue("preference1", "Debate");
+    }
+  }, [preference2, form, preference1]);
 
   // Handle Cooldown Timer
   useEffect(() => {
@@ -217,13 +328,24 @@ const Registration = () => {
         "https://docs.google.com/forms/d/e/1FAIpQLSeq0jBRmqyq_Np5balcTKc4Ex_FG4-feyXI6z4m9CSAzpFl-Q/formResponse";
       const googleFormData = new URLSearchParams();
 
+      // Updated Mapping with provided entry IDs
       googleFormData.append("entry.292244424", formData.name);
       googleFormData.append("entry.564921852", formData.email);
-      googleFormData.append("entry.56087323", formData.university);
-      googleFormData.append("entry.1880609480", formData.uniqueId);
-      googleFormData.append("entry.353806949", formData.course);
-      googleFormData.append("entry.2110524232", formData.year);
       googleFormData.append("entry.1586340470", formData.phone);
+      googleFormData.append("entry.881165610", formData.userType);
+
+      if (formData.userType === "student") {
+        googleFormData.append("entry.56087323", formData.university || "");
+        googleFormData.append("entry.353806949", formData.course || "");
+        googleFormData.append("entry.2110524232", formData.year || "");
+        if (formData.isChristite === "yes") {
+          googleFormData.append("entry.1880609480", formData.uniqueId || "");
+          googleFormData.append("entry.1860682715", formData.className || "");
+        }
+      } else {
+        googleFormData.append("entry.1498278109", formData.organization || "");
+      }
+
       googleFormData.append("entry.551794449", formData.preference1);
       googleFormData.append("entry.1741232484", formData.preference2);
       googleFormData.append("entry.1693092735", imageUrl);
@@ -334,6 +456,45 @@ const Registration = () => {
                         onSubmit={form.handleSubmit(onStep1Submit)}
                         className="space-y-6"
                       >
+                        {/* User Type Selection */}
+                        <FormField
+                          control={form.control}
+                          name="userType"
+                          render={({ field }) => (
+                            <FormItem className="space-y-3">
+                              <FormLabel className="text-lg font-semibold">
+                                I am a...
+                              </FormLabel>
+                              <FormControl>
+                                <RadioGroup
+                                  onValueChange={field.onChange}
+                                  value={field.value}
+                                  className="grid grid-cols-1 md:grid-cols-3 gap-4"
+                                >
+                                  {["student", "graduate", "professional"].map(
+                                    (type) => (
+                                      <label
+                                        key={type}
+                                        className={`flex items-center space-x-3 space-y-0 border p-4 rounded-xl hover:bg-white/5 transition-all cursor-pointer ${
+                                          field.value === type
+                                            ? "bg-primary/20 border-primary/50 shadow-[0_0_15px_rgba(119,37,131,0.3)]"
+                                            : "bg-white/5 border-white/10 hover:border-white/20"
+                                        }`}
+                                      >
+                                        <RadioGroupItem value={type} />
+                                        <span className="font-medium text-white/90 capitalize flex-1">
+                                          {type}
+                                        </span>
+                                      </label>
+                                    ),
+                                  )}
+                                </RadioGroup>
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
                         <div className="grid md:grid-cols-2 gap-6">
                           <FormField
                             control={form.control}
@@ -372,56 +533,18 @@ const Registration = () => {
                           />
                         </div>
 
-                        <div className="grid md:grid-cols-2 gap-6">
-                          <FormField
-                            control={form.control}
-                            name="phone"
-                            render={({ field }) => (
-                              <FormItem>
-                                <FormLabel>Phone (WhatsApp)</FormLabel>
-                                <FormControl>
-                                  <Input
-                                    className="bg-white/10 border-white/20 focus:border-primary/50 transition-all text-white placeholder:text-white/30"
-                                    placeholder="9876543210"
-                                    {...field}
-                                    maxLength={10}
-                                  />
-                                </FormControl>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
-
-                          <FormField
-                            control={form.control}
-                            name="uniqueId"
-                            render={({ field }) => (
-                              <FormItem>
-                                <FormLabel>Reg No / Unique ID</FormLabel>
-                                <FormControl>
-                                  <Input
-                                    className="bg-white/10 border-white/20 focus:border-primary/50 transition-all text-white placeholder:text-white/30"
-                                    placeholder="e.g. 2347111"
-                                    {...field}
-                                  />
-                                </FormControl>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
-                        </div>
-
                         <FormField
                           control={form.control}
-                          name="university"
+                          name="phone"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>University / College</FormLabel>
+                              <FormLabel>Phone (WhatsApp)</FormLabel>
                               <FormControl>
                                 <Input
                                   className="bg-white/10 border-white/20 focus:border-primary/50 transition-all text-white placeholder:text-white/30"
-                                  placeholder="CHRIST (Deemed to be University)"
+                                  placeholder="9876543210"
                                   {...field}
+                                  maxLength={10}
                                 />
                               </FormControl>
                               <FormMessage />
@@ -429,72 +552,203 @@ const Registration = () => {
                           )}
                         />
 
-                        <div className="grid md:grid-cols-2 gap-6">
-                          <FormField
-                            control={form.control}
-                            name="course"
-                            render={({ field }) => (
-                              <FormItem>
-                                <FormLabel>Course / Branch</FormLabel>
-                                <FormControl>
-                                  <Input
-                                    className="bg-white/10 border-white/20 focus:border-primary/50 transition-all text-white placeholder:text-white/30"
-                                    placeholder="e.g. B.Tech CSE"
-                                    {...field}
-                                  />
-                                </FormControl>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
-
-                          <FormField
-                            control={form.control}
-                            name="year"
-                            render={({ field }) => (
-                              <FormItem>
-                                <FormLabel>Year of Study</FormLabel>
-                                <Select
-                                  onValueChange={field.onChange}
-                                  defaultValue={field.value}
-                                >
+                        {/* Student Specific Fields */}
+                        {userType === "student" && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={{ opacity: 0, height: 0 }}
+                            className="space-y-6"
+                          >
+                            <FormField
+                              control={form.control}
+                              name="isChristite"
+                              render={({ field }) => (
+                                <FormItem className="space-y-3">
+                                  <FormLabel className="text-base font-medium">
+                                    Are you a student of CHRIST (Deemed to be
+                                    University)?
+                                  </FormLabel>
                                   <FormControl>
-                                    <SelectTrigger className="bg-white/10 border-white/20 focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-all text-white">
-                                      <SelectValue placeholder="Select Year" />
-                                    </SelectTrigger>
+                                    <RadioGroup
+                                      onValueChange={field.onChange}
+                                      value={field.value}
+                                      className="flex gap-4"
+                                    >
+                                      {["yes", "no"].map((option) => (
+                                        <label
+                                          key={option}
+                                          className={`flex items-center space-x-2 space-y-0 border px-4 py-2 rounded-lg cursor-pointer transition-all ${
+                                            field.value === option
+                                              ? "bg-primary/20 border-primary/50 shadow-[0_0_10px_rgba(119,37,131,0.3)]"
+                                              : "bg-white/5 border-white/10 hover:border-white/20"
+                                          }`}
+                                        >
+                                          <RadioGroupItem value={option} />
+                                          <span className="font-normal capitalize flex-1">
+                                            {option}
+                                          </span>
+                                        </label>
+                                      ))}
+                                    </RadioGroup>
                                   </FormControl>
-                                  <SelectContent className="bg-zinc-950 border-white/20 backdrop-blur-2xl shadow-2xl">
-                                    <SelectItem
-                                      value="1"
-                                      className="focus:bg-primary/20 focus:text-white cursor-pointer py-4 text-base"
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+
+                            <FormField
+                              control={form.control}
+                              name="university"
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel>University / College</FormLabel>
+                                  <FormControl>
+                                    <Input
+                                      className="bg-white/10 border-white/20 focus:border-primary/50 transition-all text-white placeholder:text-white/30"
+                                      placeholder="CHRIST (Deemed to be University)"
+                                      {...field}
+                                      disabled={isChristite === "yes"}
+                                    />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+
+                            <div className="grid md:grid-cols-2 gap-6">
+                              <FormField
+                                control={form.control}
+                                name="course"
+                                render={({ field }) => (
+                                  <FormItem>
+                                    <FormLabel>Course / Branch</FormLabel>
+                                    <FormControl>
+                                      <Input
+                                        className="bg-white/10 border-white/20 focus:border-primary/50 transition-all text-white placeholder:text-white/30"
+                                        placeholder="e.g. B.Tech CSE"
+                                        {...field}
+                                      />
+                                    </FormControl>
+                                    <FormMessage />
+                                  </FormItem>
+                                )}
+                              />
+
+                              <FormField
+                                control={form.control}
+                                name="year"
+                                render={({ field }) => (
+                                  <FormItem>
+                                    <FormLabel>Year of Study</FormLabel>
+                                    <Select
+                                      onValueChange={field.onChange}
+                                      defaultValue={field.value}
                                     >
-                                      1st Year
-                                    </SelectItem>
-                                    <SelectItem
-                                      value="2"
-                                      className="focus:bg-primary/20 focus:text-white cursor-pointer py-4 text-base"
-                                    >
-                                      2nd Year
-                                    </SelectItem>
-                                    <SelectItem
-                                      value="3"
-                                      className="focus:bg-primary/20 focus:text-white cursor-pointer py-4 text-base"
-                                    >
-                                      3rd Year
-                                    </SelectItem>
-                                    <SelectItem
-                                      value="4"
-                                      className="focus:bg-primary/20 focus:text-white cursor-pointer py-4 text-base"
-                                    >
-                                      4th Year
-                                    </SelectItem>
-                                  </SelectContent>
-                                </Select>
-                                <FormMessage />
-                              </FormItem>
+                                      <FormControl>
+                                        <SelectTrigger className="bg-white/10 border-white/20 focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-all text-white">
+                                          <SelectValue placeholder="Select Year" />
+                                        </SelectTrigger>
+                                      </FormControl>
+                                      <SelectContent className="bg-zinc-950 border-white/20 backdrop-blur-2xl shadow-2xl">
+                                        <SelectItem value="1">
+                                          1st Year
+                                        </SelectItem>
+                                        <SelectItem value="2">
+                                          2nd Year
+                                        </SelectItem>
+                                        <SelectItem value="3">
+                                          3rd Year
+                                        </SelectItem>
+                                        <SelectItem value="4">
+                                          4th Year
+                                        </SelectItem>
+                                        <SelectItem value="5">
+                                          5th Year
+                                        </SelectItem>
+                                      </SelectContent>
+                                    </Select>
+                                    <FormMessage />
+                                  </FormItem>
+                                )}
+                              />
+                            </div>
+
+                            {isChristite === "yes" && (
+                              <motion.div
+                                initial={{ opacity: 0, height: 0 }}
+                                animate={{ opacity: 1, height: "auto" }}
+                                exit={{ opacity: 0, height: 0 }}
+                                className="grid md:grid-cols-2 gap-6"
+                              >
+                                <FormField
+                                  control={form.control}
+                                  name="uniqueId"
+                                  render={({ field }) => (
+                                    <FormItem>
+                                      <FormLabel>Registration Number</FormLabel>
+                                      <FormControl>
+                                        <Input
+                                          className="bg-white/10 border-white/20 focus:border-primary/50 transition-all text-white placeholder:text-white/30"
+                                          placeholder="e.g. 2347111"
+                                          {...field}
+                                        />
+                                      </FormControl>
+                                      <FormMessage />
+                                    </FormItem>
+                                  )}
+                                />
+                                <FormField
+                                  control={form.control}
+                                  name="className"
+                                  render={({ field }) => (
+                                    <FormItem>
+                                      <FormLabel>Class (Section)</FormLabel>
+                                      <FormControl>
+                                        <Input
+                                          className="bg-white/10 border-white/20 focus:border-primary/50 transition-all text-white placeholder:text-white/30"
+                                          placeholder="e.g. 4 BTECH CSE A"
+                                          {...field}
+                                        />
+                                      </FormControl>
+                                      <FormMessage />
+                                    </FormItem>
+                                  )}
+                                />
+                              </motion.div>
                             )}
-                          />
-                        </div>
+                          </motion.div>
+                        )}
+
+                        {/* Professional / Graduate Fields */}
+                        {(userType === "graduate" ||
+                          userType === "professional") && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={{ opacity: 0, height: 0 }}
+                          >
+                            <FormField
+                              control={form.control}
+                              name="organization"
+                              render={({ field }) => (
+                                <FormItem>
+                                  <FormLabel>
+                                    Organization / Affiliation
+                                  </FormLabel>
+                                  <FormControl>
+                                    <Input
+                                      className="bg-white/10 border-white/20 focus:border-primary/50 transition-all text-white placeholder:text-white/30"
+                                      placeholder="Current Company or University"
+                                      {...field}
+                                    />
+                                  </FormControl>
+                                  <FormMessage />
+                                </FormItem>
+                              )}
+                            />
+                          </motion.div>
+                        )}
 
                         <div className="space-y-4 pt-4 border-t border-white/10">
                           <h3 className="font-semibold text-lg">
@@ -509,33 +763,31 @@ const Registration = () => {
                                 <FormControl>
                                   <RadioGroup
                                     onValueChange={field.onChange}
-                                    defaultValue={field.value}
+                                    value={field.value}
                                     className="grid grid-cols-1 md:grid-cols-3 gap-4"
                                   >
-                                    <FormItem className="flex items-center space-x-3 space-y-0 border border-white/10 p-4 rounded-xl hover:bg-white/5 transition-all cursor-pointer bg-white/5">
-                                      <FormControl>
-                                        <RadioGroupItem value="ieee-cs" />
-                                      </FormControl>
-                                      <FormLabel className="font-medium cursor-pointer text-white/90">
-                                        IEEE CS Member
-                                      </FormLabel>
-                                    </FormItem>
-                                    <FormItem className="flex items-center space-x-3 space-y-0 border border-white/10 p-4 rounded-xl hover:bg-white/5 transition-all cursor-pointer bg-white/5">
-                                      <FormControl>
-                                        <RadioGroupItem value="ieee" />
-                                      </FormControl>
-                                      <FormLabel className="font-medium cursor-pointer text-white/90">
-                                        IEEE Member
-                                      </FormLabel>
-                                    </FormItem>
-                                    <FormItem className="flex items-center space-x-3 space-y-0 border border-white/10 p-4 rounded-xl hover:bg-white/5 transition-all cursor-pointer bg-white/5">
-                                      <FormControl>
-                                        <RadioGroupItem value="non-ieee" />
-                                      </FormControl>
-                                      <FormLabel className="font-medium cursor-pointer text-white/90">
-                                        Non-IEEE
-                                      </FormLabel>
-                                    </FormItem>
+                                    {[
+                                      {
+                                        value: "ieee-cs",
+                                        label: "IEEE CS Member",
+                                      },
+                                      { value: "ieee", label: "IEEE Member" },
+                                      { value: "non-ieee", label: "Non-IEEE" },
+                                    ].map(({ value, label }) => (
+                                      <label
+                                        key={value}
+                                        className={`flex items-center space-x-3 space-y-0 border p-4 rounded-xl hover:bg-white/5 transition-all cursor-pointer ${
+                                          field.value === value
+                                            ? "bg-primary/20 border-primary/50 shadow-[0_0_15px_rgba(119,37,131,0.3)]"
+                                            : "bg-white/5 border-white/10 hover:border-white/20"
+                                        }`}
+                                      >
+                                        <RadioGroupItem value={value} />
+                                        <span className="font-medium text-white/90 flex-1">
+                                          {label}
+                                        </span>
+                                      </label>
+                                    ))}
                                   </RadioGroup>
                                 </FormControl>
                                 <FormMessage />
@@ -574,13 +826,41 @@ const Registration = () => {
                           <h3 className="font-semibold text-lg">
                             Event Preferences
                           </h3>
+
+                          <Alert className="bg-primary/5 border-primary/20">
+                            <Info className="h-4 w-4 text-primary" />
+                            <AlertTitle className="text-primary">
+                              Important Information
+                            </AlertTitle>
+                            <AlertDescription className="text-muted-foreground text-sm mt-2">
+                              <ul className="list-disc list-inside space-y-1">
+                                <li>
+                                  Events on <strong>Day 1 & Day 3</strong> are
+                                  common for everyone.
+                                </li>
+                                <li>
+                                  For <strong>Day 2</strong>, you must choose a
+                                  preference below.
+                                </li>
+                                <li>
+                                  Allocations for Day 2 tracks are on a{" "}
+                                  <strong>First Come First Serve</strong> basis.
+                                </li>
+                                <li>
+                                  If your 1st preference is full, you will be
+                                  allocated your 2nd preference.
+                                </li>
+                              </ul>
+                            </AlertDescription>
+                          </Alert>
+
                           <div className="grid md:grid-cols-2 gap-6">
                             <FormField
                               control={form.control}
                               name="preference1"
                               render={({ field }) => (
                                 <FormItem>
-                                  <FormLabel>Preference 1</FormLabel>
+                                  <FormLabel>Day 2: Preference 1</FormLabel>
                                   <Select
                                     onValueChange={field.onChange}
                                     defaultValue={field.value}
@@ -593,12 +873,16 @@ const Registration = () => {
                                     <SelectContent className="bg-zinc-950 border-white/20 backdrop-blur-2xl shadow-2xl">
                                       <SelectItem
                                         value="Debate"
+                                        disabled={preference2 === "Debate"}
                                         className="focus:bg-primary/20 focus:text-white cursor-pointer py-4 text-base"
                                       >
                                         Tech Debate
                                       </SelectItem>
                                       <SelectItem
                                         value="Prompt Engineering"
+                                        disabled={
+                                          preference2 === "Prompt Engineering"
+                                        }
                                         className="focus:bg-primary/20 focus:text-white cursor-pointer py-4 text-base"
                                       >
                                         Prompt Engineering
@@ -615,7 +899,7 @@ const Registration = () => {
                               name="preference2"
                               render={({ field }) => (
                                 <FormItem>
-                                  <FormLabel>Preference 2</FormLabel>
+                                  <FormLabel>Day 2: Preference 2</FormLabel>
                                   <Select
                                     onValueChange={field.onChange}
                                     defaultValue={field.value}
@@ -631,7 +915,7 @@ const Registration = () => {
                                         disabled={preference1 === "Debate"}
                                         className="focus:bg-primary/20 focus:text-white cursor-pointer py-4 text-base"
                                       >
-                                        Tech Debate
+                                        Sector - Wise Idea Debate
                                       </SelectItem>
                                       <SelectItem
                                         value="Prompt Engineering"

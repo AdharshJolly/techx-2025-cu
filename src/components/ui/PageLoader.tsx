@@ -10,6 +10,15 @@ const PageLoader = ({ onLoadComplete }: PageLoaderProps) => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
+    // Check if already loaded in this session
+    const hasLoaded = sessionStorage.getItem("techx_loaded");
+    
+    if (hasLoaded) {
+      setIsLoading(false);
+      onLoadComplete?.();
+      return;
+    }
+
     // Simulate loading progress
     const interval = setInterval(() => {
       setProgress((prev) => {
@@ -24,6 +33,7 @@ const PageLoader = ({ onLoadComplete }: PageLoaderProps) => {
     // Complete loading after progress reaches 100
     const timeout = setTimeout(() => {
       setIsLoading(false);
+      sessionStorage.setItem("techx_loaded", "true");
       onLoadComplete?.();
     }, 2000);
 
