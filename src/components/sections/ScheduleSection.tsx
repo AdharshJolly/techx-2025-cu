@@ -231,11 +231,11 @@ const ScheduleSection = () => {
   const getDayLabel = (day: DayType) => {
     switch (day) {
       case "day1":
-        return "Day 1";
+        return "Day 1 | Feb 12";
       case "day2":
-        return "Day 2";
+        return "Day 2 | Feb 13";
       case "day3":
-        return "Day 3";
+        return "Day 3 | Feb 14";
     }
   };
 
@@ -261,9 +261,15 @@ const ScheduleSection = () => {
             Event <span className="text-gradient">Schedule</span>
           </motion.h2>
 
+          <div className="flex justify-center mb-6">
+            <Badge className="text-sm px-4 py-2 bg-primary/15 border border-primary/30 text-primary font-semibold">
+              Feb 12-14, 2026
+            </Badge>
+          </div>
+
           {/* Day Switcher */}
           <div className="flex justify-center mb-12">
-            <div className="p-1 rounded-full bg-muted/50 border border-border/50 backdrop-blur-sm relative flex">
+            <div className="p-1 rounded-full bg-muted/50 border border-border/50 backdrop-blur-sm relative flex w-full max-w-2xl">
               <div
                 className="absolute inset-y-1 rounded-full bg-primary/20 transition-all duration-300 ease-in-out border border-primary/50"
                 style={{
@@ -286,7 +292,7 @@ const ScheduleSection = () => {
                 <button
                   key={day}
                   onClick={() => setActiveDay(day)}
-                  className={`w-[100px] md:w-[140px] px-2 md:px-6 py-2.5 rounded-full text-sm font-bold transition-colors z-10
+                  className={`flex-1 min-w-[120px] md:min-w-[170px] px-3 md:px-6 py-2.5 rounded-full text-sm font-bold leading-tight whitespace-nowrap transition-colors z-10
                     ${activeDay === day ? "text-primary shadow-[0_0_15px_rgba(var(--primary),0.5)]" : "text-muted-foreground hover:text-foreground"}
                   `}
                 >
