@@ -6,6 +6,7 @@ import {
   Mail,
   MapPin,
   Twitter,
+  Calendar,
 } from "lucide-react";
 
 const quickLinks = [
@@ -60,6 +61,11 @@ const Footer = () => {
                   CHRIST (Deemed to be University),
                   <br />
                   Kengeri Campus, Bangalore - 560074
+                  <br />
+                  <span className="inline-flex items-center gap-2 mt-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/30 text-primary font-semibold shadow-sm">
+                    <Calendar className="w-4 h-4" aria-hidden />
+                    Feb 12-14, 2026
+                  </span>
                 </p>
               </div>
               <div className="flex items-center gap-3 text-sm text-muted-foreground">

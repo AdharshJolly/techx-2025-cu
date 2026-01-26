@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Calendar, Cpu, MapPin, Trophy, Users, Zap } from "lucide-react";
 
 const highlights = [
-  { icon: Calendar, label: "3-Day Mega Event" },
+  { icon: Calendar, label: "Feb 12-14, 2026" },
   { icon: Cpu, label: "AI-Assisted Dev" },
   { icon: Trophy, label: "₹32k Prize Pool" },
   { icon: Zap, label: "VIBEATHON Finale" },
@@ -146,12 +146,18 @@ const HeroSection = () => {
             <p className="font-inter text-lg sm:text-xl md:text-2xl text-muted-foreground mb-4 px-4">
               Vibe Coding • Prompt Engineering • Rapid Innovation
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-2 text-primary/80 font-medium text-sm md:text-base">
-              <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 md:w-5 md:h-5 shrink-0" />
-                <span>CHRIST University, Kengeri Campus</span>
-              </div>
-            </div>
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-primary/15 border border-primary/40 text-primary font-semibold shadow-[0_10px_40px_rgba(119,37,131,0.25)]"
+              aria-label="Event dates Feb 12 to 14, 2026"
+            >
+              <Calendar className="w-4 h-4" aria-hidden />
+              <span className="text-sm sm:text-base tracking-wide">
+                Feb 12-14, 2026 • CHRIST University
+              </span>
+            </motion.div>
           </motion.div>
 
           {/* Highlights with staggered reveal */}

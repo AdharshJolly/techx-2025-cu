@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { Check, QrCode, Ticket, Users } from "lucide-react";
+import { Check, QrCode, Ticket, Users, Calendar } from "lucide-react";
 
 const pricingTiers = [
   {
@@ -85,6 +85,12 @@ const RegistrationSection = () => {
           >
             Secure Your <span className="text-gradient">Spot</span>
           </motion.h2>
+          <div className="flex justify-center">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/10 border border-secondary/30 text-secondary font-semibold">
+              <Calendar className="w-4 h-4" aria-hidden />
+              <span className="text-sm">Feb 12-14, 2026</span>
+            </div>
+          </div>
         </div>
 
         <div className="max-w-5xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
@@ -204,7 +210,7 @@ const RegistrationSection = () => {
                     `}
                     />
                     <span className="font-mono text-xs border border-white/20 px-2 py-1 rounded">
-                      2025
+                      2026
                     </span>
                   </div>
                   <h3 className="font-poppins text-3xl font-bold mb-2">

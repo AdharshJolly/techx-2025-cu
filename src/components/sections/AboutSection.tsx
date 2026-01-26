@@ -13,7 +13,7 @@ const stats = [
 const highlights = [
   { icon: Trophy, label: "VIBEATHON", color: "primary" },
   { icon: Users, label: "400+ Attendees", color: "secondary" },
-  { icon: Calendar, label: "3 Days", color: "accent" },
+  { icon: Calendar, label: "Feb 12-14, 2026", color: "accent" },
 ];
 
 const AboutSection = () => {
@@ -24,10 +24,10 @@ const AboutSection = () => {
     <section id="about" className="py-32 md:py-40 relative overflow-hidden">
       {/* Section separator gradient */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
-      
+
       {/* Background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px]" />
-      
+
       <div className="container relative z-10">
         <div className="max-w-6xl mx-auto" ref={ref}>
           {/* Header */}
@@ -43,6 +43,12 @@ const AboutSection = () => {
             <h2 className="font-poppins text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               What is <span className="text-gradient">TechX</span>?
             </h2>
+            <div className="flex justify-center">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/30 text-primary font-semibold shadow-[0_10px_30px_rgba(119,37,131,0.18)]">
+                <Calendar className="w-4 h-4" aria-hidden />
+                <span className="text-sm">Feb 12-14, 2026</span>
+              </div>
+            </div>
           </motion.div>
 
           {/* Main Content Grid */}
@@ -70,8 +76,12 @@ const AboutSection = () => {
                           <Trophy className="w-6 h-6 text-primary" />
                         </div>
                         <div>
-                          <div className="font-poppins font-bold text-xl text-white">TechX 2025</div>
-                          <div className="text-sm text-white/70">IEEE Computer Society</div>
+                          <div className="font-poppins font-bold text-xl text-white">
+                            TechX 2025
+                          </div>
+                          <div className="text-sm text-white/70">
+                            IEEE Computer Society
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -84,15 +94,25 @@ const AboutSection = () => {
                         <div
                           key={i}
                           className={`p-3 rounded-xl text-center ${
-                            item.color === "primary" ? "bg-primary/10" :
-                            item.color === "secondary" ? "bg-secondary/10" : "bg-accent/10"
+                            item.color === "primary"
+                              ? "bg-primary/10"
+                              : item.color === "secondary"
+                                ? "bg-secondary/10"
+                                : "bg-accent/10"
                           }`}
                         >
-                          <item.icon className={`w-5 h-5 mx-auto mb-2 ${
-                            item.color === "primary" ? "text-primary" :
-                            item.color === "secondary" ? "text-secondary" : "text-accent"
-                          }`} />
-                          <div className="font-medium text-sm">{item.label}</div>
+                          <item.icon
+                            className={`w-5 h-5 mx-auto mb-2 ${
+                              item.color === "primary"
+                                ? "text-primary"
+                                : item.color === "secondary"
+                                  ? "text-secondary"
+                                  : "text-accent"
+                            }`}
+                          />
+                          <div className="font-medium text-sm">
+                            {item.label}
+                          </div>
                         </div>
                       ))}
                     </div>
@@ -110,24 +130,38 @@ const AboutSection = () => {
                 className="space-y-6"
               >
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                  TechX 2025 is a flagship technical and innovation event hosted by
-                  the IEEE Computer Society at CHRIST University, Kengeri Campus.
+                  TechX 2025 is a flagship technical and innovation event hosted
+                  by the IEEE Computer Society at CHRIST University, Kengeri
+                  Campus.
                 </p>
-                
+
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                  Spanning three immersive days, the event introduces students to
-                  modern development paradigms such as{" "}
+                  Spanning three immersive days (Feb 12-14, 2026), the event
+                  introduces students to modern development paradigms such as{" "}
                   <span className="text-primary font-medium">vibe coding</span>,{" "}
-                  <span className="text-primary font-medium">AI-assisted development</span>,{" "}
-                  <span className="text-primary font-medium">prompt engineering</span>, and{" "}
-                  <span className="text-primary font-medium">rapid prototyping</span>.
+                  <span className="text-primary font-medium">
+                    AI-assisted development
+                  </span>
+                  ,{" "}
+                  <span className="text-primary font-medium">
+                    prompt engineering
+                  </span>
+                  , and{" "}
+                  <span className="text-primary font-medium">
+                    rapid prototyping
+                  </span>
+                  .
                 </p>
-                
+
                 <p className="text-lg text-muted-foreground leading-relaxed">
                   TechX brings together students from diverse disciplines to
-                  collaborate, experiment, and innovate using emerging technologies,
-                  culminating in a high-intensity innovation sprint called{" "}
-                  <span className="text-secondary font-semibold">VIBEATHON</span>.
+                  collaborate, experiment, and innovate using emerging
+                  technologies, culminating in a high-intensity innovation
+                  sprint called{" "}
+                  <span className="text-secondary font-semibold">
+                    VIBEATHON
+                  </span>
+                  .
                 </p>
 
                 {/* Secondary Image */}
@@ -142,7 +176,9 @@ const AboutSection = () => {
                     <div className="absolute inset-0 flex items-center justify-center">
                       <div className="text-center">
                         <Users className="w-10 h-10 text-white mx-auto mb-2" />
-                        <span className="text-white font-poppins font-bold text-lg">Innovation Community</span>
+                        <span className="text-white font-poppins font-bold text-lg">
+                          Innovation Community
+                        </span>
                       </div>
                     </div>
                   </div>
