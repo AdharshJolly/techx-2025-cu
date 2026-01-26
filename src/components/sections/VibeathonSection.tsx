@@ -203,7 +203,9 @@ const VibeathonSection = () => {
                       </div>
                       <div className="p-3 rounded-lg bg-background/50 border border-border">
                         <Zap className="w-5 h-5 text-secondary mb-2" />
-                        <div className="text-sm font-semibold">No-Code</div>
+                        <div className="text-sm font-semibold">
+                          Any No-Code Tools
+                        </div>
                         <div className="text-xs text-muted-foreground">
                           Permitted
                         </div>
