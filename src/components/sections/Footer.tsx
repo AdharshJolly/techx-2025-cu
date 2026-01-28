@@ -49,8 +49,8 @@ const Footer = () => {
                 />
               </div>
               <p className="text-muted-foreground text-sm leading-relaxed max-w-xs">
-                The flagship technical event fostering innovation, creativity,
-                and collaboration among future tech leaders.
+                A 3-day celebration of innovation, technology, and collaboration
+                among future tech leaders.
               </p>
             </div>
 
