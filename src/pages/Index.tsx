@@ -15,12 +15,15 @@ import ScrollProgress from "@/components/ui/ScrollProgress";
 import PageLoader from "@/components/ui/PageLoader";
 import NeuralBackground from "@/components/ui/NeuralBackground";
 import PreviousEventSection from "@/components/sections/PreviousEventSection";
+import SEO from "@/components/SEO";
+import { pageSEOConfigs } from "@/lib/seo";
 
 const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   return (
     <>
+      <SEO config={pageSEOConfigs.home} />
       <PageLoader onLoadComplete={() => setIsLoaded(true)} />
       <div
         className={`min-h-screen relative transition-opacity duration-500 ${isLoaded ? "opacity-100" : "opacity-0"}`}

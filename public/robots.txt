@@ -1,4 +1,37 @@
+# TechX 2025 Robots.txt
+# Allow all crawlers access to all content
+
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /*.json$
 
-Sitemap: https://techx.christuniversity.in/sitemap.xml
+# Crawl delay to be respectful to server
+Crawl-delay: 1
+
+# Specific rules for major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+# Block bad bots
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+# Sitemap location
+Sitemap: https://techx.ieeecscu.com/sitemap.xml
+
+# Host preference (helps search engines understand the preferred domain)
+Host: https://techx.ieeecscu.com

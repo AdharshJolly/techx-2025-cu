@@ -1,13 +1,5 @@
 import { motion } from "framer-motion";
-import {
-  Github,
-  Instagram,
-  Linkedin,
-  Mail,
-  MapPin,
-  Twitter,
-  Calendar,
-} from "lucide-react";
+import { Instagram, Linkedin, Mail, MapPin, Calendar } from "lucide-react";
 
 const quickLinks = [
   { label: "About", href: "#about" },
@@ -19,9 +11,16 @@ const quickLinks = [
 ];
 
 const socialLinks = [
-  { icon: Instagram, href: "https://instagram.com", label: "Instagram" },
-  { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
-  { icon: Twitter, href: "https://twitter.com", label: "Twitter" },
+  {
+    icon: Instagram,
+    href: "https://www.instagram.com/ieeecscu/",
+    label: "Instagram",
+  },
+  {
+    icon: Linkedin,
+    href: "https://www.linkedin.com/company/ieee-cscu/",
+    label: "LinkedIn",
+  },
 ];
 
 const Footer = () => {
@@ -49,8 +48,8 @@ const Footer = () => {
                 />
               </div>
               <p className="text-muted-foreground text-sm leading-relaxed max-w-xs">
-                The flagship technical event fostering innovation, creativity,
-                and collaboration among future tech leaders.
+                A 3-day celebration of innovation, technology, and collaboration
+                among future tech leaders.
               </p>
             </div>
 
